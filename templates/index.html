@@ -8,8 +8,8 @@
 <body>
 	<div id='nav'>
 		<ul id='nav_ul'>
-			<li id='month_name' class='nav_li'>Apr</li>
-			<li id='month_value' class='nav_li'>14</li>
+			<li id='month_name' class='nav_li'></li>
+			<li id='month_day' class='nav_li'></li>	
 			<li id='menu' class='nav_li'>...</li>
 			<li id='additionally' class='nav_li'>+</li>
 			<li style='z-index: 10;text-decoration: none;display:block;'>
@@ -22,9 +22,15 @@
 				</div>
 			</li>
 		</ul>
+		<ul class='container_year_day'><li id='year' class='nav_li_y'>2020</li><li id='day_identificator' class='nav_li_d'>Today</li></ul>
 	</div>
-</body>
-	<script type="text/javascript" src='{{ url_for("static", filename="js/jquery-3.5.0.js") }}'></script>
-	<script type="text/javascript" src='{{ url_for("static", filename="js/interface_logic.js") }}'></script>
+		<!-- <ul id='nav_days_ul'></ul>-->
+	<table id='nav_days'>
+		<tr id='nav_days_ul'></tr>
+	</table>
+<!--		<ul id='nav_days_ul_numbs'></ul> -->
 
+</body>
+<script type="text/javascript" src='{{ url_for("static", filename="js/jquery-3.5.0.js") }}'></script>
+<script type="text/javascript" src='{{ url_for("static", filename="js/interface_logic.js") }}'></script>
 </html>
