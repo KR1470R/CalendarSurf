@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 	<title>Calendar</title>
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/style.css') }}">
 	<link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto:wght@500&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
 </head>
 <body>
 	<div id='nav'>
@@ -25,8 +26,13 @@
 		<ul class='container_year_day'><li id='year' class='nav_li_y'>2020</li><li id='day_identificator' class='nav_li_d'>Today</li></ul>
 	</div>
 		<!-- <ul id='nav_days_ul'></ul>-->
-	<table id='nav_days'>
-		<tr id='nav_days_ul'></tr>
+	<table id='calendar' class='table_calendar'>
+		<thead>
+			<tr id='nav_days_ul'></tr>
+		</thead>
+		<tbody id='calendar_body' style='position:absolute;margin-top:180px;margin-left:-280px;'>
+			
+		</tbody>
 	</table>
 <!--		<ul id='nav_days_ul_numbs'></ul> -->
 

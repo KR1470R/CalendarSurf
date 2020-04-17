@@ -1,4 +1,4 @@
-body{
+body,html{
 	background-color: white;
 	overflow: hide;
 }
@@ -7,6 +7,8 @@ body{
 	margin: 0;
 	padding: 0;
 	overflow: hide;
+	border-radius: 10px;
+	background-color: white;
 }
 .nav_li{
 	display: block;
@@ -75,6 +77,7 @@ body{
 	padding-right: 100px;
 	cursor: pointer;
 	z-index: 10;
+	background-color: white;
 }
 /**/
 .nav_menu_li{
@@ -138,4 +141,13 @@ body{
 	position: absolute;
 	margin-top: 100px;
 }
-
+#calendar_body{
+	position: absolute;
+	margin-top: 50px;
+}
+.day:hover{
+	cursor:pointer;
+}
+#Sun{
+	font-weight: 100;
+}
