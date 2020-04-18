@@ -1,14 +1,18 @@
 //ALIVING OF POP UP MENU
 
 let menu_close = 'disabled'
+let $menu = $('#nav_menu')
 $(document).on('click', function(e){
-	let $menu = $('#nav_menu')
 	let c = $(e.target).attr('class')
 	let i = $(e.target).attr('id')
 	if (c === 'nav_menu_li'){return};
 	if (i == 'menu'){menu_close='disabled'}else{menu_close='enabled'};
 	if (menu_close==='enabled'){$menu.animate({opacity:'0'},100,function(){$menu.hide()})}else{$menu.show().animate({opacity:'1'},100)}
-})
+});
+
+$('#nav_menu').on('click',function(){
+	$menu.animate({opacity:'0'},100,function(){$menu.hide()})
+});
 
 //PART LOGIC OF CALENDAR
 
@@ -32,9 +36,8 @@ for (count in days){
 	newElem.id = days[count]
 	newElem.className = 'day'
 	newElem.style.cssText = 'text-decoration: none;display: block;float: left;padding: 145px 100px;text-decoration: none;font-size:30px;font-family: "Roboto", sans-serif;width: auto;'
-	container_days.appendChild(newElem)
 	container_days.style.cssText = 'position:absolute;margin-top:10px;margin-left:-230px;'
-
+	container_days.appendChild(newElem)
 }
 
 function generate_year_range(start, end) {
@@ -59,7 +62,9 @@ function showCalendar(month,year){
 	//CREATING CELLS
 	let date = 1
 	for (var i=0;i<6;i++){
+		let body = document.getElementById('body')
 		let row = document.createElement('tr')
+		body.appendChild(row)
 		row.style.cssText = "font-size: 30px;font-family: 'Lato', sans-serif;"
 		for (var j=0;j<7;j++){
 			if (i===0 && j<firstDay){
@@ -76,12 +81,18 @@ function showCalendar(month,year){
 				cell.setAttribute('data-year', year)
 				cell.setAttribute('data-month_name',months[month])
 				cell.className='date-picker'
-				cell.innerHTML = '<span>'+date+'</span>'
+				cell_span = document.createElement('div')
+				cell_span.innerHTML = date
+				cell_span.setAttribute('id','span_'+date)
+				cell.appendChild(cell_span)
 				cell.style.cssText = 'padding:50px;padding-left:165px;text-align:center;'
 
 				if (date === now.getDate() && year === now.getFullYear() && month === now.getMonth()){
 					cell.className = 'date-picker selected'
-
+					let bg_cell = document.createElement('span')
+					cell_span.style.cssText = 'z-index:1;color:white;text-align:center;margin-top:30px;padding-right:5px;'
+					cell.style.cssText = 'background-color:#E73A3C;width:100px;height:100px;position:absolute;border-radius:10px;margin-left:130px;z-index:2;margin-top:10px;'
+					cell_span.appendChild(bg_cell)
 				}
 				row.appendChild(cell)
 				date++
