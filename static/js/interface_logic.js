@@ -1,5 +1,22 @@
 //ALIVING OF POP UP MENU
 
+let menu = document.getElementById('nav_menu')
+document.addEventListener('click', function(e){
+	let c = e.target.getAttribute('class')
+	let i = e.target.getAttribute('id')
+	if (c === 'nav_menu_li'){return};
+	if (i == 'menu'){
+		menu.style.display = 'block';
+		menu.style.opacity=0;
+		setTimeout(()=>{menu.style.opacity=1;this.animationDelay+100;})}else{
+			setTimeout(()=>{menu.style.opacity=0;this.animationDelay+100});menu.style.display='none'
+		};
+});
+
+menu.addEventListener('click',function(){
+	menu.animate([{opacity:'1'},{opacity:'0'}],100,function(){menu.style.display = 'none'})
+});
+/*
 let menu_close = 'disabled'
 let $menu = $('#nav_menu')
 $(document).on('click', function(e){
@@ -13,7 +30,7 @@ $(document).on('click', function(e){
 $('#nav_menu').on('click',function(){
 	$menu.animate({opacity:'0'},100,function(){$menu.hide()})
 });
-
+*/
 //PART LOGIC OF CALENDAR
 
 let months = ['January','February','March','April','May','June','July','August','September','October','November','December']
@@ -84,6 +101,7 @@ function showCalendar(month,year){
 				cell_span = document.createElement('div')
 				cell_span.innerHTML = date
 				cell_span.setAttribute('id','span_'+date)
+				cell_span.setAttribute('class','cell_div')
 				cell.appendChild(cell_span)
 				cell.style.cssText = 'padding:50px;padding-left:165px;text-align:center;'
 
