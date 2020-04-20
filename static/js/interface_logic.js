@@ -8,29 +8,13 @@ document.addEventListener('click', function(e){
 	if (i == 'menu'){
 		menu.style.display = 'block';
 		menu.style.opacity=0;
-		setTimeout(()=>{menu.style.opacity=1;this.animationDelay+100;})}else{
-			setTimeout(()=>{menu.style.opacity=0;this.animationDelay+100});menu.style.display='none'
-		};
+		menu.animate([{opacity:0},{opacity:1}],{duration:100,fill:'both'});setTimeout(()=>menu.style.display='block',100)}else{
+			menu.animate([{opacity:1},{opacity:0}],{duration:100,fill:'both'});setTimeout(()=>menu.style.display='none',100)};
 });
 
 menu.addEventListener('click',function(){
-	menu.animate([{opacity:'1'},{opacity:'0'}],100,function(){menu.style.display = 'none'})
-});
-/*
-let menu_close = 'disabled'
-let $menu = $('#nav_menu')
-$(document).on('click', function(e){
-	let c = $(e.target).attr('class')
-	let i = $(e.target).attr('id')
-	if (c === 'nav_menu_li'){return};
-	if (i == 'menu'){menu_close='disabled'}else{menu_close='enabled'};
-	if (menu_close==='enabled'){$menu.animate({opacity:'0'},100,function(){$menu.hide()})}else{$menu.show().animate({opacity:'1'},100)}
-});
+	menu.animate([{opacity:1},{opacity:0}],{duration:100,fill:'both'});setTimeout(()=>menu.style.display='none',100)});
 
-$('#nav_menu').on('click',function(){
-	$menu.animate({opacity:'0'},100,function(){$menu.hide()})
-});
-*/
 //PART LOGIC OF CALENDAR
 
 let months = ['January','February','March','April','May','June','July','August','September','October','November','December']
