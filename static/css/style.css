@@ -144,7 +144,7 @@ body,html{
 	position: absolute;
 	margin-top: 50px;
 }
-.cell_div:hover{
+.cell_div,.cell_div_selected:hover{
 	cursor:pointer
 }
 #Sun,#Sat{
@@ -153,4 +153,24 @@ body,html{
 }
 #Sat{
 	margin-left: 20px;
+}
+/*Scrollbar*/
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: transparent;
 }

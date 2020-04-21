@@ -1,15 +1,47 @@
 //ALIVING OF POP UP MENU
 
 let menu = document.getElementById('nav_menu')
+let one_selected = false
+let number_selected = null
 document.addEventListener('click', function(e){
 	let c = e.target.getAttribute('class')
 	let i = e.target.getAttribute('id')
-	if (c === 'nav_menu_li'){return};
-	if (i == 'menu'){
+	if (c === 'nav_menu_li'){return}
+	else if (i == 'menu'){
 		menu.style.display = 'block';
 		menu.style.opacity=0;
 		menu.animate([{opacity:0},{opacity:1}],{duration:100,fill:'both'});setTimeout(()=>menu.style.display='block',100)}else{
 			menu.animate([{opacity:1},{opacity:0}],{duration:100,fill:'both'});setTimeout(()=>menu.style.display='none',100)};
+	if (c === 'cell_div'){
+		//cell = document.getElementsByClassName('cell_div')[0]
+		//cell.style.cssText = 'background-color:red;'
+		if (c === 'date-picker selected' || c === 'cell_div_selected'){return}else{
+			if (one_selected === false){
+				let cell = document.getElementById(i.replace(/\D/g,''))
+				let bg_cell = document.createElement('span')
+				cell_span = document.getElementById('span_'+i.replace(/\D/g,''))
+				cell_span.style.cssText = 'z-index:1;color:white;text-align:center;margin-top:30px;padding-right:5px;'
+				cell.style.cssText = 'background-color:#C1C1C1;width:100px;height:100px;position:absolute;border-radius:10px;margin-left:130px;z-index:2;margin-top:10px;'
+				cell_span.appendChild(bg_cell)
+				one_selected = true
+				number_selected = i.replace(/\D/g,'')
+			}else{
+				let get_selected = document.getElementById(number_selected)
+				let get_selected_span = document.getElementById('span_'+number_selected)
+				get_selected.style.cssText = 'padding: 50px 50px 50px 165px; text-align: center;'
+				get_selected_span.style.cssText = 'color:black;'
+				// ------
+				let cell = document.getElementById(i.replace(/\D/g,''))
+				let bg_cell = document.createElement('span')
+				cell_span = document.getElementById('span_'+i.replace(/\D/g,''))
+				cell_span.style.cssText = 'z-index:1;color:white;text-align:center;margin-top:30px;padding-right:5px;'
+				cell.style.cssText = 'background-color:#C1C1C1;width:100px;height:100px;position:absolute;border-radius:10px;margin-left:130px;z-index:2;margin-top:10px;'
+				cell_span.appendChild(bg_cell)
+				one_selected = true
+				number_selected = i.replace(/\D/g,'')
+			}
+		}
+	}
 });
 
 menu.addEventListener('click',function(){
@@ -81,6 +113,7 @@ function showCalendar(month,year){
 				cell.setAttribute('data-month',month+1)
 				cell.setAttribute('data-year', year)
 				cell.setAttribute('data-month_name',months[month])
+				cell.setAttribute('id',date)
 				cell.className='date-picker'
 				cell_span = document.createElement('div')
 				cell_span.innerHTML = date
@@ -91,6 +124,7 @@ function showCalendar(month,year){
 
 				if (date === now.getDate() && year === now.getFullYear() && month === now.getMonth()){
 					cell.className = 'date-picker selected'
+					cell_span.className = 'cell_div_selected'
 					let bg_cell = document.createElement('span')
 					cell_span.style.cssText = 'z-index:1;color:white;text-align:center;margin-top:30px;padding-right:5px;'
 					cell.style.cssText = 'background-color:#E73A3C;width:100px;height:100px;position:absolute;border-radius:10px;margin-left:130px;z-index:2;margin-top:10px;'
