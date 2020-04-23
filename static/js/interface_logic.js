@@ -18,11 +18,9 @@ document.addEventListener('click', function(e){
 		//cell.style.cssText = 'background-color:red;'
 			if (one_selected === false){
 				let cell = document.getElementById(i.replace(/\D/g,''))
-				let bg_cell = document.createElement('span')
 				cell_span = document.getElementById('span_'+i.replace(/\D/g,''))
 				cell_span.style.cssText = 'z-index:1;color:white;text-align:center;margin-top:30px;padding-right:5px;'
 				cell.style.cssText = 'background-color:#C1C1C1;width:100px;height:100px;position:absolute;border-radius:10px;margin-left:130px;z-index:2;margin-top:10px;'
-				cell_span.appendChild(bg_cell)
 				one_selected = true
 				number_selected = i.replace(/\D/g,'')
 				//-----
@@ -42,11 +40,9 @@ document.addEventListener('click', function(e){
 				get_selected_span.style.cssText = 'color:black;'
 				// ------
 				let cell = document.getElementById(i.replace(/\D/g,''))
-				let bg_cell = document.createElement('span')
 				cell_span = document.getElementById('span_'+i.replace(/\D/g,''))
 				cell_span.style.cssText = 'z-index:1;color:white;text-align:center;margin-top:30px;padding-right:5px;'
 				cell.style.cssText = 'background-color:#C1C1C1;width:100px;height:100px;position:absolute;border-radius:10px;margin-left:130px;z-index:2;margin-top:10px;'
-				cell_span.appendChild(bg_cell)
 				one_selected = true
 				number_selected = i.replace(/\D/g,'')
 			}
@@ -61,6 +57,7 @@ document.addEventListener('click', function(e){
 				let get_selected_span = document.getElementById('span_'+number_selected)
 				get_selected.style.cssText = 'padding: 50px 50px 50px 165px; text-align: center;'
 				get_selected_span.style.cssText = 'color:black;'
+				one_selected = false
 			}catch(e){
 				return
 			}
@@ -149,10 +146,8 @@ function showCalendar(month,year){
 					div_picker_selected_number = date
 					cell.className = 'date-picker selected'
 					cell_span.className = 'cell_div_selected'
-					let bg_cell = document.createElement('span')
 					cell_span.style.cssText = 'z-index:1;color:white;text-align:center;margin-top:30px;padding-right:5px;'
 					cell.style.cssText = 'background-color:#E73A3C;width:100px;height:100px;position:absolute;border-radius:10px;margin-left:130px;z-index:2;margin-top:10px;'
-					cell_span.appendChild(bg_cell)
 				}
 				row.appendChild(cell)
 				date++
