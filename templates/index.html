@@ -7,35 +7,52 @@
 	<link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
 </head>
 <body id='body'>
-	<div id='nav'>
-		<ul id='nav_ul'>
-			<li id='month_name' class='nav_li'></li>
-			<li id='month_day' class='nav_li'></li>	
-			<li id='menu' class='nav_li'>...</li>
-			<li id='additionally' class='nav_li'>+</li>
-			<li style='z-index: 10;text-decoration: none;display:block;'>
-				<div id='nav_menu'>
-					<ul class='nav_ul' id='elem_menu'>
-						<li class="nav_menu_li" id='events_list'>Events list</li>
-						<li class="nav_menu_li" id='go_to'>Go to</li>
-						<li class="nav_menu_li" id='settings'>Settings</li>
+	<div id='canvas_cal'>
+		<div id='nav'>
+				<ul id='nav_ul'>
+					<li id='month_name' class='nav_li'></li>
+					<li id='month_day' class='nav_li'></li>	
+					<li id='menu' class='nav_li'>...</li>
+					<li id='additionally' class='nav_li'>+</li>
+					<li style='z-index: 10;text-decoration: none;display:block;'>
+						<div id='nav_menu'>
+							<ul class='nav_ul' id='elem_menu'>
+								<li class="nav_menu_li" id='events_list'>Events list</li>
+								<li class="nav_menu_li" id='go_to'>Go to</li>
+								<li class="nav_menu_li" id='settings' onclick='aboutWindow()'>About</li>
+							</ul>
+						</div>
+					</li>
+				</ul>
+				<ul class='container_year_day'><li id='year' class='nav_li_y'>2020</li><li id='day_identificator' class='nav_li_d'>Today</li></ul>
+			</div>
+			<table id='calendar' class='table_calendar'>
+				<thead>
+					<tr id='nav_days_ul'></tr>
+				</thead>
+				<tbody id='calendar_body' style='position:absolute;margin-top:180px;margin-left:-280px;'>
+				</tbody>
+			</table>
+	</div>
+	<div id='background' onclick="closeAll()"></div>
+	<div id='about'>
+		<ul id='about_ul'>
+			<li class='about_li'>
+				<div id='title_div'>
+					<ul id='title_ul'>
+						<li id='title_li'><p>Calendar Surf <b>v1.0</b></p></li>
+					</ul>
+				</div>
+			</li>
+			<li id='about_li'>
+				<div id='git_div'>
+					<ul id='git_ul'>
+						<li id='git_li'><a href="https://github.com/KR1470R/CalendarSurf">Git Repository</a></li>
 					</ul>
 				</div>
 			</li>
 		</ul>
-		<ul class='container_year_day'><li id='year' class='nav_li_y'>2020</li><li id='day_identificator' class='nav_li_d'>Today</li></ul>
 	</div>
-		<!-- <ul id='nav_days_ul'></ul>-->
-	<table id='calendar' class='table_calendar'>
-		<thead>
-			<tr id='nav_days_ul'></tr>
-		</thead>
-		<tbody id='calendar_body' style='position:absolute;margin-top:180px;margin-left:-280px;'>
-			
-		</tbody>
-	</table>
-<!--		<ul id='nav_days_ul_numbs'></ul> -->
-
 </body>
 <script type="text/javascript" src='{{ url_for("static", filename="js/interface_logic.js") }}'></script>
 </html>

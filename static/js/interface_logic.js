@@ -1,5 +1,4 @@
-//ALIVING OF POP UP MENU
-
+//LOGIC PAGE
 let menu = document.getElementById('nav_menu')
 let one_selected = false
 let number_selected = null
@@ -66,6 +65,9 @@ document.addEventListener('click', function(e){
 
 menu.addEventListener('click',function(){
 	menu.animate([{opacity:1},{opacity:0}],{duration:100,fill:'both'});setTimeout(()=>menu.style.display='none',100)});
+
+//document.getElementById('canvas_cal').style.cssText = 'filter:blur(0.2rem);'
+//document.getElementById('background').style.cssText = 'position:absolute;width:100%;height:100%;opacity:0;'
 
 //PART LOGIC OF CALENDAR
 
@@ -158,4 +160,17 @@ function showCalendar(month,year){
 }
 function daysInMonth(iMonth,iYear){
 	return 32 - new Date(iYear, iMonth, 32).getDate()
+}
+
+function closeAll(){
+	console.log('test')
+	let get_div_about = document.getElementById('about')
+	get_div_about.style.display = 'none'
+}
+
+function aboutWindow(){
+	let get_div_about = document.getElementById('about')
+	get_div_about.style.display = 'block'
+	get_div_about.animate([{opacity:0,},{opacity:1}],[{duration:100},fill:'both'])//;setTimeout(()=>{get_div_about.cssText=''})
+
 }

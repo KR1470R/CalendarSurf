@@ -1,7 +1,7 @@
 body,html{
 	background-color: white;
 }
-.nav_ul{
+.nav_ul,#title_ul,#git_ul{
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
@@ -9,7 +9,7 @@ body,html{
 	border-radius: 10px;
 	background-color: white;
 }
-.nav_li{
+.nav_li,#title_li,#git_li{
 	display: block;
 	float: left;
 	padding: 14px 16px;
@@ -182,4 +182,60 @@ body,html{
      -moz-user-select: none;
       -ms-user-select: none; 
           user-select: none;
+}
+
+#about{
+	background-color: white;
+	width: 50%;
+	height: 50%;
+	position: fixed;
+	display: none;
+	justify-content: center;
+	-webkit-box-shadow: 0px 0px 23px -5px rgba(0,0,0,0.75);
+	-moz-box-shadow: 0px 0px 23px -5px rgba(0,0,0,0.75);
+	box-shadow: 0px 0px 23px -5px rgba(0,0,0,0.75);
+	border-radius: 10px;
+	top:50%;
+	left:50%;
+	transform: translate(-50%,-50%);
+	z-index: 9999999999;
+}
+
+#about_li{
+	display: block;
+	float: left;
+	padding: 14px 16px;
+	text-decoration: none;
+	font-size: 60px;
+	font-family: 'Roboto', sans-serif;
+	width: auto;
+}
+#about_ul{
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hide;
+	border-radius: 10px;
+	background-color: white;
+}
+a{
+	text-decoration: none;
+	color:#231A6A;
+}
+#git_div{
+	text-align: center;
+	justify-content: center;
+	align-items: center;
+	left: 50%;
+	transform: translate(10%,-50%);
+}
+#background{
+	position:absolute;
+	width:100%;
+	height:100%;
+	opacity:0;
+	display:none;
+}
+#canvas_cal{
+	filter: blur(0rem);
 }
