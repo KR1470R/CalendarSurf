@@ -66,9 +66,6 @@ document.addEventListener('click', function(e){
 menu.addEventListener('click',function(){
 	menu.animate([{opacity:1},{opacity:0}],{duration:100,fill:'both'});setTimeout(()=>menu.style.display='none',100)});
 
-//document.getElementById('canvas_cal').style.cssText = 'filter:blur(0.2rem);'
-//document.getElementById('background').style.cssText = 'position:absolute;width:100%;height:100%;opacity:0;'
-
 //PART LOGIC OF CALENDAR
 
 let months = ['January','February','March','April','May','June','July','August','September','October','November','December']
@@ -162,15 +159,19 @@ function daysInMonth(iMonth,iYear){
 	return 32 - new Date(iYear, iMonth, 32).getDate()
 }
 
+let get_div_about = document.getElementById('about')
+let get_background = document.getElementById('canvas_cal')
+let get_div_bg = document.getElementById('background')
+
 function closeAll(){
-	console.log('test')
-	let get_div_about = document.getElementById('about')
-	get_div_about.style.display = 'none'
+	get_div_about.animate([{opacity:1},{opacity:0}],{duration:100,fill:'both'});setTimeout(()=>get_div_about.style.cssText='opacity:0;display:none;',100)
+	get_background.style.cssText = 'animation:0.1s linear sharp_background;';setTimeout(()=>get_background.style.cssText = 'filter:blur(0rem);')
+	get_div_bg.style.display = 'none'
 }
 
 function aboutWindow(){
-	let get_div_about = document.getElementById('about')
+	get_div_bg.style.display = 'block'
+	get_background.style.cssText = 'display:block;animation:0.1s linear blur_background;';setTimeout(()=>get_background.style.cssText='filter:blur(1rem);')
 	get_div_about.style.display = 'block'
-	get_div_about.animate([{opacity:0,},{opacity:1}],[{duration:100},fill:'both'])//;setTimeout(()=>{get_div_about.cssText=''})
-
+	get_div_about.animate([{opacity:0},{opacity:1}],{duration:100,fill:'both'});setTimeout(()=>get_div_about.cssText='opacity:1;')
 }
