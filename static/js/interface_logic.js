@@ -68,7 +68,8 @@ menu.addEventListener('click',function(){
 
 //PART LOGIC OF CALENDAR
 
-let months = ['January','February','March','April','May','June','July','August','September','October','November','December']
+let months_days_count = [31,29,31,30,31,30,31,31,30,31,30,31]
+let months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
 let days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat']
 
 let now = new Date()
@@ -174,4 +175,27 @@ function aboutWindow(){
 	get_background.style.cssText = 'display:block;animation:0.1s linear blur_background;';setTimeout(()=>get_background.style.cssText='filter:blur(1rem);')
 	get_div_about.style.display = 'block'
 	get_div_about.animate([{opacity:0},{opacity:1}],{duration:100,fill:'both'});setTimeout(()=>get_div_about.cssText='opacity:1;')
+}
+
+let month_div = document.getElementById('month_div')
+let month_days_div = document.getElementById('day_div')
+let year_div = document.getElementById('year_div')
+
+for (m in months){
+	let create_div_month = document.createElement('div')
+	create_div_month.innerHTML = months[m]
+	create_div_month.setAttribute('class','option-choose')
+	month_div.appendChild(create_div_month)
+}
+for (m_c in months_days_count){
+	let create_div_month_days_count = document.createElement('div')
+	create_div_month_days_count.innerHTML = months_days_count[m_c]
+	create_div_month_days_count.setAttribute('class','option-choose')
+	month_days_div.appendChild(create_div_month_days_count)
+}
+for (let yc=1970;yc<=2050;yc++){
+	let create_div_year = document.createElement('div')
+	create_div_year.innerHTML = yc
+	create_div_year.setAttribute('class','option-choose')
+	year_div.appendChild(create_div_year)
 }
