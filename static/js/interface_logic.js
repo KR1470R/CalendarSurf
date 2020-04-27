@@ -60,6 +60,11 @@ document.addEventListener('click', function(e){
 			}catch(e){
 				return
 			}
+		}else if ( c === 'option-choose'){
+			console.log('clicked')
+			console.log(i)
+			let get_selector = document.getElementById(i)
+			get_selector.style.cssText = 'font-weight:bold;'
 		}
 });
 
@@ -77,11 +82,16 @@ let current_month = months[now.getMonth()]
 document.getElementById('month_name').innerHTML = current_month
 document.getElementById('month_day').innerHTML = now.getDate()
 
+document.getElementById('selected_month').innerHTML = current_month
+document.getElementById('selected_day').innerHTML = now.getDate()
+document.getElementById('selected_year').innerHTML =  now.getFullYear()
+
 let currentMonth = now.getMonth()
 let currentYear = now.getFullYear()
 let container_days = document.getElementById('nav_days_ul')
 let element_month = document.getElementById('month_name')
 let element_year = document.getElementById('year')
+
 
 for (count in days){
 	let newElem = document.createElement('th')
@@ -106,7 +116,6 @@ showCalendar(currentMonth,currentYear)
 
 function showCalendar(month,year){
 	let firstDay = (new Date(year,month)).getDay()
-
 	let tbl = document.getElementById('calendar_body')
 	tbl.innerHTML = ''
 
@@ -156,6 +165,25 @@ function showCalendar(month,year){
 	tbl.appendChild(row)
 	}
 }
+
+function back(){
+  currentYear = (currentMonth === 0) ? currentYear - 1 : currentYear;
+  currentMonth = (currentMonth === 0) ? 11 : currentMonth - 1;
+  showCalendar(currentMonth, currentYear);
+}
+
+function next(){
+  currentYear = (currentMonth === 11) ? currentYear + 1 : currentYear;
+  currentMonth = (currentMonth + 1) % 12;
+  showCalendar(currentMonth, currentYear);
+}
+
+function goto(){
+  currentYear = parseInt(selectYear.value);
+  currentMonth = parseInt(selectMonth.value);
+  showCalendar(currentMonth, currentYear);
+}
+
 function daysInMonth(iMonth,iYear){
 	return 32 - new Date(iYear, iMonth, 32).getDate()
 }
@@ -185,17 +213,20 @@ for (m in months){
 	let create_div_month = document.createElement('div')
 	create_div_month.innerHTML = months[m]
 	create_div_month.setAttribute('class','option-choose')
+	create_div_month.setAttribute('id','selector_'+months[m])
 	month_div.appendChild(create_div_month)
 }
 for (m_c in months_days_count){
 	let create_div_month_days_count = document.createElement('div')
 	create_div_month_days_count.innerHTML = months_days_count[m_c]
 	create_div_month_days_count.setAttribute('class','option-choose')
+	create_div_month_days_count.setAttribute('id','selector_'+months_days_count[m_c])
 	month_days_div.appendChild(create_div_month_days_count)
 }
 for (let yc=1970;yc<=2050;yc++){
 	let create_div_year = document.createElement('div')
 	create_div_year.innerHTML = yc
 	create_div_year.setAttribute('class','option-choose')
+	create_div_year.setAttribute('id','selector_'+yc)
 	year_div.appendChild(create_div_year)
 }

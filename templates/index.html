@@ -24,7 +24,7 @@
 						</div>
 					</li>
 				</ul>
-				<ul class='container_year_day'><li id='year' class='nav_li_y'>2020</li><li id='day_identificator' class='nav_li_d'>Today</li></ul>
+				<ul class='container_year_day'><li id='year' class='nav_li_y'></li><li id='day_identificator' class='nav_li_d'>Today</li></ul>
 			</div>
 			<table id='calendar' class='table_calendar'>
 				<thead>
@@ -34,6 +34,20 @@
 				</tbody>
 			</table>
 	</div>
+	<div id='div_back_next'>
+		<div id='back' onclick="back()">
+			<div id='back_first'></div>
+			<div id='back_center'><</div>
+			<div id='back_second'></div>
+		</div>
+		<div id='center'></div>
+		<div id='next' onclick="next()">
+			<div id='next_first'></div>
+			<div id='next_center'>></div>
+			<div id='next_second'></div>
+		</div>
+	</div>
+
 	<div id='background' onclick="closeAll()"></div>
 	<div id='about'>
 		<ul id='about_ul'>
@@ -53,13 +67,18 @@
 			</li>
 		</ul>
 	</div>
-	
-	<div id='got_to_div'>
+
+	<div id='got_to_div' style='display: none;'>
 		<div id='choose_date'>
-			<div id='selected_date'></div>
+			<div id='selected_date'>
+				<p id='selected_month'>Mar</p>
+				<p id='selected_day'>21</p>
+				<p id='selected_year'>1991</p>
+			</div>
 			<div id='month_div' class='column'></div>
 			<div id='day_div' class='column'></div>
 			<div id='year_div' class='column'></div>
+			<div id='opacitylow_top'></div>
 			<div id='opacitylow_bottom'></div>
 		</div>
 		<div id='buttons_div'>
