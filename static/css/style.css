@@ -175,7 +175,7 @@ body,html{
   background: transparent;
 }
 
-.cell_div,.date-picker,.day,#buttons_div,.option-choose,#back,#next{
+.cell_div,.date-picker,.day,#buttons_div,.option-choose,#back,#next,#get_current_date{
 	-webkit-touch-callout: none;
   -webkit-user-select: none; 
    -khtml-user-select: none; 
@@ -447,14 +447,39 @@ a{
 	padding-right: 5px;
 	padding-left: 5px;
 	transition: 0.1s;
-}
-
-#back,#next:hover{
 	cursor:pointer;
 }
+
 #back:active{
 	background-color:#F2F2F2;
 }
 #next:active{
 	background-color:#F2F2F2;
 }
+#get_current_date{
+	background-color:#D5D5D5;
+	width: 100px;
+	height: 100px;
+	border-radius: 99999px;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	float:right;
+	position: absolute;
+  bottom: 3%;
+  left: 92%;
+  align-self: flex-end;
+  cursor:pointer;
+}
+#get_current_date_first{display: flex;flex-grow:1;}
+#text_current_date_center{
+	display: flex;
+	text-align: center; 
+	font-size: 60px;
+	font-family: 'Lato', sans-serif;
+	font-weight: bold;
+	justify-content: center;
+	color:white;
+}
+#get_current_date_second{display: flex;flex-grow: 1;}
+

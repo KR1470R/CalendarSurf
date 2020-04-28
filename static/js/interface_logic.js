@@ -85,6 +85,7 @@ document.getElementById('month_day').innerHTML = now.getDate()
 document.getElementById('selected_month').innerHTML = current_month
 document.getElementById('selected_day').innerHTML = now.getDate()
 document.getElementById('selected_year').innerHTML =  now.getFullYear()
+document.getElementById('text_current_date_center').innerHTML = now.getDate()
 
 let currentMonth = now.getMonth()
 let currentYear = now.getFullYear()
@@ -166,6 +167,49 @@ function showCalendar(month,year){
 	}
 }
 
+el = document.getElementById('calendar')
+  el.addEventListener("touchstart", startTouch, false);
+  el.addEventListener("touchmove", moveTouch, false);
+
+// Swipe Left / Right
+var initialX = null;
+var initialY = null;
+
+function startTouch(e) {
+  initialX = e.touches[0].clientX;
+  initialY = e.touches[0].clientY;
+};
+
+function moveTouch(e) {
+  if (initialX === null) {
+    return;
+  }
+
+  if (initialY === null) {
+    return;
+  }
+
+  var currentX = e.touches[0].clientX;
+  var currentY = e.touches[0].clientY;
+
+  var diffX = initialX - currentX;
+  var diffY = initialY - currentY;
+
+  if (Math.abs(diffX) > Math.abs(diffY)) {
+    if (diffX > 0) {
+      // swiped left
+      back()
+    } else {
+      // swiped right
+     	next()
+    }  
+  }
+  initialX = null;
+  initialY = null;
+
+  e.preventDefault();
+};
+
 function back(){
   currentYear = (currentMonth === 0) ? currentYear - 1 : currentYear;
   currentMonth = (currentMonth === 0) ? 11 : currentMonth - 1;
@@ -182,6 +226,10 @@ function goto(){
   currentYear = parseInt(selectYear.value);
   currentMonth = parseInt(selectMonth.value);
   showCalendar(currentMonth, currentYear);
+}
+
+function switchToCurrentDate(){
+	showCalendar(now.getMonth(),now.getFullYear())
 }
 
 function daysInMonth(iMonth,iYear){
