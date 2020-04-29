@@ -113,57 +113,73 @@ function generate_year_range(start, end) {
 }
 
 var createYear = generate_year_range(1970,2050)
-showCalendar(currentMonth,currentYear)
+showCalendar(currentMonth,currentYear,'None')
 
-function showCalendar(month,year){
+function showCalendar(month,year,swiped){
 	let firstDay = (new Date(year,month)).getDay()
-	let tbl = document.getElementById('calendar_body')
-	tbl.innerHTML = ''
 
 	element_month.innerHTML=months[month];element_year.innerHTML=year
-
+	if (swiped === 'next'){
+		console.log('in this moment will be animation to next')
+		render_cal('right_calendar_body')
+		let get_container_right = document.getElementById('left_calendar_body')
+		let get_container_left = document.getElementById('right_calendar_body')
+		let get_container_center = document.getElementById('calendar_body')
+		//let create_left_table_body = document.createElement('tbody')
+	}else if (swiped === 'back'){
+		console.log('in this moment will be animation to back')
+		render_cal('left_calendar_body')
+		let get_container_right = document.getElementById('right_calendar_body')
+		let get_container_left = document.getElementById('left_calendar_body')
+		let get_container_center = document.getElementById('calendar_body')
+		get_container_left.style.cssText = 'animation:1s linear left_to_right;';setTimeout(()=>get_container_left.style.cssText='margin-left: -280px;margin-top: 180px;position: absolute;',100)
+		get_container_center.style.cssText = 'animation:1s linear center_container_to_right;';setTimeout(()=>get_container_center.style.cssText='margin-left:100%;margin-top: 180px;position: absolute;',100)
+		
+	}else{render_cal('calendar_body')}
 	//CREATING CELLS
-	let date = 1
-	for (var i=0;i<6;i++){
-		let body = document.getElementById('body')
-		let row = document.createElement('tr')
-		body.appendChild(row)
-		row.style.cssText = "font-size: 30px;font-family: 'Lato', sans-serif;"
-		for (var j=0;j<7;j++){
-			if (i===0 && j<firstDay){
-				let cell = document.createElement('td')
-				let cellText = document.createTextNode("")
-				cell.appendChild(cellText)
-				row.appendChild(cell)
-			}else if (date>daysInMonth(month,year)){
-				break;
-			}else{
-				let cell = document.createElement('td')
-				cell.setAttribute("data-date",date)
-				cell.setAttribute('data-month',month+1)
-				cell.setAttribute('data-year', year)
-				cell.setAttribute('data-month_name',months[month])
-				cell.setAttribute('id',date)
-				cell.className='date-picker'
-				cell_span = document.createElement('div')
-				cell_span.innerHTML = date
-				cell_span.setAttribute('id','span_'+date)
-				cell_span.setAttribute('class','cell_div')
-				cell.appendChild(cell_span)
-				cell.style.cssText = 'padding:50px;padding-left:165px;text-align:center;'
+	function render_cal(id){
+		let tbl = document.getElementById(id)
+		tbl.innerHTML = ''
+		let date = 1
+		for (var i=0;i<6;i++){
+			let row = document.createElement('tr')
+			row.style.cssText = "font-size: 30px;font-family: 'Lato', sans-serif;"
+			for (var j=0;j<7;j++){
+				if (i===0 && j<firstDay){
+					let cell = document.createElement('td')
+					let cellText = document.createTextNode("")
+					cell.appendChild(cellText)
+					row.appendChild(cell)
+				}else if (date>daysInMonth(month,year)){
+					break;
+				}else{
+					let cell = document.createElement('td')
+					cell.setAttribute("data-date",date)
+					cell.setAttribute('data-month',month+1)
+					cell.setAttribute('data-year', year)
+					cell.setAttribute('data-month_name',months[month])
+					cell.setAttribute('id',date)
+					cell.className='date-picker'
+					cell_span = document.createElement('div')
+					cell_span.innerHTML = date
+					cell_span.setAttribute('id','span_'+date)
+					cell_span.setAttribute('class','cell_div')
+					cell.appendChild(cell_span)
+					cell.style.cssText = 'padding:50px;padding-left:165px;text-align:center;'
 
-				if (date === now.getDate() && year === now.getFullYear() && month === now.getMonth()){
-					div_picker_selected_number = date
-					cell.className = 'date-picker selected'
-					cell_span.className = 'cell_div_selected'
-					cell_span.style.cssText = 'z-index:1;color:white;text-align:center;margin-top:30px;padding-right:5px;'
-					cell.style.cssText = 'background-color:#E73A3C;width:100px;height:100px;position:absolute;border-radius:10px;margin-left:130px;z-index:2;margin-top:10px;'
+					if (date === now.getDate() && year === now.getFullYear() && month === now.getMonth()){
+						div_picker_selected_number = date
+						cell.className = 'date-picker selected'
+						cell_span.className = 'cell_div_selected'
+						cell_span.style.cssText = 'z-index:1;color:white;text-align:center;margin-top:30px;padding-right:5px;'
+						cell.style.cssText = 'background-color:#E73A3C;width:100px;height:100px;position:absolute;border-radius:10px;margin-left:130px;z-index:2;margin-top:10px;'
+					}
+					row.appendChild(cell)
+					date++
 				}
-				row.appendChild(cell)
-				date++
 			}
+		tbl.appendChild(row)
 		}
-	tbl.appendChild(row)
 	}
 }
 
@@ -198,10 +214,10 @@ function moveTouch(e) {
   if (Math.abs(diffX) > Math.abs(diffY)) {
     if (diffX > 0) {
       // swiped left
-      back()
+      next()
     } else {
       // swiped right
-     	next()
+     	back()
     }  
   }
   initialX = null;
@@ -213,19 +229,19 @@ function moveTouch(e) {
 function back(){
   currentYear = (currentMonth === 0) ? currentYear - 1 : currentYear;
   currentMonth = (currentMonth === 0) ? 11 : currentMonth - 1;
-  showCalendar(currentMonth, currentYear);
+  showCalendar(currentMonth, currentYear,'back');
 }
 
 function next(){
   currentYear = (currentMonth === 11) ? currentYear + 1 : currentYear;
   currentMonth = (currentMonth + 1) % 12;
-  showCalendar(currentMonth, currentYear);
+  showCalendar(currentMonth, currentYear,'next');
 }
 
 function goto(){
   currentYear = parseInt(selectYear.value);
   currentMonth = parseInt(selectMonth.value);
-  showCalendar(currentMonth, currentYear);
+  showCalendar(currentMonth, currentYear,'None');
 }
 
 function switchToCurrentDate(){
