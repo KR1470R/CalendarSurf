@@ -142,7 +142,7 @@ body,html{
 }
 #calendar_body{
 	position: absolute;
-	margin-top: 50px;
+	margin-top: 180px;
 }
 #left_calendar_body{
 	position: absolute;
@@ -151,10 +151,9 @@ body,html{
 #right_calendar_body{
 	position: absolute;
 	margin-top: 180px;
-	right: -100%;
 }
 
-@keyframes left_to_right{
+@keyframes left_to_center{
 	0%{
 		margin-left:-100%;
 		margin-top: 180px;
@@ -164,6 +163,18 @@ body,html{
 		margin-top: 180px;
 	}
 }
+
+@keyframes right_to_center{
+	0%{
+		margin-left:200%;
+		margin-top: 180px;
+	}
+	100%{
+		margin-left: -280px;
+		margin-top: -280px;
+	}
+}
+
 @keyframes center_container_to_right{
 	0%{
 		margin-left: -280px;
@@ -174,6 +185,18 @@ body,html{
 		margin-top: 180px;
 	}
 }
+
+@keyframes center_container_to_left{
+	0%{
+		margin-left: -280px;
+		margin-top:180px;
+	}
+	100%{
+		margin-left: -200%;
+		margin-top: 180px;
+	}
+}
+
 .cell_div,.cell_div_selected:hover{
 	cursor:pointer
 }
@@ -395,7 +418,8 @@ a{
 	width: 50px;
 	height:200px;
 	padding-right: 100px;
-	position: relative;
+	position: relative;	
+	scroll-behavior: smooth;
 }
 
 #buttons_div{
@@ -512,4 +536,3 @@ a{
 	color:white;
 }
 #get_current_date_second{display: flex;flex-grow: 1;}
-

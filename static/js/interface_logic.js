@@ -64,7 +64,7 @@ document.addEventListener('click', function(e){
 			console.log('clicked')
 			console.log(i)
 			let get_selector = document.getElementById(i)
-			get_selector.style.cssText = 'font-weight:bold;'
+			get_selector.style.cssText = 'font-weight:bold;font-size:60px;transition:0.1s;'
 		}
 });
 
@@ -122,20 +122,22 @@ function showCalendar(month,year,swiped){
 	if (swiped === 'next'){
 		console.log('in this moment will be animation to next')
 		render_cal('right_calendar_body')
-		let get_container_right = document.getElementById('left_calendar_body')
-		let get_container_left = document.getElementById('right_calendar_body')
+		let get_container_right = document.getElementById('right_calendar_body')
+		let get_container_left = document.getElementById('left_calendar_body')
 		let get_container_center = document.getElementById('calendar_body')
-		//let create_left_table_body = document.createElement('tbody')
+		get_container_right.style.cssText = 'animation:1s linear right_to_center;';setTimeout(()=>get_container_right.style.cssText='margin-left:200%;margin-top: 180px;position: absolute;',100)
+		get_container_center.style.cssText = 'animation:1s linear center_container_to_left;';setTimeout(()=>get_container_center.style.cssText='margin-left:-280px;margin-top: 180px;position: absolute;',100)
+		get_container_center.innerHTML = get_container_right.innerHTML
 	}else if (swiped === 'back'){
 		console.log('in this moment will be animation to back')
 		render_cal('left_calendar_body')
 		let get_container_right = document.getElementById('right_calendar_body')
 		let get_container_left = document.getElementById('left_calendar_body')
 		let get_container_center = document.getElementById('calendar_body')
-		get_container_left.style.cssText = 'animation:1s linear left_to_right;';setTimeout(()=>get_container_left.style.cssText='margin-left: -280px;margin-top: 180px;position: absolute;',100)
-		get_container_center.style.cssText = 'animation:1s linear center_container_to_right;';setTimeout(()=>get_container_center.style.cssText='margin-left:100%;margin-top: 180px;position: absolute;',100)
-		
-	}else{render_cal('calendar_body')}
+		get_container_left.style.cssText = 'animation:1s linear left_to_center;';setTimeout(()=>get_container_left.style.cssText='margin-left: -200%;margin-top: 180px;position: absolute;',100)
+		get_container_center.style.cssText = 'animation:1s linear center_container_to_right;';setTimeout(()=>get_container_center.style.cssText='margin-left:-280px;margin-top: 180px;position: absolute;',100)
+		get_container_center.innerHTML = get_container_left.innerHTML
+	}else{render_cal('calendar_body')	}
 	//CREATING CELLS
 	function render_cal(id){
 		let tbl = document.getElementById(id)
