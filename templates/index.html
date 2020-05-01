@@ -5,6 +5,7 @@
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/style.css') }}">
 	<link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto:wght@500&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="https://unpkg.com/flickity@2.0.11/dist/flickity.css">
 </head>
 <body id='body'>
 	<div id='canvas_cal'>
@@ -68,7 +69,6 @@
 			</li>
 		</ul>
 	</div>
-
 	<div id='got_to_div'>
 		<div id='choose_date'>
 			<div id='selected_date' style='display: none;'>
@@ -76,7 +76,13 @@
 				<p id='selected_day'>21</p>
 				<p id='selected_year'>1991</p>
 			</div>
-			<div id='month_div' class='column'></div>
+			<div id='month_div' class='column' data-flickity='{
+              "percentPosition": false,
+              "groupCells": "100%",
+              "pageDots": false,
+              "prevNextButtons":false,
+              "contain":true
+            }'></div>
 			<div id='day_div' class='column'></div>
 			<div id='year_div' class='column'></div>
 			<div id='opacitylow_top'></div>
@@ -93,4 +99,7 @@
 	</div>	
 </body>
 <script type="text/javascript" src='{{ url_for("static", filename="js/interface_logic.js") }}'></script>
+<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
+<script type="text/javascript" src='https://unpkg.com/flickity@2.0.11/dist/flickity.pkgd.js'></script>
+<script type="text/javascript" src='https://code.jquery.com/jquery-3.5.0.min.js'></script>
 </html>

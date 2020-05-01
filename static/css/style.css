@@ -407,6 +407,12 @@ a{
       rgba(255, 255, 255, 1) 100%
   );
 }
+#month_div{
+	transform: rotate(90deg)
+}
+.option-choose{
+	transform: rotate(-90deg)
+}
 .column{
 	padding-left: 150px;
 	padding-top: 50px;
@@ -536,3 +542,7 @@ a{
 	color:white;
 }
 #get_current_date_second{display: flex;flex-grow: 1;}
+
+.flickity-viewport{
+	height: 100px;
+}

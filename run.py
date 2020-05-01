@@ -1,3 +1,4 @@
+# FLASK_APP=run.py FLASK_DEBUG=1 flask run
 from flask import Flask, render_template
 
 app = Flask(__name__)
