@@ -324,9 +324,10 @@ a{
 	min-width: 50%;
 	width: auto;
 	height: 60%;
+	display: none;
 	position: fixed;
 	text-align: center;
-  align-items: center
+	align-items: center
 	-webkit-box-shadow: 0px 0px 23px -5px rgba(0,0,0,0.75);
 	-moz-box-shadow: 0px 0px 23px -5px rgba(0,0,0,0.75);
 	box-shadow: 0px 0px 23px -5px rgba(0,0,0,0.75);
@@ -407,17 +408,20 @@ a{
       rgba(255, 255, 255, 1) 100%
   );
 }
-#month_div{
-	transform: rotate(90deg)
+#month_div,#day_div,#year_div{
+	width:200px;
+	transform: rotate(90deg);
 }
-.option-choose{
-	transform: rotate(-90deg)
+.option-choose-month,.option-choose-monthday,.option-choose-year{
+	transform: rotate(-90deg);
+	top:60px;
 }
+
 .column{
 	padding-left: 150px;
 	padding-top: 50px;
 	margin-top: 100px;
-	font-size: 50px;
+	font-size: 80px;
 	font-family: 'Lato', sans-serif;
 	display: block;
 	overflow-x: hidden;
@@ -427,6 +431,13 @@ a{
 	position: relative;	
 	scroll-behavior: smooth;
 }
+
+#buttons_comfirm_div{
+	display: flex;
+	flex-direction:row;
+}
+
+#left_buttons_div{display:flex;flex-grow: 1;}
 
 #buttons_div{
 	display:flex;
@@ -438,6 +449,9 @@ a{
 	position: relative;
 	transform: translate(12.5%,100%);
 }
+
+#right_buttons_div{display:flex;flex-grow: 2;}
+
 #cancel{
 	color:#2774E7;
 }
@@ -526,10 +540,10 @@ a{
 	flex-direction: column;
 	float:right;
 	position: absolute;
-  bottom: 3%;
-  left: 92%;
-  align-self: flex-end;
-  cursor:pointer;
+	bottom: 3%;
+	left: 92%;
+	align-self: flex-end;
+	cursor:pointer;
 }
 #get_current_date_first{display: flex;flex-grow:1;}
 #text_current_date_center{

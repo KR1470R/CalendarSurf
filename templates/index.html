@@ -6,6 +6,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto:wght@500&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="https://unpkg.com/flickity@2.0.11/dist/flickity.css">
+	<!--<script src="{{ url_for('static', filename='js/flickity-verticalCarousel/flickity.pkgd.js') }}"></script>-->
 </head>
 <body id='body'>
 	<div id='canvas_cal'>
@@ -19,7 +20,7 @@
 						<div id='nav_menu'>
 							<ul class='nav_ul' id='elem_menu'>
 								<li class="nav_menu_li" id='events_list'>Events list</li>
-								<li class="nav_menu_li" id='go_to'>Go to</li>
+								<li class="nav_menu_li" id='go_to' onclick='goToWindow()'>Go to</li>
 								<li class="nav_menu_li" id='settings' onclick='aboutWindow()'>About</li>
 							</ul>
 						</div>
@@ -71,26 +72,48 @@
 	</div>
 	<div id='got_to_div'>
 		<div id='choose_date'>
+			<!--
 			<div id='selected_date' style='display: none;'>
 				<p id='selected_month'>Mar</p>
 				<p id='selected_day'>21</p>
 				<p id='selected_year'>1991</p>
-			</div>
+			</div>-->
 			<div id='month_div' class='column' data-flickity='{
               "percentPosition": false,
-              "groupCells": "100%",
+              "groupCells": 1,
               "pageDots": false,
               "prevNextButtons":false,
-              "contain":true
+              "contain":true,
+              "setGallerySize":false	
+            }'></div> 
+			<!--<div id='month_div' class='column'></div>-->
+			<div id='day_div' class='column' data-flickity='{
+              "percentPosition": false,
+              "groupCells": 1,
+              "pageDots": false,
+              "prevNextButtons":false,
+              "contain":true,
+              "setGallerySize":false	
             }'></div>
-			<div id='day_div' class='column'></div>
-			<div id='year_div' class='column'></div>
+			<div id='year_div' class='column' data-flickity='{
+              "percentPosition": false,
+              "groupCells": 1,
+              "pageDots": false,
+              "prevNextButtons":false,
+              "contain":true,
+              "setGallerySize":false	
+            }'></div>
 			<div id='opacitylow_top'></div>
 			<div id='opacitylow_bottom'></div>
 		</div>
-		<div id='buttons_div'>
-			<div id='cancel'>Cancel</div><div id='ok'>OK</div>
+		<div id='buttons_comfirm_div'>
+			<div id='left_buttons_div'></div>
+			<div id='buttons_div'>
+				<div id='cancel' onclick="closeAll()">Cancel</div><div id='ok' onclick="goto()">OK</div>
+			</div>
+			<div id='right_buttons_div'></div>
 		</div>
+
 	</div>
 	<div id='get_current_date' onclick='switchToCurrentDate()'>
 		<div id='get_current_date_first'></div>
@@ -101,5 +124,6 @@
 <script type="text/javascript" src='{{ url_for("static", filename="js/interface_logic.js") }}'></script>
 <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
 <script type="text/javascript" src='https://unpkg.com/flickity@2.0.11/dist/flickity.pkgd.js'></script>
+
 <script type="text/javascript" src='https://code.jquery.com/jquery-3.5.0.min.js'></script>
 </html>

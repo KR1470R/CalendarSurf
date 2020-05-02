@@ -60,12 +60,12 @@ document.addEventListener('click', function(e){
 			}catch(e){
 				return
 			}
-		}else if ( c === 'option-choose'){
+		}/*else if ( c === 'option-choose'){
 			console.log('clicked')
 			console.log(i)
 			let get_selector = document.getElementById(i)
 			get_selector.style.cssText = 'font-weight:bold;font-size:60px;transition:0.1s;'
-		}
+		}*/
 });
 
 menu.addEventListener('click',function(){
@@ -82,11 +82,13 @@ let current_month = months[now.getMonth()]
 document.getElementById('month_name').innerHTML = current_month
 document.getElementById('month_day').innerHTML = now.getDate()
 
+/* Label current choosed DATE in /mainWindow/GoToWindow
 document.getElementById('selected_month').innerHTML = current_month
 document.getElementById('selected_day').innerHTML = now.getDate()
 document.getElementById('selected_year').innerHTML =  now.getFullYear()
-document.getElementById('text_current_date_center').innerHTML = now.getDate()
 
+*/
+document.getElementById('text_current_date_center').innerHTML = now.getDate()
 let currentMonth = now.getMonth()
 let currentYear = now.getFullYear()
 let container_days = document.getElementById('nav_days_ul')
@@ -217,6 +219,7 @@ function moveTouch(e) {
     if (diffX > 0) {
       // swiped left
       next()
+      
     } else {
       // swiped right
      	back()
@@ -241,9 +244,8 @@ function next(){
 }
 
 function goto(){
-  currentYear = parseInt(selectYear.value);
-  currentMonth = parseInt(selectMonth.value);
-  showCalendar(currentMonth, currentYear,'None');
+  showCalendar(months.indexOf(document.getElementsByClassName('option-choose-month is-selected')[0].innerHTML), document.getElementsByClassName('option-choose-year is-selected')[0].innerHTML,'None');
+  closeAll()
 }
 
 function switchToCurrentDate(){
@@ -256,19 +258,33 @@ function daysInMonth(iMonth,iYear){
 
 let get_div_about = document.getElementById('about')
 let get_background = document.getElementById('canvas_cal')
+let get_background_arrow_buttons = document.getElementById('div_back_next')
 let get_div_bg = document.getElementById('background')
+let get_go_to_div = document.getElementById('got_to_div')
 
 function closeAll(){
 	get_div_about.animate([{opacity:1},{opacity:0}],{duration:100,fill:'both'});setTimeout(()=>get_div_about.style.cssText='opacity:0;display:none;',100)
 	get_background.style.cssText = 'animation:0.1s linear sharp_background;';setTimeout(()=>get_background.style.cssText = 'filter:blur(0rem);')
+	get_background_arrow_buttons.style.cssText = 'animation:0.1s linear sharp_background;';setTimeout(()=>get_background_arrow_buttons.style.cssText = 'filter:blur(0rem);')
 	get_div_bg.style.display = 'none'
+	//=-=-=-=-=-=-=-=-
+	get_go_to_div.animate([{opacity:1},{opacity:0}],{duration:100,fill:'both'});setTimeout(()=>get_go_to_div.style.cssText='opacity:0;display:none',100)
 }
 
 function aboutWindow(){
 	get_div_bg.style.display = 'block'
 	get_background.style.cssText = 'display:block;animation:0.1s linear blur_background;';setTimeout(()=>get_background.style.cssText='filter:blur(1rem);')
+	get_background_arrow_buttons.style.cssText = 'animation:0.1s linear blur_background;';setTimeout(()=>get_background_arrow_buttons.style.cssText = 'filter:blur(1rem);')
 	get_div_about.style.display = 'block'
-	get_div_about.animate([{opacity:0},{opacity:1}],{duration:100,fill:'both'});setTimeout(()=>get_div_about.cssText='opacity:1;')
+	get_div_about.animate([{opacity:0},{opacity:1}],{duration:100,fill:'both'});setTimeout(()=>get_div_about.style.cssText='opacity:1;display:block;')
+}
+
+function goToWindow(){
+	get_div_bg.style.display = 'block'
+	get_background.style.cssText = 'display:block;animation:0.1s linear blur_background;';setTimeout(()=>get_background.style.cssText='filter:blur(1rem);')
+	get_background_arrow_buttons.style.cssText = 'animation:0.1s linear blur_background;';setTimeout(()=>get_background_arrow_buttons.style.cssText = 'filter:blur(1rem);')
+	get_go_to_div.style.display = 'block'
+	get_go_to_div.animate([{opacity:0},{opacity:1}],{duration:100,fill:'both'});setTimeout(()=>get_go_to_div.style.cssText='opacity:1;display:block;')
 }
 
 let month_div = document.getElementById('month_div')
@@ -278,21 +294,21 @@ let year_div = document.getElementById('year_div')
 for (m in months){
 	let create_div_month = document.createElement('div')
 	create_div_month.innerHTML = months[m]
-	create_div_month.setAttribute('class','option-choose')
+	create_div_month.setAttribute('class','option-choose-month')
 	create_div_month.setAttribute('id','selector_'+months[m])
 	month_div.appendChild(create_div_month)
 }
 for (m_c in months_days_count){
 	let create_div_month_days_count = document.createElement('div')
 	create_div_month_days_count.innerHTML = months_days_count[m_c]
-	create_div_month_days_count.setAttribute('class','option-choose')
+	create_div_month_days_count.setAttribute('class','option-choose-monthday')
 	create_div_month_days_count.setAttribute('id','selector_'+months_days_count[m_c])
 	month_days_div.appendChild(create_div_month_days_count)
 }
 for (let yc=1970;yc<=2050;yc++){
 	let create_div_year = document.createElement('div')
 	create_div_year.innerHTML = yc
-	create_div_year.setAttribute('class','option-choose')
+	create_div_year.setAttribute('class','option-choose-year')
 	create_div_year.setAttribute('id','selector_'+yc)
 	year_div.appendChild(create_div_year)
 }
