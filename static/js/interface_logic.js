@@ -1,9 +1,22 @@
+//PRELOADER PART
+let preloader_play = true
+let preloader_div = document.getElementById('preloader-div')
+window.onload = function () {
+  document.body.classList.add('loaded_hiding');
+  window.setTimeout(function () {
+    document.body.classList.add('loaded');
+    document.body.classList.remove('loaded_hiding');
+    preloader_div.animate([{opacity:1},{opacity:0}],{duration:1000,fill:'both'});setTimeout(()=>preloader_div.style.display='none',1000)
+  }, 1000);
+}
+	
 //LOGIC PAGE
 let menu = document.getElementById('nav_menu')
 let one_selected = false
 let number_selected = null
 let div_picker_selected_number = null
 let div_picker_selected = false
+setTimeout(()=>document.getElementById('got_to_div').style.cssText='display:none;',100)
 document.addEventListener('click', function(e){
 	let c = e.target.getAttribute('class')
 	let i = e.target.getAttribute('id')
@@ -261,11 +274,14 @@ let get_background = document.getElementById('canvas_cal')
 let get_background_arrow_buttons = document.getElementById('div_back_next')
 let get_div_bg = document.getElementById('background')
 let get_go_to_div = document.getElementById('got_to_div')
+let get_button_for_switch_to_current_date = document.getElementById('get_current_date')
+
 
 function closeAll(){
 	get_div_about.animate([{opacity:1},{opacity:0}],{duration:100,fill:'both'});setTimeout(()=>get_div_about.style.cssText='opacity:0;display:none;',100)
 	get_background.style.cssText = 'animation:0.1s linear sharp_background;';setTimeout(()=>get_background.style.cssText = 'filter:blur(0rem);')
 	get_background_arrow_buttons.style.cssText = 'animation:0.1s linear sharp_background;';setTimeout(()=>get_background_arrow_buttons.style.cssText = 'filter:blur(0rem);')
+	get_button_for_switch_to_current_date.style.cssText = 'animation:0.1s linear sharp_background;';setTimeout(()=>get_button_for_switch_to_current_date.style.cssText = 'filter:blur(0rem);')
 	get_div_bg.style.display = 'none'
 	//=-=-=-=-=-=-=-=-
 	get_go_to_div.animate([{opacity:1},{opacity:0}],{duration:100,fill:'both'});setTimeout(()=>get_go_to_div.style.cssText='opacity:0;display:none',100)
@@ -275,6 +291,7 @@ function aboutWindow(){
 	get_div_bg.style.display = 'block'
 	get_background.style.cssText = 'display:block;animation:0.1s linear blur_background;';setTimeout(()=>get_background.style.cssText='filter:blur(1rem);')
 	get_background_arrow_buttons.style.cssText = 'animation:0.1s linear blur_background;';setTimeout(()=>get_background_arrow_buttons.style.cssText = 'filter:blur(1rem);')
+	get_button_for_switch_to_current_date.style.cssText = 'animation:0.1s linear blur_background;';setTimeout(()=>get_button_for_switch_to_current_date.style.cssText = 'filter:blur(1rem);')
 	get_div_about.style.display = 'block'
 	get_div_about.animate([{opacity:0},{opacity:1}],{duration:100,fill:'both'});setTimeout(()=>get_div_about.style.cssText='opacity:1;display:block;')
 }
@@ -283,6 +300,7 @@ function goToWindow(){
 	get_div_bg.style.display = 'block'
 	get_background.style.cssText = 'display:block;animation:0.1s linear blur_background;';setTimeout(()=>get_background.style.cssText='filter:blur(1rem);')
 	get_background_arrow_buttons.style.cssText = 'animation:0.1s linear blur_background;';setTimeout(()=>get_background_arrow_buttons.style.cssText = 'filter:blur(1rem);')
+	get_button_for_switch_to_current_date.style.cssText = 'animation:0.1s linear blur_background;';setTimeout(()=>get_button_for_switch_to_current_date.style.cssText = 'filter:blur(1rem);')
 	get_go_to_div.style.display = 'block'
 	get_go_to_div.animate([{opacity:0},{opacity:1}],{duration:100,fill:'both'});setTimeout(()=>get_go_to_div.style.cssText='opacity:1;display:block;')
 }
