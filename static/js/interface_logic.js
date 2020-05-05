@@ -1,3 +1,32 @@
+//Dates DB 
+let months_days_count = [31,28,31,30,31,30,31,31,30,31,30,31]
+let months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
+let days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat']
+let has_been_clicked = false //for count day 
+let now = new Date()
+let current_month = months[now.getMonth()]
+document.getElementById('month_name').innerHTML = current_month
+document.getElementById('month_day').innerHTML = now.getDate()
+
+/* Label current choosed DATE in /mainWindow/GoToWindow
+document.getElementById('selected_month').innerHTML = current_month
+document.getElementById('selected_day').innerHTML = now.getDate()
+document.getElementById('selected_year').innerHTML =  now.getFullYear()
+
+*/
+document.getElementById('text_current_date_center').innerHTML = now.getDate()
+let currentMonth = now.getMonth()
+let currentYear = now.getFullYear()
+let container_days = document.getElementById('nav_days_ul')
+let element_month = document.getElementById('month_name')
+let element_year = document.getElementById('year')
+
+let month_div = document.getElementById('month_div')
+
+let year_div = document.getElementById('year_div')
+
+let month_days_div = document.getElementById('day_div')
+
 //PRELOADER PART
 let preloader_play = true
 let preloader_div = document.getElementById('preloader-div')
@@ -16,10 +45,38 @@ let one_selected = false
 let number_selected = null
 let div_picker_selected_number = null
 let div_picker_selected = false
-setTimeout(()=>document.getElementById('got_to_div').style.cssText='display:none;',100)
+setTimeout(()=>document.getElementById('got_to_div').style.cssText='display:none;',300)
+let removed = false
 document.addEventListener('click', function(e){
+	//let month_days_div = document.getElementById('day_div').children[0].children[0]
 	let c = e.target.getAttribute('class')
 	let i = e.target.getAttribute('id')
+
+	let get_selected_month = document.querySelector('.option-choose-month.is-selected')
+	let get_index_month = months.indexOf(get_selected_month.innerHTML)
+	let get_month_count = months_days_count[get_index_month]
+
+	let wtn = 31 - get_month_count 
+	if (wtn === 0){
+		for (let el=1;el<=31;el++){
+			if (String(el).length<2){el = '0'+el}
+			document.getElementById('selector_'+el).style.display = 'block'
+		}
+	}else{
+		for (let el=1;el<=31;el++){
+			if (String(el).length<2){el = '0'+el}
+			document.getElementById('selector_'+el).style.display = 'block'
+		}
+		for (let s=1;s<=wtn;s++){
+			try{
+				document.getElementById('selector_'+(32-s)).style.display = 'none'
+				removed = true
+			}catch(e){
+				return
+			}
+		}
+	}
+
 	if (c === 'nav_menu_li'){return}else if (i == 'menu'){
 		menu.style.display = 'block';
 		menu.style.opacity=0;
@@ -79,35 +136,14 @@ document.addEventListener('click', function(e){
 			let get_selector = document.getElementById(i)
 			get_selector.style.cssText = 'font-weight:bold;font-size:60px;transition:0.1s;'
 		}*/
+		//if ()
+
 });
 
 menu.addEventListener('click',function(){
 	menu.animate([{opacity:1},{opacity:0}],{duration:100,fill:'both'});setTimeout(()=>menu.style.display='none',100)});
 
 //PART LOGIC OF CALENDAR
-
-let months_days_count = [31,29,31,30,31,30,31,31,30,31,30,31]
-let months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
-let days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat']
-
-let now = new Date()
-let current_month = months[now.getMonth()]
-document.getElementById('month_name').innerHTML = current_month
-document.getElementById('month_day').innerHTML = now.getDate()
-
-/* Label current choosed DATE in /mainWindow/GoToWindow
-document.getElementById('selected_month').innerHTML = current_month
-document.getElementById('selected_day').innerHTML = now.getDate()
-document.getElementById('selected_year').innerHTML =  now.getFullYear()
-
-*/
-document.getElementById('text_current_date_center').innerHTML = now.getDate()
-let currentMonth = now.getMonth()
-let currentYear = now.getFullYear()
-let container_days = document.getElementById('nav_days_ul')
-let element_month = document.getElementById('month_name')
-let element_year = document.getElementById('year')
-
 
 for (count in days){
 	let newElem = document.createElement('th')
@@ -135,7 +171,6 @@ function showCalendar(month,year,swiped){
 
 	element_month.innerHTML=months[month];element_year.innerHTML=year
 	if (swiped === 'next'){
-		console.log('in this moment will be animation to next')
 		render_cal('right_calendar_body')
 		let get_container_right = document.getElementById('right_calendar_body')
 		let get_container_left = document.getElementById('left_calendar_body')
@@ -144,7 +179,6 @@ function showCalendar(month,year,swiped){
 		get_container_center.style.cssText = 'animation:1s linear center_container_to_left;';setTimeout(()=>get_container_center.style.cssText='margin-left:-280px;margin-top: 180px;position: absolute;',100)
 		get_container_center.innerHTML = get_container_right.innerHTML
 	}else if (swiped === 'back'){
-		console.log('in this moment will be animation to back')
 		render_cal('left_calendar_body')
 		let get_container_right = document.getElementById('right_calendar_body')
 		let get_container_left = document.getElementById('left_calendar_body')
@@ -245,15 +279,19 @@ function moveTouch(e) {
 };
 
 function back(){
-  currentYear = (currentMonth === 0) ? currentYear - 1 : currentYear;
-  currentMonth = (currentMonth === 0) ? 11 : currentMonth - 1;
-  showCalendar(currentMonth, currentYear,'back');
+	let selectedCurrentMonth = months.indexOf(document.getElementById("month_name").innerHTML)
+	let selectedCurrentYear = Number(document.getElementById("year").innerHTML)
+	currentYear = (selectedCurrentMonth === 0) ? selectedCurrentYear - 1 : selectedCurrentYear;
+	currentMonth = (selectedCurrentMonth === 0) ? 11 : selectedCurrentMonth - 1;
+	showCalendar(currentMonth, currentYear,'back');
 }
 
 function next(){
-  currentYear = (currentMonth === 11) ? currentYear + 1 : currentYear;
-  currentMonth = (currentMonth + 1) % 12;
-  showCalendar(currentMonth, currentYear,'next');
+	let selectedCurrentMonth = months.indexOf(document.getElementById("month_name").innerHTML)
+	let selectedCurrentYear = Number(document.getElementById("year").innerHTML)
+	currentYear = (selectedCurrentMonth === 11) ? selectedCurrentYear + 1 : selectedCurrentYear;
+	currentMonth = (selectedCurrentMonth + 1) % 12;
+	showCalendar(currentMonth, currentYear,'next');
 }
 
 function goto(){
@@ -305,9 +343,9 @@ function goToWindow(){
 	get_go_to_div.animate([{opacity:0},{opacity:1}],{duration:100,fill:'both'});setTimeout(()=>get_go_to_div.style.cssText='opacity:1;display:block;')
 }
 
-let month_div = document.getElementById('month_div')
-let month_days_div = document.getElementById('day_div')
-let year_div = document.getElementById('year_div')
+
+
+
 
 for (m in months){
 	let create_div_month = document.createElement('div')
@@ -316,11 +354,21 @@ for (m in months){
 	create_div_month.setAttribute('id','selector_'+months[m])
 	month_div.appendChild(create_div_month)
 }
+/*
 for (m_c in months_days_count){
 	let create_div_month_days_count = document.createElement('div')
 	create_div_month_days_count.innerHTML = months_days_count[m_c]
 	create_div_month_days_count.setAttribute('class','option-choose-monthday')
 	create_div_month_days_count.setAttribute('id','selector_'+months_days_count[m_c])
+	month_days_div.appendChild(create_div_month_days_count)
+}
+*/
+for (let d=1;d<32;d++){
+	if (String(d).length < 2){d = "0"+d}
+	let create_div_month_days_count = document.createElement('div')
+	create_div_month_days_count.innerHTML = d
+	create_div_month_days_count.setAttribute('class','option-choose-monthday')
+	create_div_month_days_count.setAttribute('id','selector_'+d)
 	month_days_div.appendChild(create_div_month_days_count)
 }
 for (let yc=1970;yc<=2050;yc++){

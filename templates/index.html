@@ -46,7 +46,7 @@
 	<div id='div_back_next'>
 		<div id='back' onclick="back()">
 			<div id='back_first'></div>
-			<div id='back_center'><</div>
+				<div id='back_center'><</div>
 			<div id='back_second'></div>
 		</div>
 		<div id='center'></div>
@@ -74,7 +74,7 @@
 					</ul>
 				</div>
 			</li>
-		</ul>
+		</ul	>
 	</div>
 	<div id='got_to_div'>
 		<div id='choose_date'>
@@ -90,7 +90,8 @@
               "pageDots": false,
               "prevNextButtons":false,
               "contain":true,
-              "setGallerySize":false	
+              "setGallerySize":false,
+              "wrapAround":true
             }'></div> 
 			<!--<div id='month_div' class='column'></div>-->
 			<div id='day_div' class='column' data-flickity='{
@@ -99,7 +100,9 @@
               "pageDots": false,
               "prevNextButtons":false,
               "contain":true,
-              "setGallerySize":false	
+              "setGallerySize":false,
+              "wrapAround":true,
+              "adaptiveHeight":true	
             }'></div>
 			<div id='year_div' class='column' data-flickity='{
               "percentPosition": false,
@@ -107,7 +110,9 @@
               "pageDots": false,
               "prevNextButtons":false,
               "contain":true,
-              "setGallerySize":false	
+              "setGallerySize":false,
+              "dragThreshold":100,
+              "wrapAround":true	
             }'></div>
 			<div id='opacitylow_top'></div>
 			<div id='opacitylow_bottom'></div>
