@@ -45,7 +45,7 @@ let one_selected = false
 let number_selected = null
 let div_picker_selected_number = null
 let div_picker_selected = false
-setTimeout(()=>document.getElementById('got_to_div').style.cssText='display:none;',300)
+setTimeout(()=>document.getElementById('got_to_div').style.cssText='display:none;',1100)
 let removed = false
 document.addEventListener('click', function(e){
 	//let month_days_div = document.getElementById('day_div').children[0].children[0]
@@ -186,7 +186,7 @@ function showCalendar(month,year,swiped){
 		get_container_left.style.cssText = 'animation:1s linear left_to_center;';setTimeout(()=>get_container_left.style.cssText='margin-left: -200%;margin-top: 180px;position: absolute;',100)
 		get_container_center.style.cssText = 'animation:1s linear center_container_to_right;';setTimeout(()=>get_container_center.style.cssText='margin-left:-280px;margin-top: 180px;position: absolute;',100)
 		get_container_center.innerHTML = get_container_left.innerHTML
-	}else{render_cal('calendar_body')	}
+	}else{render_cal('calendar_body')}
 	//CREATING CELLS
 	function render_cal(id){
 		let tbl = document.getElementById(id)
@@ -378,3 +378,32 @@ for (let yc=1970;yc<=2050;yc++){
 	create_div_year.setAttribute('id','selector_'+yc)
 	year_div.appendChild(create_div_year)
 }
+
+
+//GETTING DATA FOR CALENDAR
+/*
+let url = "https://calendarific.com/"
+
+async function parcing(){
+	try{
+		const response = await fetch(url)
+		const data = await response.json()
+		console.log(data)
+	}catch (err){
+		console.log(err)
+	}
+}
+parcing()
+*/
+document.addEventListener('DOMContentLoaded',()=>{
+	$('#events_list').on('click', function(e){
+		$.ajax({
+			url: '/countries/',
+			type: 'POST',
+			success: function(data) {
+				console.log(data.data)
+			}
+		});
+	});
+})
+
