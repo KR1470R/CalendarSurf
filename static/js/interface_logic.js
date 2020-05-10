@@ -28,6 +28,7 @@ let year_div = document.getElementById('year_div')
 let month_days_div = document.getElementById('day_div')
 
 //PRELOADER PART
+
 let preloader_play = true
 let preloader_div = document.getElementById('preloader-div')
 window.onload = function () {
@@ -395,15 +396,30 @@ async function parcing(){
 }
 parcing()
 */
-document.addEventListener('DOMContentLoaded',()=>{
-	$('#events_list').on('click', function(e){
-		$.ajax({
-			url: '/countries/',
-			type: 'POST',
-			success: function(data) {
-				console.log(data.data)
-			}
-		});
-	});
-})
 
+document.addEventListener('DOMContentLoaded',()=>{
+	let events_btn = document.querySelector('#events_list')
+	let event_container = document.querySelector('#events_container')
+	events_btn.addEventListener("click",()=>{
+		let get_container_center = document.getElementById('calendar_body')
+		let get_calendar_head = document.getElementById('nav_days_ul')
+		get_calendar_head.style.cssText = "animation:calendar_body_swipe_to_left 1s ease-in-out;";setTimeout(()=>get_calendar_head.style.cssText='margin-top:10px;margin-left:-200%;position:absolute;',1000)
+		get_container_center.style.cssText = 'animation:center_container_to_left 1s ease-in-out;';setTimeout(()=>get_container_center.style.cssText='margin-left:-200%;margin-top: 180px;position: absolute;',1000)
+		events_container.style.cssText = "animation: slide_events_container 1s ease-in-out;";setTimeout(()=>events_container.style.cssText = "margin-left:50px;",1000)
+		let year = document.getElementById('year').innerHTML
+		let country_choosed = document.getElementById('country_select').options[document.getElementById('country_select').selectedIndex].text
+		let data = {
+		    'year' : year,
+		    'country' : country_choosed,
+		}
+		$.ajax({
+			type:"POST",
+			url:'/countries/',
+			data:JSON.stringify(data,null,'\t'),
+			contentType: 'application/json;charset=UTF-8',
+			success:(result)=>{
+				console.log(result)
+			}
+		})
+	})
+})

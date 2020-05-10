@@ -8,6 +8,7 @@
 	<link rel="stylesheet" type="text/css" href="https://unpkg.com/flickity@2.0.11/dist/flickity.css">
 	<!--<script src="{{ url_for('static', filename='js/flickity-verticalCarousel/flickity.pkgd.js') }}"></script>-->
 </head>
+<noscript><p>JS support not enabled!</p></noscript>
 <body id='body'>
 	<div class="preloader" id='preloader-div'>
 	    <div class="preloader__row">
@@ -35,7 +36,7 @@
 				<ul class='container_year_day'><li id='year' class='nav_li_y'></li><li id='day_identificator' class='nav_li_d'>Today</li></ul>
 			</div>
 			<table id='calendar' class='table_calendar'>
-				<thead>
+				<thead id='calendar_head'>
 					<tr id='nav_days_ul'></tr>
 				</thead>
 				<tbody id='left_calendar_body'></tbody>
@@ -131,6 +132,37 @@
 		<div id='text_current_date_center'></div>
 		<div id='get_current_date_second'></div>
 	</div>	
+	<div id='events_container'>
+		<select id='country_select'>
+			<option style='background-image:url("https://image.flaticon.com/icons/png/512/330/330540.png");'>
+				Ukraine
+				<span class='country_ico'><img src="https://image.flaticon.com/icons/png/512/330/330540.png" width="150" height='150'></span>
+			</option>
+			<option>
+				Russia
+				<span class='country_ico'><img src="https://image.flaticon.com/icons/png/512/330/330437.png" width="150" height='150'></span>
+			</option>
+			<option>
+				Belarus
+				<span class='country_ico'><img src="https://image.flaticon.com/icons/svg/330/330550.svg" width="150" height='150'></span>
+			</option>
+			<option>
+				Uzbekistan
+				<span class='country_ico'><img src="https://image.flaticon.com/icons/png/512/330/330495.png" width="150" height='150'></span>
+			</option>
+			<option>
+				USA
+				<span><img src="https://image.flaticon.com/icons/png/512/330/330459.png" width="150" height='150'></span>
+			</option>
+		</select>
+
+<!--
+		<div class='country_container' id='usa_container'>
+			
+			<p>USA Events</p>
+		</div>
+	</div>
+-->
 </body>
 <script type="text/javascript" src='{{ url_for("static", filename="js/interface_logic.js") }}'></script>
 <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>

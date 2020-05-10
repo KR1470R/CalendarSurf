@@ -7,7 +7,9 @@ app = Flask(__name__)
 def main():
 	return render_template('index.html')
 
-@app.route('/countries/',methods=['POST'])
+@app.route('/countries/',methods=["POST","GET"])
 def get_req():
-	lox = ['pidr','pidr2','pidr3']
-	return jsonify({'data':render_template('response.html',lox=lox)})
+	if request.method == 'POST':
+		year = request.json['year']
+		country = request.json['country']
+		
