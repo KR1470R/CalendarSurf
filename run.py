@@ -1,17 +1,18 @@
 # FLASK_APP=run.py FLASK_DEBUG=1 flask run
-from flask import Flask, render_template,request,jsonify
+from flask import Flask, render_template,request,jsonify 
 import json
 import bs4
-from lxml import html
 import os
+import sys
 
 app = Flask(__name__)
 
 @app.route('/')
 def main():
+	print(sys.version)
 	return render_template('index.html')
 
-@app.route('/countries/',methods=["POST","GET"])
+@app.route('/countries/',methods=["POST"])
 def get_req():
 	if request.method == 'POST':
 		year = request.json['year']
@@ -27,7 +28,13 @@ def get_req():
 		elif country == 'USA':
 			country = 'US'
 		url = f"https://calendarific.com/holidays/{year}/{country}"
-		os.system(f"wget {url} -O templates/parse_data.html")
-		#soup = bs4.BeautifulSoup(parse_req, 'lxml')
-		#print(soup.findAll())
-		print(html.fromstring(parse_req.content))
+		#os.system(f"wget {url} -O templates/parse_data.html")
+		parse_file = "templates/parse_data.html"
+		with open(parse_file,"r") as f:
+			content = f.read()
+			soup = bs4.BeautifulSoup(content, 'lxml')
+			response_content = soup.find("table")
+
+			return jsonify({
+				"data":str(response_content)
+				})	

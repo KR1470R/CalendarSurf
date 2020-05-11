@@ -416,8 +416,16 @@ document.addEventListener('DOMContentLoaded',()=>{
 			url:'/countries/',
 			data:JSON.stringify(data,null,'\t'),
 			contentType: 'application/json;charset=UTF-8',
-			success:(result)=>{
-				console.log(result)
+			success:function(response){
+				//response_data = response["data"];console.log("DATA OUTPUT - ",response_data)
+				//response = $.parseJSON(response)
+				console.log(response["data"])
+				let add_content_container = document.createElement("div")
+				add_content_container.innerHTML = response["data"]
+				document.getElementById("events_container").appendChild(add_content_container)
+			},
+			error:(error)=>{
+				console.log(error)
 			}
 		})
 	})
