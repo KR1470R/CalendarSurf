@@ -396,7 +396,6 @@ async function parcing(){
 }
 parcing()
 */
-
 document.addEventListener('DOMContentLoaded',()=>{
 	let events_btn = document.querySelector('#events_list')
 	let event_container = document.querySelector('#events_container')
