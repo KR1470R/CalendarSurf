@@ -34,6 +34,7 @@ def get_req():
 			content = f.read()
 			soup = bs4.BeautifulSoup(content, 'lxml')
 			response_content = soup.find("table")
+			response_content.find("tbody")['id'] = "event_tbody"
 
 			return jsonify({
 				"data":str(response_content)

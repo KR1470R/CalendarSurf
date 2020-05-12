@@ -403,8 +403,8 @@ document.addEventListener('DOMContentLoaded',()=>{
 		let get_container_center = document.getElementById('calendar_body')
 		let get_calendar_head = document.getElementById('nav_days_ul')
 		get_calendar_head.style.cssText = "animation:calendar_body_swipe_to_left 1s ease-in-out;";setTimeout(()=>get_calendar_head.style.cssText='margin-top:10px;margin-left:-200%;position:absolute;',1000)
-		get_container_center.style.cssText = 'animation:center_container_to_left 1s ease-in-out;';setTimeout(()=>get_container_center.style.cssText='margin-left:-200%;margin-top: 180px;position: absolute;',1000)
-		events_container.style.cssText = "animation: slide_events_container 1s ease-in-out;";setTimeout(()=>events_container.style.cssText = "margin-left:50px;",1000)
+		get_container_center.style.cssText = 'animation:center_container_to_left 1s ease-in-out;';setTimeout(()=>get_container_center.style.cssText='margin-left:-200%;margin-top: 180px;position:absolute;display:none;',1000)
+		events_container.style.cssText = "display:block;animation: slide_events_container 1s ease-in-out;";setTimeout(()=>events_container.style.cssText = "margin-left:3%;display:block;",1000)
 		let year = document.getElementById('year').innerHTML
 		let country_choosed = document.getElementById('country_select').options[document.getElementById('country_select').selectedIndex].text
 		let data = {
@@ -419,8 +419,8 @@ document.addEventListener('DOMContentLoaded',()=>{
 			success:function(response){
 				//response_data = response["data"];console.log("DATA OUTPUT - ",response_data)
 				//response = $.parseJSON(response)
-				console.log(response["data"])
 				let add_content_container = document.createElement("div")
+				add_content_container.setAttribute("id","table_event_container")
 				add_content_container.innerHTML = response["data"]
 				document.getElementById("events_container").appendChild(add_content_container)
 			},
