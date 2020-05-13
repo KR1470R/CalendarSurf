@@ -138,7 +138,8 @@ document.addEventListener('DOMContentLoaded',()=>{
 				get_selector.style.cssText = 'font-weight:bold;font-size:60px;transition:0.1s;'
 			}*/
 			//if ()
-			else if (i === 'selected_country' || i === 'dropdown_country_title' || i === 'ico_country'){
+			else if (i === 'dropdown_country' || i === 'dropdown_country_title' || i === 'ico_country'){
+				console.log('test')
 				if (document.getElementById("dropdown_list_countries") != null === true){return}else if (document.getElementById("dropdown_list_countries") === null){
 					let create_dropdown_list_ul = document.createElement('div')
 					create_dropdown_list_ul.setAttribute('id', "dropdown_list_countries")
@@ -164,8 +165,6 @@ document.addEventListener('DOMContentLoaded',()=>{
 					create_dropdown_list_ul.style.cssText = 'display:block;opacity:0;'
 					document.getElementById('dropdown_country').appendChild(create_dropdown_list_ul)
 					create_dropdown_list_ul.animate([{opacity:0},{opacity:1}],{duration:100,fill:"both"});setTimeout(()=>create_dropdown_list_ul.cssText="opacity:1;")	
-					
-
 				}
 
 			}

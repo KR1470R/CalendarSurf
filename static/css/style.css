@@ -760,3 +760,12 @@ a{
 	transition: 0.1s;
 	background-color: #F5F5F5;
 }
+/*
+	display: inline;
+	position: absolute;
+	margin-top: -30%;
+	white-space: nowrap;
+	background-color: white;
+	margin-left: 20%;
+	padding-top: 30px;
+}
