@@ -584,7 +584,7 @@ a{
 	height: 100%;
 	display: flex;
 	pointer-events: none;
-	z-index: 999999999999999999999999;
+	z-index: 99999999999999;
 }
 #back{
 	font-size: 60px;
@@ -711,11 +711,52 @@ a{
 	margin-left: -40px;
 }
 #dropdown_country_title{
-	display: inline;
+	float: right;
+    display: inline;
+    position: absolute;
+    margin-top: -5%;
+    white-space: nowrap;
+    margin-left: 25%;
+    padding-top: 30px;
+    font-size: 50px;
+}
+#dropdown_country_title_list{
+	float: right;
+    display: inline;
+    position: absolute;
+    margin-top: -5%;
+    white-space: nowrap;
+    margin-left: 2%;
+    padding-top: 30px;
+    font-size: 50px;
+}
+#dropdown_list_ul:hover{
+	cursor: pointer;
+}
+#dropdown_country{
 	position: absolute;
-	margin-top: -30%;
-	white-space: nowrap;
-	background-color: white;
-	margin-left: 20%;
-	padding-top: 30px;
+	left:70%;
+	width: 370px;
+/*	-webkit-box-shadow: 0px 0px 23px -5px rgba(0,0,0,0.75);
+	-moz-box-shadow: 0px 0px 23px -5px rgba(0,0,0,0.75);
+	box-shadow: 0px 0px 23px -5px rgba(0,0,0,0.75);
+*/
+	border-radius:10px;
+}
+#ico_country{
+	margin-left: 2%;
+}
+#selected_country{
+	display: flex;
+	align-items: baseline;
+}
+#selected_country:active{
+	transition: 0.1s;
+	background-color: #F5F5F5;
+	border-radius: 10px;
+}
+
+#nav_li{
+	transition: 0.1s;
+	background-color: #F5F5F5;
 }
