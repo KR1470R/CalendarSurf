@@ -720,6 +720,7 @@ a{
     padding-top: 30px;
     font-size: 50px;
     pointer-events: none;
+
 }
 #dropdown_country_title_list{
 	float: right;
@@ -730,6 +731,7 @@ a{
     margin-left: 2%;
     padding-top: 30px;
     font-size: 50px;
+    pointer-events: none;
 }
 #dropdown_list_ul:hover{
 	cursor: pointer;

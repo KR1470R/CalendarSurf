@@ -141,32 +141,52 @@ document.addEventListener('DOMContentLoaded',()=>{
 			}*/
 			//if ()
 			else if (i === 'dropdown_country' || i === 'dropdown_list_ul' || i === 'country_dropdown_list' || i === 'dropdown_country_title_list' || i === 'selected_country'){
+
 				if (opened_dropdown_country === false){
 					if (document.getElementById("dropdown_list_countries") != null === true){
-						let create_dropdown_list_ul = document.getElementById('dropdown_list_countries')
-						create_dropdown_list_ul.style.cssText = 'display:block;opacity:0;'
-						create_dropdown_list_ul.animate([{opacity:0},{opacity:1}],{duration:100,fill:"both"});setTimeout(()=>create_dropdown_list_ul.cssText="opacity:1;")
-						document.getElementById('dropdown_country').style.cssText = "-webkit-box-shadow: 0px 0px 23px -5px rgba(0,0,0,0.75);-moz-box-shadow: 0px 0px 23px -5px rgba(0,0,0,0.75);box-shadow: 0px 0px 23px -5px rgba(0,0,0,0.75);"
+						if (opened_dropdown_country === false && i != 'selected_country' == true){
+							let get_value_clicked_item = e.target
+							if (get_value_clicked_item.getAttribute('id') === 'dropdown_list_ul'){return}else{
+								
+								let get_content_from_title = get_value_clicked_item.querySelector('#dropdown_country_title_list')
+								let get_ico_from_item = get_value_clicked_item.querySelector('#ico_country')
+
+								let get_current_item_ico = document.getElementById('ico_country_current')
+								let get_current_item_title = document.getElementById('dropdown_country_title')
+
+								let previous_current_title_country = get_current_item_title.innerHTML
+								let previus_current_ico_country = get_current_item_ico.getAttribute("src")
+
+								get_current_item_title.innerHTML = get_content_from_title.innerHTML;get_content_from_title.innerHTML = previous_current_title_country
+								get_current_item_ico.setAttribute("src",String(get_ico_from_item.getAttribute("src")));get_ico_from_item.setAttribute("src",String(previus_current_ico_country))
+							}
+						}else{
+							let create_dropdown_list_ul = document.getElementById('dropdown_list_countries')
+							create_dropdown_list_ul.style.cssText = 'display:block;opacity:0;'
+							create_dropdown_list_ul.animate([{opacity:0},{opacity:1}],{duration:100,fill:"both"});setTimeout(()=>create_dropdown_list_ul.cssText="opacity:1;")
+							document.getElementById('dropdown_country').style.cssText = "-webkit-box-shadow: 0px 0px 23px -5px rgba(0,0,0,0.75);-moz-box-shadow: 0px 0px 23px -5px rgba(0,0,0,0.75);box-shadow: 0px 0px 23px -5px rgba(0,0,0,0.75);"	
+						}
+
 					}else if (document.getElementById("dropdown_list_countries") === null){
 						let create_dropdown_list_ul = document.createElement('div')
 						create_dropdown_list_ul.setAttribute('id', "dropdown_list_countries")
 						create_dropdown_list_ul.innerHTML = '\
 										<ul id="dropdown_list_ul">\
-											<li class="nav_ul"><div id="country_dropdown_list">\
+											<li class="nav_ul"><div id="country_dropdown_list" id="country_dropdown_list_li">\
 												<img id="ico_country" src="https://image.flaticon.com/icons/png/512/330/330437.png" width="80" height="80">\
-												<p id="dropdown_country_title_list">Russia</p>\
+												<p id="dropdown_country_title_list" class="ru">Russia</p>\
 											</div></li>\
-											<li class="nav_ul"><div id="country_dropdown_list">\
+											<li class="nav_ul"><div id="country_dropdown_list" id="country_dropdown_list_li">\
 												<img id="ico_country" src="https://image.flaticon.com/icons/svg/330/330550.svg" width="80" height="80">\
-												<p id="dropdown_country_title_list">Belarus</p>\
+												<p id="dropdown_country_title_list" class="by">Belarus</p>\
 											</div></li>\
-											<li class="nav_ul"><div id="country_dropdown_list">\
+											<li class="nav_ul"><div id="country_dropdown_list" id="country_dropdown_list_li">\
 												<img id="ico_country" src="https://image.flaticon.com/icons/png/512/330/330459.png" width="80" height="80">\
-												<p id="dropdown_country_title_list">USA</p>\
+												<p id="dropdown_country_title_list" class="us">USA</p>\
 											</div></li>\
-											<li class="nav_ul"><div id="country_dropdown_list">\
+											<li class="nav_ul"><div id="country_dropdown_list" id="country_dropdown_list_li">\
 												<img id="ico_country" src="https://image.flaticon.com/icons/png/512/330/330495.png" width="80" height="80">\
-												<p id="dropdown_country_title_list">Uzbekistan</p>\
+												<p id="dropdown_country_title_list" class="uz">Uzbekistan</p>\
 											</div></li>\
 										</ul>'
 						document.getElementById('dropdown_country').appendChild(create_dropdown_list_ul)
@@ -177,15 +197,15 @@ document.addEventListener('DOMContentLoaded',()=>{
 					opened_dropdown_country = true
 				}
 			}else{if (opened_dropdown_country === false){
-					try{let get_dropdown_list = document.getElementById('dropdown_list_countries')
+					try{
+						let get_dropdown_list = document.getElementById('dropdown_list_countries')
 						get_dropdown_list.animate([{opacity:1},{opacity:0}],{duration:100,fill:'both'});setTimeout(()=>get_dropdown_list.style.cssText='opacity:0;display:none;',100)
-						opened_dropdown_country = false	
+						opened_dropdown_country = true	
 						document.getElementById('dropdown_country').style.cssText = 'display:block;opacity:1;'
 					}catch(e){return}
 				}
 
 			}
-
 	});
 
 	menu.addEventListener('click',function(){
