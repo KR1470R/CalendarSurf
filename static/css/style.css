@@ -719,6 +719,7 @@ a{
     margin-left: 25%;
     padding-top: 30px;
     font-size: 50px;
+    pointer-events: none;
 }
 #dropdown_country_title_list{
 	float: right;
@@ -745,6 +746,7 @@ a{
 }
 #ico_country{
 	margin-left: 2%;
+	pointer-events: none;
 }
 #selected_country{
 	display: flex;
@@ -768,4 +770,4 @@ a{
 	background-color: white;
 	margin-left: 20%;
 	padding-top: 30px;
-}
+}*/
