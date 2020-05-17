@@ -592,6 +592,7 @@ a{
 	display: flex;
 	flex-direction:column;
 	pointer-events: all;
+	margin-left: -7px;
 }
 #back_first{display:flex;flex-grow: 1;}
 #back_center{display:flex;}

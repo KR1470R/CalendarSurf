@@ -56,6 +56,9 @@ document.addEventListener('DOMContentLoaded',()=>{
 	let get_button_ok_go_to = document.getElementById('ok')
 	let get_button_cancel_go_to = document.getElementById('cancel')
 
+	let get_button_back = document.getElementById('back')
+	let get_button_next = document.getElementById('next')
+
 	let get_div_about = document.getElementById('about')
 	let get_background_main = document.getElementById('background')
 	let get_background = document.getElementById('canvas_cal')
@@ -161,7 +164,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 			}*/
 			//if ()
 
-			else if (i === 'dropdown_country' || i === 'dropdown_list_ul' || i === 'country_dropdown_list' || i === 'dropdown_country_title_list' || i === 'selected_country' ){
+			else if (i === 'dropdown_country' || i === 'dropdown_list_ul' || i === 'country_dropdown_list' || i === 'dropdown_country_title_list' || i === 'selected_country' || i === 'ico_country_current'){
 
 				if (opened_dropdown_country === false){
 					if (document.getElementById("dropdown_list_countries") != null === true){
@@ -382,30 +385,6 @@ document.addEventListener('DOMContentLoaded',()=>{
 	  e.preventDefault();
 	};
 
-	function back(){
-		let selectedCurrentMonth = months.indexOf(document.getElementById("month_name").innerHTML)
-		let selectedCurrentYear = Number(document.getElementById("year").innerHTML)
-		currentYear = (selectedCurrentMonth === 0) ? selectedCurrentYear - 1 : selectedCurrentYear;
-		currentMonth = (selectedCurrentMonth === 0) ? 11 : selectedCurrentMonth - 1;
-		showCalendar(currentMonth, currentYear,'back');
-	}
-
-	function next(){
-		let selectedCurrentMonth = months.indexOf(document.getElementById("month_name").innerHTML)
-		let selectedCurrentYear = Number(document.getElementById("year").innerHTML)
-		currentYear = (selectedCurrentMonth === 11) ? selectedCurrentYear + 1 : selectedCurrentYear;
-		currentMonth = (selectedCurrentMonth + 1) % 12;
-		showCalendar(currentMonth, currentYear,'next');
-	}
-
-	function goto(){
-
-	}
-
-	function switchToCurrentDate(){
-		showCalendar(now.getMonth(),now.getFullYear())
-	}
-
 	function daysInMonth(iMonth,iYear){
 		return 32 - new Date(iYear, iMonth, 32).getDate()
 	}
@@ -435,7 +414,6 @@ document.addEventListener('DOMContentLoaded',()=>{
 
 	//go to container
 	get_button_go_to.addEventListener("click", ()=>{
-		console.log('sadsadasdasd')
 		get_div_bg.style.display = 'block'
 		get_background.style.cssText = 'display:block;animation:0.1s linear blur_background;';setTimeout(()=>get_background.style.cssText='filter:blur(1rem);')
 		get_background_arrow_buttons.style.cssText = 'animation:0.1s linear blur_background;';setTimeout(()=>get_background_arrow_buttons.style.cssText = 'filter:blur(1rem);')
@@ -444,8 +422,30 @@ document.addEventListener('DOMContentLoaded',()=>{
 		get_go_to_div.animate([{opacity:0},{opacity:1}],{duration:100,fill:'both'});setTimeout(()=>get_go_to_div.style.cssText='opacity:1;display:block;')	
 	})
 
-	get_button_ok_go_to.addEventListener('click',()=>{
+	//current date
+	get_button_for_switch_to_current_date.addEventListener("click", ()=>{
+		showCalendar(now.getMonth(),now.getFullYear())
+		console.log('done')
+	})
+
+	get_button_ok_go_to.addEventListener("click",()=>{
 		showCalendar(months.indexOf(document.getElementsByClassName('option-choose-month is-selected')[0].innerHTML), document.getElementsByClassName('option-choose-year is-selected')[0].innerHTML,'None');
+	})
+
+	get_button_back.addEventListener("click", ()=>{
+		let selectedCurrentMonth = months.indexOf(document.getElementById("month_name").innerHTML)
+		let selectedCurrentYear = Number(document.getElementById("year").innerHTML)
+		currentYear = (selectedCurrentMonth === 0) ? selectedCurrentYear - 1 : selectedCurrentYear;
+		currentMonth = (selectedCurrentMonth === 0) ? 11 : selectedCurrentMonth - 1;
+		showCalendar(currentMonth, currentYear,'back');
+	})
+
+	get_button_next.addEventListener("click", ()=>{
+		let selectedCurrentMonth = months.indexOf(document.getElementById("month_name").innerHTML)
+		let selectedCurrentYear = Number(document.getElementById("year").innerHTML)
+		currentYear = (selectedCurrentMonth === 11) ? selectedCurrentYear + 1 : selectedCurrentYear;
+		currentMonth = (selectedCurrentMonth + 1) % 12;
+		showCalendar(currentMonth, currentYear,'next');
 	})
 
 	for (m in months){
