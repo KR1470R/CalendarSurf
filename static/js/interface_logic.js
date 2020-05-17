@@ -45,12 +45,25 @@ document.addEventListener('DOMContentLoaded',()=>{
 	let menu = document.getElementById('nav_menu')
 	setTimeout(()=>document.getElementById('got_to_div').style.cssText='display:none;',1100)
 
+	let one_selected = false
+	let div_picker_selected_number = null
+	let div_picker_selected = false
+	let removed = false
+
+	let get_button_about = document.getElementById('settings')
+	let get_div_about = document.getElementById('about')
+
+	let get_background = document.getElementById('canvas_cal')
+	let get_background_arrow_buttons = document.getElementById('div_back_next')
+	let get_div_bg = document.getElementById('background')
+	let get_go_to_div = document.getElementById('got_to_div')
+	let get_button_for_switch_to_current_date = document.getElementById('get_current_date')
+	let dropdown_list_country = document.getElementById("dropdown_country")
+
 	document.addEventListener('click', function(e){
-		let one_selected = false
-		let div_picker_selected_number = null
-		let div_picker_selected = false
-		let removed = false
+
 		//let month_days_div = document.getElementById('day_div').children[0].children[0]
+
 		let c = e.target.getAttribute('class')
 		let i = e.target.getAttribute('id')
 		let number_selected = null
@@ -85,6 +98,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 			menu.style.opacity=0;
 			menu.animate([{opacity:0},{opacity:1}],{duration:100,fill:'both'});setTimeout(()=>menu.style.display='block',100)}else{
 			menu.animate([{opacity:1},{opacity:0}],{duration:100,fill:'both'});setTimeout(()=>menu.style.display='none',100)};
+
 		if (c === 'cell_div'){
 			//cell = document.getElementsByClassName('cell_div')[0]
 			//cell.style.cssText = 'background-color:red;'
@@ -140,6 +154,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 				get_selector.style.cssText = 'font-weight:bold;font-size:60px;transition:0.1s;'
 			}*/
 			//if ()
+
 			else if (i === 'dropdown_country' || i === 'dropdown_list_ul' || i === 'country_dropdown_list' || i === 'dropdown_country_title_list' || i === 'selected_country'){
 
 				if (opened_dropdown_country === false){
@@ -164,7 +179,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 							let create_dropdown_list_ul = document.getElementById('dropdown_list_countries')
 							create_dropdown_list_ul.style.cssText = 'display:block;opacity:0;'
 							create_dropdown_list_ul.animate([{opacity:0},{opacity:1}],{duration:100,fill:"both"});setTimeout(()=>create_dropdown_list_ul.cssText="opacity:1;")
-							document.getElementById('dropdown_country').style.cssText = "-webkit-box-shadow: 0px 0px 23px -5px rgba(0,0,0,0.75);-moz-box-shadow: 0px 0px 23px -5px rgba(0,0,0,0.75);box-shadow: 0px 0px 23px -5px rgba(0,0,0,0.75);"	
+							document.getElementById('dropdown_country').style.cssText = "min-height:50px;height:auto;-webkit-box-shadow: 0px 0px 23px -5px rgba(0,0,0,0.75);-moz-box-shadow: 0px 0px 23px -5px rgba(0,0,0,0.75);box-shadow: 0px 0px 23px -5px rgba(0,0,0,0.75);"	
 						}
 
 					}else if (document.getElementById("dropdown_list_countries") === null){
@@ -192,7 +207,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 						document.getElementById('dropdown_country').appendChild(create_dropdown_list_ul)
 						create_dropdown_list_ul.style.cssText = 'display:block;opacity:0;'
 						create_dropdown_list_ul.animate([{opacity:0},{opacity:1}],{duration:100,fill:"both"});setTimeout(()=>create_dropdown_list_ul.cssText="opacity:1;",100)
-						document.getElementById('dropdown_country').style.cssText = "-webkit-box-shadow: 0px 0px 23px -5px rgba(0,0,0,0.75);-moz-box-shadow: 0px 0px 23px -5px rgba(0,0,0,0.75);box-shadow: 0px 0px 23px -5px rgba(0,0,0,0.75);"
+						document.getElementById('dropdown_country').style.cssText = "min-height:50px;height:auto;z-index:10;-webkit-box-shadow: 0px 0px 23px -5px rgba(0,0,0,0.75);-moz-box-shadow: 0px 0px 23px -5px rgba(0,0,0,0.75);box-shadow: 0px 0px 23px -5px rgba(0,0,0,0.75);"
 					}
 					opened_dropdown_country = true
 				}
@@ -375,16 +390,10 @@ document.addEventListener('DOMContentLoaded',()=>{
 		return 32 - new Date(iYear, iMonth, 32).getDate()
 	}
 
-	let get_div_about = document.getElementById('about')
-	let get_background = document.getElementById('canvas_cal')
-	let get_background_arrow_buttons = document.getElementById('div_back_next')
-	let get_div_bg = document.getElementById('background')
-	let get_go_to_div = document.getElementById('got_to_div')
-	let get_button_for_switch_to_current_date = document.getElementById('get_current_date')
-	let dropdown_list_country = document.getElementById("dropdown_country")
+
 
 	function closeAll(){
-		get_div_about.animate([{opacity:1},{opacity:0}],{duration:100,fill:'both'});setTimeout(()=>get_div_about.style.cssText='opacity:0;display:none;',100)
+		get_button_about.animate([{opacity:1},{opacity:0}],{duration:100,fill:'both'});setTimeout(()=>get_div_about.style.cssText='opacity:0;display:none;',100)
 		get_background.style.cssText = 'animation:0.1s linear sharp_background;';setTimeout(()=>get_background.style.cssText = 'filter:blur(0rem);')
 		get_background_arrow_buttons.style.cssText = 'animation:0.1s linear sharp_background;';setTimeout(()=>get_background_arrow_buttons.style.cssText = 'filter:blur(0rem);')
 		get_button_for_switch_to_current_date.style.cssText = 'animation:0.1s linear sharp_background;';setTimeout(()=>get_button_for_switch_to_current_date.style.cssText = 'filter:blur(0rem);')
@@ -394,26 +403,25 @@ document.addEventListener('DOMContentLoaded',()=>{
 		get_go_to_div.animate([{opacity:1},{opacity:0}],{duration:100,fill:'both'});setTimeout(()=>get_go_to_div.style.cssText='opacity:0;display:none',100)
 	}
 
-	function aboutWindow(){
+	// about container
+	get_button_about.addEventListener("click", ()=>{
 		get_div_bg.style.display = 'block'
 		get_background.style.cssText = 'display:block;animation:0.1s linear blur_background;';setTimeout(()=>get_background.style.cssText='filter:blur(1rem);')
 		get_background_arrow_buttons.style.cssText = 'animation:0.1s linear blur_background;';setTimeout(()=>get_background_arrow_buttons.style.cssText = 'filter:blur(1rem);')
 		get_button_for_switch_to_current_date.style.cssText = 'animation:0.1s linear blur_background;';setTimeout(()=>get_button_for_switch_to_current_date.style.cssText = 'filter:blur(1rem);')
 		get_div_about.style.display = 'block'
 		get_div_about.animate([{opacity:0},{opacity:1}],{duration:100,fill:'both'});setTimeout(()=>get_div_about.style.cssText='opacity:1;display:block;')
-	}
+	})
 
-	function goToWindow(){
+	//go to container
+	get_go_to_div.addEventListener("click", ()=>{
 		get_div_bg.style.display = 'block'
 		get_background.style.cssText = 'display:block;animation:0.1s linear blur_background;';setTimeout(()=>get_background.style.cssText='filter:blur(1rem);')
 		get_background_arrow_buttons.style.cssText = 'animation:0.1s linear blur_background;';setTimeout(()=>get_background_arrow_buttons.style.cssText = 'filter:blur(1rem);')
 		get_button_for_switch_to_current_date.style.cssText = 'animation:0.1s linear blur_background;';setTimeout(()=>get_button_for_switch_to_current_date.style.cssText = 'filter:blur(1rem);')
 		get_go_to_div.style.display = 'block'
-		get_go_to_div.animate([{opacity:0},{opacity:1}],{duration:100,fill:'both'});setTimeout(()=>get_go_to_div.style.cssText='opacity:1;display:block;')
-	}
-
-
-
+		get_go_to_div.animate([{opacity:0},{opacity:1}],{duration:100,fill:'both'});setTimeout(()=>get_go_to_div.style.cssText='opacity:1;display:block;')	
+	})
 
 
 	for (m in months){
@@ -423,15 +431,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 		create_div_month.setAttribute('id','selector_'+months[m])
 		month_div.appendChild(create_div_month)
 	}
-	/*
-	for (m_c in months_days_count){
-		let create_div_month_days_count = document.createElement('div')
-		create_div_month_days_count.innerHTML = months_days_count[m_c]
-		create_div_month_days_count.setAttribute('class','option-choose-monthday')
-		create_div_month_days_count.setAttribute('id','selector_'+months_days_count[m_c])
-		month_days_div.appendChild(create_div_month_days_count)
-	}
-	*/
+
 	for (let d=1;d<32;d++){
 		if (String(d).length < 2){d = "0"+d}
 		let create_div_month_days_count = document.createElement('div')
@@ -447,23 +447,6 @@ document.addEventListener('DOMContentLoaded',()=>{
 		create_div_year.setAttribute('id','selector_'+yc)
 		year_div.appendChild(create_div_year)
 	}
-
-
-	//GETTING DATA FOR CALENDAR
-	/*
-	let url = "https://calendarific.com/"
-
-	async function parcing(){
-		try{
-			const response = await fetch(url)
-			const data = await response.json()
-			console.log(data)
-		}catch (err){
-			console.log(err)
-		}
-	}
-	parcing()
-	*/
 
 	let events_btn = document.querySelector('#events_list')
 	let event_container = document.querySelector('#events_container')

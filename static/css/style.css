@@ -740,6 +740,9 @@ a{
 	position: absolute;
 	left:70%;
 	width: 370px;
+	z-index: 10;
+	min-height:50px;
+	height:auto;
 /*	-webkit-box-shadow: 0px 0px 23px -5px rgba(0,0,0,0.75);
 	-moz-box-shadow: 0px 0px 23px -5px rgba(0,0,0,0.75);
 	box-shadow: 0px 0px 23px -5px rgba(0,0,0,0.75);
