@@ -51,14 +51,20 @@ document.addEventListener('DOMContentLoaded',()=>{
 	let removed = false
 
 	let get_button_about = document.getElementById('settings')
-	let get_div_about = document.getElementById('about')
+	let get_button_go_to = document.getElementById('go_to')
 
+	let get_button_ok_go_to = document.getElementById('ok')
+	let get_button_cancel_go_to = document.getElementById('cancel')
+
+	let get_div_about = document.getElementById('about')
+	let get_background_main = document.getElementById('background')
 	let get_background = document.getElementById('canvas_cal')
 	let get_background_arrow_buttons = document.getElementById('div_back_next')
 	let get_div_bg = document.getElementById('background')
 	let get_go_to_div = document.getElementById('got_to_div')
 	let get_button_for_switch_to_current_date = document.getElementById('get_current_date')
 	let dropdown_list_country = document.getElementById("dropdown_country")
+	document.getElementById('ico_country_current').setAttribute('draggable', false);
 
 	document.addEventListener('click', function(e){
 
@@ -155,14 +161,14 @@ document.addEventListener('DOMContentLoaded',()=>{
 			}*/
 			//if ()
 
-			else if (i === 'dropdown_country' || i === 'dropdown_list_ul' || i === 'country_dropdown_list' || i === 'dropdown_country_title_list' || i === 'selected_country'){
+			else if (i === 'dropdown_country' || i === 'dropdown_list_ul' || i === 'country_dropdown_list' || i === 'dropdown_country_title_list' || i === 'selected_country' ){
 
 				if (opened_dropdown_country === false){
 					if (document.getElementById("dropdown_list_countries") != null === true){
 						if (opened_dropdown_country === false && i != 'selected_country' == true){
 							let get_value_clicked_item = e.target
-							if (get_value_clicked_item.getAttribute('id') === 'dropdown_list_ul'){return}else{
-								
+
+							if (get_value_clicked_item.getAttribute('id') === 'dropdown_list_ul' || get_value_clicked_item.getAttribute('id') === 'dropdown_country'){return}else{
 								let get_content_from_title = get_value_clicked_item.querySelector('#dropdown_country_title_list')
 								let get_ico_from_item = get_value_clicked_item.querySelector('#ico_country')
 
@@ -174,15 +180,27 @@ document.addEventListener('DOMContentLoaded',()=>{
 
 								get_current_item_title.innerHTML = get_content_from_title.innerHTML;get_content_from_title.innerHTML = previous_current_title_country
 								get_current_item_ico.setAttribute("src",String(get_ico_from_item.getAttribute("src")));get_ico_from_item.setAttribute("src",String(previus_current_ico_country))
+								try{
+									let get_dropdown_list = document.getElementById('dropdown_list_countries')
+									let get_dropdown_list_ul = document.getElementById('dropdown_list_ul')
+									get_dropdown_list.animate([{opacity:1},{opacity:0}],{duration:100,fill:'both'});setTimeout(()=>get_dropdown_list.style.cssText='opacity:0;display:none;',100)
+									get_dropdown_list_ul.animate([{opacity:1},{opacity:0}],{duration:100,fill:'both'});setTimeout(()=>get_dropdown_list_ul.style.cssText='opacity:0;display:none;',100)
+									opened_dropdown_country = true	
+									document.getElementById('dropdown_country').style.cssText = 'display:block;opacity:1;background-color:transparent;'
+								}catch(e){return}
 							}
 						}else{
 							let create_dropdown_list_ul = document.getElementById('dropdown_list_countries')
+							let get_dropdown_list_ul = document.getElementById('dropdown_list_ul')
+							get_dropdown_list_ul.style.cssText = 'display:block;opacity:0;'
 							create_dropdown_list_ul.style.cssText = 'display:block;opacity:0;'
 							create_dropdown_list_ul.animate([{opacity:0},{opacity:1}],{duration:100,fill:"both"});setTimeout(()=>create_dropdown_list_ul.cssText="opacity:1;")
-							document.getElementById('dropdown_country').style.cssText = "min-height:50px;height:auto;-webkit-box-shadow: 0px 0px 23px -5px rgba(0,0,0,0.75);-moz-box-shadow: 0px 0px 23px -5px rgba(0,0,0,0.75);box-shadow: 0px 0px 23px -5px rgba(0,0,0,0.75);"	
+							get_dropdown_list_ul.animate([{opacity:0},{opacity:1}],{duration:100,fill:"both"});setTimeout(()=>get_dropdown_list_ul.cssText="opacity:1;")
+							document.getElementById('dropdown_country').style.cssText = "background-color:white;min-height:50px;height:auto;-webkit-box-shadow: 0px 0px 23px -5px rgba(0,0,0,0.75);-moz-box-shadow: 0px 0px 23px -5px rgba(0,0,0,0.75);box-shadow: 0px 0px 23px -5px rgba(0,0,0,0.75);"	
 						}
 
 					}else if (document.getElementById("dropdown_list_countries") === null){
+
 						let create_dropdown_list_ul = document.createElement('div')
 						create_dropdown_list_ul.setAttribute('id', "dropdown_list_countries")
 						create_dropdown_list_ul.innerHTML = '\
@@ -207,16 +225,19 @@ document.addEventListener('DOMContentLoaded',()=>{
 						document.getElementById('dropdown_country').appendChild(create_dropdown_list_ul)
 						create_dropdown_list_ul.style.cssText = 'display:block;opacity:0;'
 						create_dropdown_list_ul.animate([{opacity:0},{opacity:1}],{duration:100,fill:"both"});setTimeout(()=>create_dropdown_list_ul.cssText="opacity:1;",100)
-						document.getElementById('dropdown_country').style.cssText = "min-height:50px;height:auto;z-index:10;-webkit-box-shadow: 0px 0px 23px -5px rgba(0,0,0,0.75);-moz-box-shadow: 0px 0px 23px -5px rgba(0,0,0,0.75);box-shadow: 0px 0px 23px -5px rgba(0,0,0,0.75);"
+						document.getElementById('dropdown_country').style.cssText = "background-color:white;min-height:50px;height:auto;z-index:10;-webkit-box-shadow: 0px 0px 23px -5px rgba(0,0,0,0.75);-moz-box-shadow: 0px 0px 23px -5px rgba(0,0,0,0.75);box-shadow: 0px 0px 23px -5px rgba(0,0,0,0.75);"
+						document.getElementById('ico_country').setAttribute('draggable', false);
 					}
 					opened_dropdown_country = true
 				}
 			}else{if (opened_dropdown_country === false){
 					try{
 						let get_dropdown_list = document.getElementById('dropdown_list_countries')
+						let get_dropdown_list_ul = document.getElementById('dropdown_list_ul')
 						get_dropdown_list.animate([{opacity:1},{opacity:0}],{duration:100,fill:'both'});setTimeout(()=>get_dropdown_list.style.cssText='opacity:0;display:none;',100)
+						get_dropdown_list_ul.animate([{opacity:1},{opacity:0}],{duration:100,fill:'both'});setTimeout(()=>get_dropdown_list_ul.style.cssText='opacity:0;display:none;',100)
 						opened_dropdown_country = true	
-						document.getElementById('dropdown_country').style.cssText = 'display:block;opacity:1;'
+						document.getElementById('dropdown_country').style.cssText = 'display:block;opacity:1;background-color:transparent;'
 					}catch(e){return}
 				}
 
@@ -378,8 +399,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 	}
 
 	function goto(){
-	  showCalendar(months.indexOf(document.getElementsByClassName('option-choose-month is-selected')[0].innerHTML), document.getElementsByClassName('option-choose-year is-selected')[0].innerHTML,'None');
-	  closeAll()
+
 	}
 
 	function switchToCurrentDate(){
@@ -391,17 +411,17 @@ document.addEventListener('DOMContentLoaded',()=>{
 	}
 
 
-
-	function closeAll(){
-		get_button_about.animate([{opacity:1},{opacity:0}],{duration:100,fill:'both'});setTimeout(()=>get_div_about.style.cssText='opacity:0;display:none;',100)
-		get_background.style.cssText = 'animation:0.1s linear sharp_background;';setTimeout(()=>get_background.style.cssText = 'filter:blur(0rem);')
-		get_background_arrow_buttons.style.cssText = 'animation:0.1s linear sharp_background;';setTimeout(()=>get_background_arrow_buttons.style.cssText = 'filter:blur(0rem);')
-		get_button_for_switch_to_current_date.style.cssText = 'animation:0.1s linear sharp_background;';setTimeout(()=>get_button_for_switch_to_current_date.style.cssText = 'filter:blur(0rem);')
-		get_div_bg.style.display = 'none'
-		//dropdown_list_country.style.display = 'none'
-		//=-=-=-=-=-=-=-=-
-		get_go_to_div.animate([{opacity:1},{opacity:0}],{duration:100,fill:'both'});setTimeout(()=>get_go_to_div.style.cssText='opacity:0;display:none',100)
-	}
+	[get_background_main,get_button_cancel_go_to,get_button_ok_go_to].forEach(
+			item => item.addEventListener("click", ()=>{
+				get_div_about.animate([{opacity:1},{opacity:0}],{duration:100,fill:'both'});setTimeout(()=>get_div_about.style.cssText='opacity:0;display:none;',100)
+				get_background.style.cssText = 'animation:0.1s linear sharp_background;';setTimeout(()=>get_background.style.cssText = 'filter:blur(0rem);')
+				get_background_arrow_buttons.style.cssText = 'animation:0.1s linear sharp_background;';setTimeout(()=>get_background_arrow_buttons.style.cssText = 'filter:blur(0rem);')
+				get_button_for_switch_to_current_date.style.cssText = 'animation:0.1s linear sharp_background;';setTimeout(()=>get_button_for_switch_to_current_date.style.cssText = 'filter:blur(0rem);')
+				get_div_bg.style.display = 'none'
+				//dropdown_list_country.style.display = 'none'
+				//=-=-=-=-=-=-=-=-
+				get_go_to_div.animate([{opacity:1},{opacity:0}],{duration:100,fill:'both'});setTimeout(()=>get_go_to_div.style.cssText='opacity:0;display:none',100)
+	}))
 
 	// about container
 	get_button_about.addEventListener("click", ()=>{
@@ -414,15 +434,19 @@ document.addEventListener('DOMContentLoaded',()=>{
 	})
 
 	//go to container
-	get_go_to_div.addEventListener("click", ()=>{
+	get_button_go_to.addEventListener("click", ()=>{
+		console.log('sadsadasdasd')
 		get_div_bg.style.display = 'block'
 		get_background.style.cssText = 'display:block;animation:0.1s linear blur_background;';setTimeout(()=>get_background.style.cssText='filter:blur(1rem);')
 		get_background_arrow_buttons.style.cssText = 'animation:0.1s linear blur_background;';setTimeout(()=>get_background_arrow_buttons.style.cssText = 'filter:blur(1rem);')
 		get_button_for_switch_to_current_date.style.cssText = 'animation:0.1s linear blur_background;';setTimeout(()=>get_button_for_switch_to_current_date.style.cssText = 'filter:blur(1rem);')
-		get_go_to_div.style.display = 'block'
+		get_go_to_div.style.cssText = 'display:block;opacity:1;'
 		get_go_to_div.animate([{opacity:0},{opacity:1}],{duration:100,fill:'both'});setTimeout(()=>get_go_to_div.style.cssText='opacity:1;display:block;')	
 	})
 
+	get_button_ok_go_to.addEventListener('click',()=>{
+		showCalendar(months.indexOf(document.getElementsByClassName('option-choose-month is-selected')[0].innerHTML), document.getElementsByClassName('option-choose-year is-selected')[0].innerHTML,'None');
+	})
 
 	for (m in months){
 		let create_div_month = document.createElement('div')

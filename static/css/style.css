@@ -743,6 +743,9 @@ a{
 	z-index: 10;
 	min-height:50px;
 	height:auto;
+	background-color: transparent;
+	/*pointer-events: none;*/
+
 /*	-webkit-box-shadow: 0px 0px 23px -5px rgba(0,0,0,0.75);
 	-moz-box-shadow: 0px 0px 23px -5px rgba(0,0,0,0.75);
 	box-shadow: 0px 0px 23px -5px rgba(0,0,0,0.75);
@@ -753,9 +756,13 @@ a{
 	margin-left: 2%;
 	pointer-events: none;
 }
+#ico_country_current{
+	margin-left: 2%;
+}
 #selected_country{
 	display: flex;
 	align-items: baseline;
+	pointer-events: all;
 }
 #selected_country:active{
 	transition: 0.1s;
