@@ -67,6 +67,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 	let get_go_to_div = document.getElementById('got_to_div')
 	let get_button_for_switch_to_current_date = document.getElementById('get_current_date')
 	let dropdown_list_country = document.getElementById("dropdown_country")
+
 	document.getElementById('ico_country_current').setAttribute('draggable', false);
 
 	document.addEventListener('click', function(e){
@@ -226,7 +227,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 											</div></li>\
 										</ul>'
 						document.getElementById('dropdown_country').appendChild(create_dropdown_list_ul)
-						create_dropdown_list_ul.style.cssText = 'display:block;opacity:0;'
+						create_dropdown_list_ul.style.cssText = 'display:block;o2pacity:0;'
 						create_dropdown_list_ul.animate([{opacity:0},{opacity:1}],{duration:100,fill:"both"});setTimeout(()=>create_dropdown_list_ul.cssText="opacity:1;",100)
 						document.getElementById('dropdown_country').style.cssText = "background-color:white;min-height:50px;height:auto;z-index:10;-webkit-box-shadow: 0px 0px 23px -5px rgba(0,0,0,0.75);-moz-box-shadow: 0px 0px 23px -5px rgba(0,0,0,0.75);box-shadow: 0px 0px 23px -5px rgba(0,0,0,0.75);"
 						document.getElementById('ico_country').setAttribute('draggable', false);
@@ -481,11 +482,15 @@ document.addEventListener('DOMContentLoaded',()=>{
 		get_container_center.style.cssText = 'animation:center_container_to_left 1s ease-in-out;';setTimeout(()=>get_container_center.style.cssText='margin-left:-200%;margin-top: 180px;position:absolute;display:none;',1000)
 		events_container.style.cssText = "display:block;animation: slide_events_container 1s ease-in-out;";setTimeout(()=>events_container.style.cssText = "margin-left:3%;display:block;",1000)
 		let year = document.getElementById('year').innerHTML
-		let country_choosed = document.getElementById('country_select').options[document.getElementById('country_select').selectedIndex].text
+		let country_choosed = document.getElementById('dropdown_country_title').innerHTML
 		let data = {
 		    'year' : year,
 		    'country' : country_choosed,
 		}
+	dropdown_list_country.style.cssText = 'display:block;'
+	dropdown_list_country.animate([{opacity:0, opacity:1}],{duration:100,fill:'both'});setTimeout(()=>{
+		dropdown_list_country.style.cssText = 'display:block;opacity:1;'
+	})
 		$.ajax({
 			type:"POST",
 			url:'/countries/',
