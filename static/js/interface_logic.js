@@ -71,20 +71,17 @@ document.addEventListener('DOMContentLoaded',()=>{
 	let get_event_list = document.getElementById("events_container")
 
 	document.getElementById('ico_country_current').setAttribute('draggable', false);
-
+	let number_selected = null
+	let opened_dropdown_country = false
 	document.addEventListener('click', function(e){
-
-		//let month_days_div = document.getElementById('day_div').children[0].children[0]
-
 		let c = e.target.getAttribute('class')
 		let i = e.target.getAttribute('id')
-		let number_selected = null
+		
 		let get_selected_month = document.querySelector('.option-choose-month.is-selected')
 		let get_index_month = months.indexOf(get_selected_month.innerHTML)
 		let get_month_count = months_days_count[get_index_month]
 		let wtn = 31 - get_month_count 
-
-		let opened_dropdown_country = false
+		
 		if (wtn === 0){
 			for (let el=1;el<=31;el++){
 				if (String(el).length<2){el = '0'+el}
@@ -121,6 +118,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 					cell.style.cssText = 'background-color:#C1C1C1;width:100px;height:100px;position:absolute;border-radius:10px;margin-left:130px;z-index:2;margin-top:10px;'
 					one_selected = true
 					number_selected = i.replace(/\D/g,'')
+					
 					//-----
 					let get_selected_td = document.getElementById(div_picker_selected_number)
 					get_selected_td.style.cssText = "padding: 50px 50px 50px 165px; text-align: center;"
@@ -133,6 +131,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 					get_selected_td.appendChild(create_selected_div)
 				}else{
 					let get_selected = document.getElementById(number_selected)
+					console.log(get_selected)
 					let get_selected_span = document.getElementById('span_'+number_selected)
 					get_selected.style.cssText = 'padding: 50px 50px 50px 165px; text-align: center;'
 					get_selected_span.style.cssText = 'color:black;'
