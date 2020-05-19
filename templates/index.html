@@ -131,7 +131,11 @@
 	</div>
 	<div id='get_current_date'>
 		<div id='get_current_date_first'></div>
-		<div id='text_current_date_center'></div>
+		<div id='text_current_date_center'>
+			<img id='ico_cal_current_date_btn' src='{{ url_for("static", filename="img/calendar.png")}}' width="75" height="75">
+			<p id='text_current_date_content'></p>
+		</div>
+		
 		<div id='get_current_date_second'></div>
 	</div>	
 	<div id='events_container'></div>

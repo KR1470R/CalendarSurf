@@ -6,20 +6,16 @@ document.addEventListener('DOMContentLoaded',()=>{
 	let has_been_clicked = false //for count day 
 	let now = new Date()
 	let current_month = months[now.getMonth()]
+
 	document.getElementById('month_name').innerHTML = current_month
 	document.getElementById('month_day').innerHTML = now.getDate()
 
-	/* Label current choosed DATE in /mainWindow/GoToWindow
-	document.getElementById('selected_month').innerHTML = current_month
-	document.getElementById('selected_day').innerHTML = now.getDate()
-	document.getElementById('selected_year').innerHTML =  now.getFullYear()
-
-	*/
-	document.getElementById('text_current_date_center').innerHTML = now.getDate()
+	document.getElementById('text_current_date_content').innerHTML = now.getDate()
 	let currentMonth = now.getMonth()
 	let currentYear = now.getFullYear()
 	let container_days = document.getElementById('nav_days_ul')
 	let element_month = document.getElementById('month_name')
+	let element_month_day = document.getElementById('month_day')
 	let element_year = document.getElementById('year')
 
 	let month_div = document.getElementById('month_div')
@@ -33,10 +29,10 @@ document.addEventListener('DOMContentLoaded',()=>{
 	let preloader_play = true
 	let preloader_div = document.getElementById('preloader-div')
 	window.onload = function () {
-	  document.body.classList.add('loaded_hiding');
+	  preloader_div.classList.add('loaded_hiding');
 	  window.setTimeout(function () {
-	    document.body.classList.add('loaded');
-	    document.body.classList.remove('loaded_hiding');
+	    preloader_div.classList.add('loaded');
+	    preloader_div.classList.remove('loaded_hiding');
 	    preloader_div.animate([{opacity:1},{opacity:0}],{duration:1000,fill:'both'});setTimeout(()=>preloader_div.style.display='none',1000)
 	  }, 1000);
 	}
@@ -70,18 +66,24 @@ document.addEventListener('DOMContentLoaded',()=>{
 	dropdown_list_country.style.display = 'none'
 	let get_event_list = document.getElementById("events_container")
 
+	let get_current_date_btn = document.getElementById('get_current_date')
+
 	document.getElementById('ico_country_current').setAttribute('draggable', false);
 	let number_selected = null
-	let opened_dropdown_country = false
+	
 	document.addEventListener('click', function(e){
 		let c = e.target.getAttribute('class')
 		let i = e.target.getAttribute('id')
-		
+		let opened_dropdown_country = false
 		let get_selected_month = document.querySelector('.option-choose-month.is-selected')
 		let get_index_month = months.indexOf(get_selected_month.innerHTML)
 		let get_month_count = months_days_count[get_index_month]
 		let wtn = 31 - get_month_count 
 		
+		if (element_month.innerHTML == current_month && element_month_day.innerHTML == now.getDate() && element_year.innerHTML == currentYear){get_current_date_btn.style.display = 'none'
+			}else{get_current_date_btn.style.cssText = 'background-color: #D5D5D5;width: 100px;height: 100px;border-radius: 99999px;position: relative;display: flex;flex-direction: column;float: right;position: fixed;bottom: 3%;left: 92%;align-self: flex-end;cursor: pointer;z-index: 10;'
+		}
+
 		if (wtn === 0){
 			for (let el=1;el<=31;el++){
 				if (String(el).length<2){el = '0'+el}
@@ -109,8 +111,6 @@ document.addEventListener('DOMContentLoaded',()=>{
 			menu.animate([{opacity:1},{opacity:0}],{duration:100,fill:'both'});setTimeout(()=>menu.style.display='none',100)};
 
 		if (c === 'cell_div'){
-			//cell = document.getElementsByClassName('cell_div')[0]
-			//cell.style.cssText = 'background-color:red;'
 				if (one_selected === false){
 					let cell = document.getElementById(i.replace(/\D/g,''))
 					cell_span = document.getElementById('span_'+i.replace(/\D/g,''))
@@ -131,7 +131,6 @@ document.addEventListener('DOMContentLoaded',()=>{
 					get_selected_td.appendChild(create_selected_div)
 				}else{
 					let get_selected = document.getElementById(number_selected)
-					console.log(get_selected)
 					let get_selected_span = document.getElementById('span_'+number_selected)
 					get_selected.style.cssText = 'padding: 50px 50px 50px 165px; text-align: center;'
 					get_selected_span.style.cssText = 'color:black;'
@@ -158,21 +157,14 @@ document.addEventListener('DOMContentLoaded',()=>{
 				}catch(e){
 					return
 				}
-			}/*else if ( c === 'option-choose'){
-				console.log('clicked')
-				console.log(i)
-				let get_selector = document.getElementById(i)
-				get_selector.style.cssText = 'font-weight:bold;font-size:60px;transition:0.1s;'
-			}*/
-			//if ()
+			}
 
 			else if (i === 'dropdown_country' || i === 'dropdown_list_ul' || i === 'country_dropdown_list' || i === 'dropdown_country_title_list' || i === 'selected_country' || i === 'ico_country_current'){
-				
+
 				if (opened_dropdown_country === false){
 					if (document.getElementById("dropdown_list_countries") != null === true){
 						if (opened_dropdown_country === false && i != 'selected_country' == true){
 							let get_value_clicked_item = e.target
-
 							if (get_value_clicked_item.getAttribute('id') === 'dropdown_list_ul' || get_value_clicked_item.getAttribute('id') === 'dropdown_country'){return}else{
 								let get_content_from_title = get_value_clicked_item.querySelector('#dropdown_country_title_list')
 								let get_ico_from_item = get_value_clicked_item.querySelector('#ico_country')
@@ -182,16 +174,16 @@ document.addEventListener('DOMContentLoaded',()=>{
 
 								let previous_current_title_country = get_current_item_title.innerHTML
 								let previus_current_ico_country = get_current_item_ico.getAttribute("src")
-
-								get_current_item_title.innerHTML = get_content_from_title.innerHTML;get_content_from_title.innerHTML = previous_current_title_country
-								get_current_item_ico.setAttribute("src",String(get_ico_from_item.getAttribute("src")));get_ico_from_item.setAttribute("src",String(previus_current_ico_country))
 								try{
-									let get_dropdown_list = document.getElementById('dropdown_list_countries')
-									let get_dropdown_list_ul = document.getElementById('dropdown_list_ul')
-									get_dropdown_list.animate([{opacity:1},{opacity:0}],{duration:100,fill:'both'});setTimeout(()=>get_dropdown_list.style.cssText='opacity:0;display:none;',100)
-									get_dropdown_list_ul.animate([{opacity:1},{opacity:0}],{duration:100,fill:'both'});setTimeout(()=>get_dropdown_list_ul.style.cssText='opacity:0;display:none;',100)
-									opened_dropdown_country = true	
-									document.getElementById('dropdown_country').style.cssText = 'display:block;opacity:1;background-color:transparent;'
+									get_current_item_title.innerHTML = get_content_from_title.innerHTML;get_content_from_title.innerHTML = previous_current_title_country
+									get_current_item_ico.setAttribute("src",String(get_ico_from_item.getAttribute("src")));get_ico_from_item.setAttribute("src",String(previus_current_ico_country))
+									
+										let get_dropdown_list = document.getElementById('dropdown_list_countries')
+										let get_dropdown_list_ul = document.getElementById('dropdown_list_ul')
+										get_dropdown_list.animate([{opacity:1},{opacity:0}],{duration:100,fill:'both'});setTimeout(()=>get_dropdown_list.style.cssText='opacity:0;display:none;',100)
+										get_dropdown_list_ul.animate([{opacity:1},{opacity:0}],{duration:100,fill:'both'});setTimeout(()=>get_dropdown_list_ul.style.cssText='opacity:0;display:none;',100)
+										opened_dropdown_country = true	
+										document.getElementById('dropdown_country').style.cssText = 'display:block;opacity:1;background-color:transparent;'
 								}catch(e){return}
 							}
 						}else{
@@ -205,7 +197,6 @@ document.addEventListener('DOMContentLoaded',()=>{
 						}
 
 					}else if (document.getElementById("dropdown_list_countries") === null){
-
 						let create_dropdown_list_ul = document.createElement('div')
 						create_dropdown_list_ul.setAttribute('id', "dropdown_list_countries")
 						create_dropdown_list_ul.innerHTML = '\
@@ -436,7 +427,6 @@ document.addEventListener('DOMContentLoaded',()=>{
 	//current date
 	get_button_for_switch_to_current_date.addEventListener("click", ()=>{
 		showCalendar(now.getMonth(),now.getFullYear())
-		console.log('done')
 	})
 
 	get_button_ok_go_to.addEventListener("click",()=>{
@@ -501,15 +491,12 @@ document.addEventListener('DOMContentLoaded',()=>{
 		dropdown_list_country.animate([{opacity:0},{opacity:1}],{duration:1000,fill:'both'});setTimeout(()=>{
 			dropdown_list_country.style.cssText = 'display:block;opacity:1;'
 		})
-		//get_event_list.style.cssText = 'z-index:-1;'
 		$.ajax({
 			type:"POST",
 			url:'/countries/',
 			data:JSON.stringify(data,null,'\t'),
 			contentType: 'application/json;charset=UTF-8',
 			success:function(response){
-				//response_data = response["data"];console.log("DATA OUTPUT - ",response_data)
-				//response = $.parseJSON(response)
 				let add_content_container = document.createElement("div")
 				add_content_container.setAttribute("id","table_event_container")
 				add_content_container.innerHTML = response["data"]

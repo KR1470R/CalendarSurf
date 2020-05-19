@@ -635,7 +635,7 @@ a{
 	height: 100px;
 	border-radius: 99999px;
 	position: relative;
-	display: flex;
+	display: none;
 	flex-direction: column;
 	float:right;
 	position: fixed;
@@ -754,12 +754,16 @@ a{
 */
 	border-radius:10px;
 }
+#dropdown_country:hover{
+	cursor: pointer;
+}
 #ico_country{
 	margin-left: 2%;
 	pointer-events: none;
 }
 #ico_country_current{
 	margin-left: 2%;
+	pointer-events: none;
 }
 #selected_country{
 	display: flex;
@@ -789,4 +793,17 @@ a{
 	z-index: -1;
 	margin-left:3%;
 	display:block;
+}
+#ico_cal_current_date_btn{
+	position: absolute;
+	margin-top: -5px;
+	position: absolute;
+	margin-top: -40px;
+}
+#text_current_date_content{
+	margin-top: -22px;
+	position: absolute;
+	font-size: 50px;
+	text-align: center;
+	margin-left: -3px;
 }
