@@ -67,6 +67,8 @@ document.addEventListener('DOMContentLoaded',()=>{
 	let get_go_to_div = document.getElementById('got_to_div')
 	let get_button_for_switch_to_current_date = document.getElementById('get_current_date')
 	let dropdown_list_country = document.getElementById("dropdown_country")
+	dropdown_list_country.style.display = 'none'
+	let get_event_list = document.getElementById("events_container")
 
 	document.getElementById('ico_country_current').setAttribute('draggable', false);
 
@@ -166,7 +168,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 			//if ()
 
 			else if (i === 'dropdown_country' || i === 'dropdown_list_ul' || i === 'country_dropdown_list' || i === 'dropdown_country_title_list' || i === 'selected_country' || i === 'ico_country_current'){
-
+				
 				if (opened_dropdown_country === false){
 					if (document.getElementById("dropdown_list_countries") != null === true){
 						if (opened_dropdown_country === false && i != 'selected_country' == true){
@@ -227,7 +229,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 											</div></li>\
 										</ul>'
 						document.getElementById('dropdown_country').appendChild(create_dropdown_list_ul)
-						create_dropdown_list_ul.style.cssText = 'display:block;o2pacity:0;'
+						create_dropdown_list_ul.style.cssText = 'display:block;opacity:0;'
 						create_dropdown_list_ul.animate([{opacity:0},{opacity:1}],{duration:100,fill:"both"});setTimeout(()=>create_dropdown_list_ul.cssText="opacity:1;",100)
 						document.getElementById('dropdown_country').style.cssText = "background-color:white;min-height:50px;height:auto;z-index:10;-webkit-box-shadow: 0px 0px 23px -5px rgba(0,0,0,0.75);-moz-box-shadow: 0px 0px 23px -5px rgba(0,0,0,0.75);box-shadow: 0px 0px 23px -5px rgba(0,0,0,0.75);"
 						document.getElementById('ico_country').setAttribute('draggable', false);
@@ -397,6 +399,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 				get_background.style.cssText = 'animation:0.1s linear sharp_background;';setTimeout(()=>get_background.style.cssText = 'filter:blur(0rem);')
 				get_background_arrow_buttons.style.cssText = 'animation:0.1s linear sharp_background;';setTimeout(()=>get_background_arrow_buttons.style.cssText = 'filter:blur(0rem);')
 				get_button_for_switch_to_current_date.style.cssText = 'animation:0.1s linear sharp_background;';setTimeout(()=>get_button_for_switch_to_current_date.style.cssText = 'filter:blur(0rem);')
+				get_event_list.style.cssText = 'margin-left:3%;display:block;animation:0.1s linear sharp_background;';setTimeout(()=>get_event_list.style.cssText='margin-left:3%;display:block;filter:blur(0rem);')
 				get_div_bg.style.display = 'none'
 				//dropdown_list_country.style.display = 'none'
 				//=-=-=-=-=-=-=-=-
@@ -407,7 +410,11 @@ document.addEventListener('DOMContentLoaded',()=>{
 	get_button_about.addEventListener("click", ()=>{
 		get_div_bg.style.display = 'block'
 		get_background.style.cssText = 'display:block;animation:0.1s linear blur_background;';setTimeout(()=>get_background.style.cssText='filter:blur(1rem);')
+
 		get_background_arrow_buttons.style.cssText = 'animation:0.1s linear blur_background;';setTimeout(()=>get_background_arrow_buttons.style.cssText = 'filter:blur(1rem);')
+
+		get_event_list.style.cssText = 'margin-left:3%;display:block;animation:0.1s linear blur_background;';setTimeout(()=>get_event_list.style.cssText='margin-left:3%;display:block;filter:blur(1rem);')
+
 		get_button_for_switch_to_current_date.style.cssText = 'animation:0.1s linear blur_background;';setTimeout(()=>get_button_for_switch_to_current_date.style.cssText = 'filter:blur(1rem);')
 		get_div_about.style.display = 'block'
 		get_div_about.animate([{opacity:0},{opacity:1}],{duration:100,fill:'both'});setTimeout(()=>get_div_about.style.cssText='opacity:1;display:block;')
@@ -417,7 +424,11 @@ document.addEventListener('DOMContentLoaded',()=>{
 	get_button_go_to.addEventListener("click", ()=>{
 		get_div_bg.style.display = 'block'
 		get_background.style.cssText = 'display:block;animation:0.1s linear blur_background;';setTimeout(()=>get_background.style.cssText='filter:blur(1rem);')
+
 		get_background_arrow_buttons.style.cssText = 'animation:0.1s linear blur_background;';setTimeout(()=>get_background_arrow_buttons.style.cssText = 'filter:blur(1rem);')
+
+		get_event_list.style.cssText = 'margin-left:3%;display:block;animation:0.1s linear blur_background;';setTimeout(()=>get_event_list.style.cssText='margin-left:3%;display:block;filter:blur(1rem);')
+
 		get_button_for_switch_to_current_date.style.cssText = 'animation:0.1s linear blur_background;';setTimeout(()=>get_button_for_switch_to_current_date.style.cssText = 'filter:blur(1rem);')
 		get_go_to_div.style.cssText = 'display:block;opacity:1;'
 		get_go_to_div.animate([{opacity:0},{opacity:1}],{duration:100,fill:'both'});setTimeout(()=>get_go_to_div.style.cssText='opacity:1;display:block;')	
@@ -487,10 +498,11 @@ document.addEventListener('DOMContentLoaded',()=>{
 		    'year' : year,
 		    'country' : country_choosed,
 		}
-	dropdown_list_country.style.cssText = 'display:block;'
-	dropdown_list_country.animate([{opacity:0, opacity:1}],{duration:100,fill:'both'});setTimeout(()=>{
-		dropdown_list_country.style.cssText = 'display:block;opacity:1;'
-	})
+		dropdown_list_country.style.cssText = 'display:block;'
+		dropdown_list_country.animate([{opacity:0},{opacity:1}],{duration:1000,fill:'both'});setTimeout(()=>{
+			dropdown_list_country.style.cssText = 'display:block;opacity:1;'
+		})
+		//get_event_list.style.cssText = 'z-index:-1;'
 		$.ajax({
 			type:"POST",
 			url:'/countries/',
@@ -502,7 +514,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 				let add_content_container = document.createElement("div")
 				add_content_container.setAttribute("id","table_event_container")
 				add_content_container.innerHTML = response["data"]
-				document.getElementById("events_container").appendChild(add_content_container)
+				get_event_list.appendChild(add_content_container)
 			},
 			error:(error)=>{
 				console.log(error)
