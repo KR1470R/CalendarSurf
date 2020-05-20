@@ -224,19 +224,19 @@ document.addEventListener('DOMContentLoaded', () => {
                     create_dropdown_list_ul.setAttribute('id', "dropdown_list_countries")
                     create_dropdown_list_ul.innerHTML = '\
 										<ul id="dropdown_list_ul">\
-											<li class="nav_ul"><div id="country_dropdown_list" id="country_dropdown_list_li">\
+											<li class="nav_ul"><div class="country_dropdown_list country_dropdown_list_li">\
 												<img id="ico_country" src="https://image.flaticon.com/icons/png/512/330/330437.png" width="80" height="80" alt="Russia">\
 												<p id="dropdown_country_title_list" class="ru">Russia</p>\
 											</div></li>\
-											<li class="nav_ul"><div id="country_dropdown_list" id="country_dropdown_list_li">\
+											<li class="nav_ul"><div class="country_dropdown_list country_dropdown_list_li">\
 												<img id="ico_country" src="https://image.flaticon.com/icons/svg/330/330550.svg" width="80" height="80" alt="Belarus">\
 												<p id="dropdown_country_title_list" class="by">Belarus</p>\
 											</div></li>\
-											<li class="nav_ul"><div id="country_dropdown_list" id="country_dropdown_list_li">\
+											<li class="nav_ul"><div class="country_dropdown_list country_dropdown_list_li">\
 												<img id="ico_country" src="https://image.flaticon.com/icons/png/512/330/330459.png" width="80" height="80" alt="USA">\
 												<p id="dropdown_country_title_list" class="us">USA</p>\
 											</div></li>\
-											<li class="nav_ul"><div id="country_dropdown_list" id="country_dropdown_list_li">\
+											<li class="nav_ul"><div class="country_dropdown_list country_dropdown_list_li">\
 												<img id="ico_country" src="https://image.flaticon.com/icons/png/512/330/330495.png" width="80" height="80" alt="Uzbekistan">\
 												<p id="dropdown_country_title_list" class="uz">Uzbekistan</p>\
 											</div></li>\
