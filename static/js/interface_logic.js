@@ -168,7 +168,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 get_selected_span.style.cssText = 'color:black;'
                 one_selected = false
             } catch (e) {
-                return
             }
         } else if (i === 'dropdown_country' || i === 'dropdown_list_ul' || i === 'country_dropdown_list' || i === 'dropdown_country_title_list' || i === 'selected_country' || i === 'ico_country_current') {
 
