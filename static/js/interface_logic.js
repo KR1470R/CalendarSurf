@@ -172,8 +172,8 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (i === 'dropdown_country' || i === 'dropdown_list_ul' || i === 'country_dropdown_list' || i === 'dropdown_country_title_list' || i === 'selected_country' || i === 'ico_country_current') {
 
             if (opened_dropdown_country === false) {
-                if (document.getElementById("dropdown_list_countries") != null === true) {
-                    if (opened_dropdown_country === false && i != 'selected_country' == true) {
+                if (document.getElementById("dropdown_list_countries") != null) {
+                    if (opened_dropdown_country === false && i !== 'selected_country') {
                         let get_value_clicked_item = e.target
                         if (get_value_clicked_item.getAttribute('id') === 'dropdown_list_ul' || get_value_clicked_item.getAttribute('id') === 'dropdown_country') {
                             return
