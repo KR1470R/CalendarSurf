@@ -70,7 +70,27 @@ document.addEventListener('DOMContentLoaded',()=>{
 
 	document.getElementById('ico_country_current').setAttribute('draggable', false);
 	let number_selected = null
-	
+
+	let data = {
+		'month_day' : element_month_day.innerHTML,
+	}
+
+	$.ajax({
+		type : 'POST',
+		url : '/icoTab/',
+		data : JSON.stringify(data, null, "\t"),
+		contentType: 'application/json;charset=UTF-8',
+		success:function(response){
+			if (response !== "OK"){
+				throw "ERROR INCLUDING ICON TAB"
+			}else{
+				document.head.innerHTML += "<link rel='icon' href='static/img/icoTab.png'>"
+			}
+		},
+		error:(error)=>{
+			console.log(error)
+		}
+	})
 	document.addEventListener('click', function(e){
 		let c = e.target.getAttribute('class')
 		let i = e.target.getAttribute('id')
@@ -365,11 +385,24 @@ document.addEventListener('DOMContentLoaded',()=>{
 	  if (Math.abs(diffX) > Math.abs(diffY)) {
 	    if (diffX > 0) {
 	      // swiped left
-	      next()
-	      
+				let selectedCurrentMonth = months.indexOf(document.getElementById("month_name").innerHTML)
+				let selectedCurrentYear = Number(document.getElementById("year").innerHTML)
+				currentYear = (selectedCurrentMonth === 11) ? selectedCurrentYear + 1 : selectedCurrentYear;
+				currentMonth = (selectedCurrentMonth + 1) % 12;
+				showCalendar(currentMonth, currentYear,'next');
+				if (element_month.innerHTML == current_month && element_month_day.innerHTML == now.getDate() && element_year.innerHTML == currentYear){get_current_date_btn.style.display = 'none'
+				}else{get_current_date_btn.style.cssText = 'background-color: #D5D5D5;width: 100px;height: 100px;border-radius: 99999px;position: relative;display: flex;flex-direction: column;float: right;position: fixed;bottom: 3%;left: 92%;align-self: flex-end;cursor: pointer;z-index: 10;'
+				}
 	    } else {
 	      // swiped right
-	     	back()
+				let selectedCurrentMonth = months.indexOf(document.getElementById("month_name").innerHTML)
+				let selectedCurrentYear = Number(document.getElementById("year").innerHTML)
+				currentYear = (selectedCurrentMonth === 0) ? selectedCurrentYear - 1 : selectedCurrentYear;
+				currentMonth = (selectedCurrentMonth === 0) ? 11 : selectedCurrentMonth - 1;
+				showCalendar(currentMonth, currentYear,'back');
+				if (element_month.innerHTML == current_month && element_month_day.innerHTML == now.getDate() && element_year.innerHTML == currentYear){get_current_date_btn.style.display = 'none'
+				}else{get_current_date_btn.style.cssText = 'background-color: #D5D5D5;width: 100px;height: 100px;border-radius: 99999px;position: relative;display: flex;flex-direction: column;float: right;position: fixed;bottom: 3%;left: 92%;align-self: flex-end;cursor: pointer;z-index: 10;'
+				}
 	    }  
 	  }
 	  initialX = null;
