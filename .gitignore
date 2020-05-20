@@ -5,3 +5,4 @@ package-lock.json
 webpack.config.js
 yarn.lock
 package.json
+static/img/icoTab.png
