@@ -384,7 +384,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function startTouch(e) {
         initialX = e.touches[0].clientX;
         initialY = e.touches[0].clientY;
-    };
+    }
 
     function moveTouch(e) {
         if (initialX === null) {
@@ -415,7 +415,7 @@ document.addEventListener('DOMContentLoaded', () => {
         initialY = null;
 
         e.preventDefault();
-    };
+    }
 
     function daysInMonth(iMonth, iYear) {
         return 32 - new Date(iYear, iMonth, 32).getDate()
