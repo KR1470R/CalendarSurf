@@ -359,9 +359,9 @@ body::-webkit-scrollbar {
     display: none;
     justify-content: center;
     text-align: center;
-    -webkit-box-shadow: 0px 0px 23px -5px rgba(0, 0, 0, 0.75);
-    -moz-box-shadow: 0px 0px 23px -5px rgba(0, 0, 0, 0.75);
-    box-shadow: 0px 0px 23px -5px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: 0 0 23px -5px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0 0 23px -5px rgba(0, 0, 0, 0.75);
+    box-shadow: 0 0 23px -5px rgba(0, 0, 0, 0.75);
     border-radius: 10px;
     top: 50%;
     left: 50%;
