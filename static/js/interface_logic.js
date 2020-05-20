@@ -1,3 +1,140 @@
+(() => {
+    let monthDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    let monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    let dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+ 
+    class Preloader {
+        // var el
+ 
+        constructor(el) {
+            if(typeof el === "undefined" || el === null) {
+                throw new Error("No element to mount");
+            }
+ 
+            this.el = el;
+        }
+ 
+        start(timeout) {
+            this.show();
+            setTimeout(this.hide.bind(this), timeout);
+        }
+ 
+        show() {
+            this.el.classList.add("loaded_hiding");
+        }
+ 
+        hide() {
+            this.el.classList.add("loaded");
+            this.el.classList.remove("loaded_hiding");
+            this.el.animate([
+                {opacity: 1},
+                {opacity: 0},
+            ], {
+                duration: 1000,
+                fill: "both",
+            });
+            setTimeout(() => this.el.style.display = "none", 1000);
+        }
+    }
+ 
+    class Menu {
+        // var el
+        // var shown = false
+ 
+        constructor(el) {
+            if(typeof el === "undefined" || el === null) {
+                throw new Error("No element to mount");
+            }
+ 
+            this.el = el;
+            this.shown = false;
+        }
+ 
+        show() {
+            this.el.style.display = "block";
+            this.el.style.opacity = 0;
+            this.el.animate([
+                {opacity: 0},
+                {opacity: 1},
+            ], {
+                duration: 100,
+                fill: "both",
+            });
+            setTimeout(() => this.el.style.display = "block", 100);
+ 
+            this.shown = true;
+        }
+ 
+        hide() {
+            this.el.animate([
+                {opacity: 1},
+                {opacity: 0},
+            ], {
+                duration: 100,
+                fill: "both",
+            });
+            setTimeout(() => this.el.style.display = "none", 100);
+ 
+            this.shown = false;
+        }
+ 
+        toggle() {
+            if(this.shown) {
+                this.hide();
+            } else {
+                this.show();
+            }
+        }
+    }
+ 
+    class MenuButton {
+        // var el
+        // var menu: Menu
+ 
+        constructor(el, menu) {
+            if(typeof el === "undefined" || el === null) {
+                throw new Error("No element to mount");
+            }
+            if(typeof menu !== "object") {
+                throw new Error("No menu element to control");
+            }
+ 
+            this.el = el;
+            this.menu = menu;
+            this.el.addEventListener("click", this.clickHandler.bind(this));
+            document.addEventListener("click", this.documentClickHandler.bind(this));
+        }
+ 
+        clickHandler() {
+            this.menu.toggle();
+        }
+ 
+        documentClickHandler(event) {
+            if(event.target !== this.el && event.target !== this.menu.el) {
+                this.menu.hide();
+            }
+        }
+    }
+ 
+    class Calendar {
+        // var preloader: Preloader
+        // var menu: Menu
+        // var menuButton: MenuButton
+ 
+        constructor() {
+            this.preloader = new Preloader(document.getElementById("preloader-div"));
+            this.menu = new Menu(document.getElementById("nav_menu"));
+            this.menuButton = new MenuButton(document.getElementById("menu"), this.menu);
+ 
+            this.preloader.start(1000);
+        }
+    }
+ 
+    document.addEventListener("DOMContentLoaded", () => {
+        new Calendar();
+    });
+})();
+
 document.addEventListener('DOMContentLoaded', () => {
     //Dates DB
     let months_days_count = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
@@ -24,23 +161,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let month_days_div = document.getElementById('day_div')
 
-    //PRELOADER PART
-
-    let preloader_play = true
-    let preloader_div = document.getElementById('preloader-div')
-    window.onload = function () {
-        preloader_div.classList.add('loaded_hiding');
-        window.setTimeout(function () {
-            preloader_div.classList.add('loaded');
-            preloader_div.classList.remove('loaded_hiding');
-            preloader_div.animate([{opacity: 1}, {opacity: 0}], {duration: 1000, fill: 'both'});
-            setTimeout(() => preloader_div.style.display = 'none', 1000)
-        }, 1000);
-    }
-
     //LOGIC PAGE
     let menu = document.getElementById('nav_menu')
-    setTimeout(() => document.getElementById('got_to_div').style.cssText = 'display:none;', 1100)
+    setTimeout(() => document.getElementById('go-to-div').style.cssText = 'display:none;', 1100)
 
     let one_selected = false
     let div_picker_selected_number = null
@@ -61,7 +184,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let get_background = document.getElementById('canvas_cal')
     let get_background_arrow_buttons = document.getElementById('div_back_next')
     let get_div_bg = document.getElementById('background')
-    let get_go_to_div = document.getElementById('got_to_div')
+    let get_go_to_div = document.getElementById('go-to-div')
     let get_button_for_switch_to_current_date = document.getElementById('get_current_date')
     let dropdown_list_country = document.getElementById("dropdown_country")
     dropdown_list_country.style.display = 'none'
@@ -112,15 +235,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (c === 'nav_menu_li') {
-            return
-        } else if (i === 'menu') {
-            menu.style.display = 'block';
-            menu.style.opacity = 0;
-            menu.animate([{opacity: 0}, {opacity: 1}], {duration: 100, fill: 'both'});
-            setTimeout(() => menu.style.display = 'block', 100)
-        } else {
-            menu.animate([{opacity: 1}, {opacity: 0}], {duration: 100, fill: 'both'});
-            setTimeout(() => menu.style.display = 'none', 100)
+            return;
         }
 
         if (c === 'cell_div') {
