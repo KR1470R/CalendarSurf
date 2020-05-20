@@ -122,7 +122,6 @@ document.addEventListener('DOMContentLoaded', () => {
             menu.animate([{opacity: 1}, {opacity: 0}], {duration: 100, fill: 'both'});
             setTimeout(() => menu.style.display = 'none', 100)
         }
-        ;
 
         if (c === 'cell_div') {
             if (one_selected === false) {
