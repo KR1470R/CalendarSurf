@@ -4,6 +4,8 @@ import json
 import bs4
 import os
 import sys
+from PIL import Image, ImageDraw, ImageFont
+
 
 app = Flask(__name__)
 
@@ -13,7 +15,7 @@ def main():
 	return render_template('index.html')
 
 @app.route('/countries/',methods=["POST"])
-def get_req():
+def sendDataByCountry():
 	if request.method == 'POST':
 		year = request.json['year']
 		country = request.json['country']
@@ -39,3 +41,23 @@ def get_req():
 			return jsonify({
 				"data":str(response_content)
 				})	
+
+@app.route('/icoTab/', methods=["POST"])
+def sendIcoByDay():
+	if request.method == "POST":
+		try:
+			response = "OK"
+			month_day = request.json['month_day']
+			input_path_img = str(os.path.abspath('static/img/defaultIcoTab.png'))
+			output_path_img = str(os.path.abspath('static/img/icoTab.png'))
+			img = Image.open(input_path_img)
+			draw = ImageDraw.Draw(img)
+			font = ImageFont.truetype(os.path.abspath('static/fonts/Aller/Aller_Lt.ttf'),190)
+			if len(str(month_day)) > 1: 
+				draw.text((17, 40),str(month_day),font=font,fill=(0,0,0))
+			else:
+				draw.text((70, 40),str(month_day),font=font,fill=(0,0,0))
+			img.save(output_path_img)
+			return response
+		except Exception as e:
+			return str(e)
