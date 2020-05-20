@@ -275,7 +275,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //PART LOGIC OF CALENDAR
 
-    for (count in days) {
+    for (let count in days) {
         let newElem = document.createElement('th')
         newElem.innerHTML = days[count]
         newElem.id = days[count]
@@ -286,14 +286,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function generate_year_range(start, end) {
-        var years = "";
-        for (var year = start; year <= end; year++) {
+        let years = "";
+        for (let year = start; year <= end; year++) {
             years += "<option value='" + year + "'>" + year + "</option>";
         }
         return years;
     }
 
-    var createYear = generate_year_range(1970, 2050)
+    const createYear = generate_year_range(1970, 2050);
     showCalendar(currentMonth, currentYear, 'None')
 
     function showCalendar(month, year, swiped) {
@@ -330,7 +330,7 @@ document.addEventListener('DOMContentLoaded', () => {
             let tbl = document.getElementById(id)
             tbl.innerHTML = ''
             let date = 1
-            for (var i = 0; i < 6; i++) {
+            for (let i = 0; i < 6; i++) {
                 let row = document.createElement('tr')
                 row.style.cssText = "font-size: 30px;font-family: 'Lato', sans-serif;"
                 for (var j = 0; j < 7; j++) {
@@ -339,10 +339,11 @@ document.addEventListener('DOMContentLoaded', () => {
                         let cellText = document.createTextNode("")
                         cell.appendChild(cellText)
                         row.appendChild(cell)
-                    } else if (date > daysInMonth(month, year)) {
+                    } else let cell_span;
+                    if (date > daysInMonth(month, year)) {
                         break;
                     } else {
-                        let cell = document.createElement('td')
+                        let cell = document.createElement('td'), cell_span
                         cell.setAttribute("data-date", date)
                         cell.setAttribute('data-month', month + 1)
                         cell.setAttribute('data-year', year)
@@ -377,8 +378,8 @@ document.addEventListener('DOMContentLoaded', () => {
     el.addEventListener("touchmove", moveTouch, false);
 
     // Swipe Left / Right
-    var initialX = null;
-    var initialY = null;
+    let initialX = null;
+    let initialY = null;
 
     function startTouch(e) {
         initialX = e.touches[0].clientX;
@@ -394,11 +395,11 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        var currentX = e.touches[0].clientX;
-        var currentY = e.touches[0].clientY;
+        const currentX = e.touches[0].clientX;
+        const currentY = e.touches[0].clientY;
 
-        var diffX = initialX - currentX;
-        var diffY = initialY - currentY;
+        const diffX = initialX - currentX;
+        const diffY = initialY - currentY;
 
         if (Math.abs(diffX) > Math.abs(diffY)) {
             if (diffX > 0) {
@@ -503,7 +504,7 @@ document.addEventListener('DOMContentLoaded', () => {
         showCalendar(currentMonth, currentYear, 'next');
     })
 
-    for (m in months) {
+    for (let m in months) {
         let create_div_month = document.createElement('div')
         create_div_month.innerHTML = months[m]
         create_div_month.setAttribute('class', 'option-choose-month')
