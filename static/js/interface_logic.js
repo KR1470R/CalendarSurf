@@ -339,8 +339,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         let cellText = document.createTextNode("")
                         cell.appendChild(cellText)
                         row.appendChild(cell)
-                    } else let cell_span;
-                    if (date > daysInMonth(month, year)) {
+                    } else if (date > daysInMonth(month, year)) {
                         break;
                     } else {
                         let cell = document.createElement('td'), cell_span
