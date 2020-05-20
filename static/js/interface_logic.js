@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 		contentType: 'application/json;charset=UTF-8',
 		success:function(response){
 			if (response !== "OK"){
-				throw "ERROR INCLUDING ICON TAB"
+				throw "ERROR INCLUDING ICON TAB: \n"+response
 			}else{
 				document.head.innerHTML += "<link rel='icon' href='static/img/icoTab.png'>"
 			}
