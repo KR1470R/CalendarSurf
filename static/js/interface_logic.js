@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let get_month_count = months_days_count[get_index_month]
         let wtn = 31 - get_month_count
 
-        if (element_month.innerHTML == current_month && element_month_day.innerHTML == now.getDate() && element_year.innerHTML == currentYear) {
+        if (element_month.innerHTML === current_month && element_month_day.innerHTML === now.getDate() && element_year.innerHTML === currentYear) {
             get_current_date_btn.style.display = 'none'
         } else {
             get_current_date_btn.style.cssText = 'background-color: #D5D5D5;width: 100px;height: 100px;border-radius: 99999px;position: relative;display: flex;flex-direction: column;float: right;position: fixed;bottom: 3%;left: 92%;align-self: flex-end;cursor: pointer;z-index: 10;'
@@ -113,7 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (c === 'nav_menu_li') {
             return
-        } else if (i == 'menu') {
+        } else if (i === 'menu') {
             menu.style.display = 'block';
             menu.style.opacity = 0;
             menu.animate([{opacity: 0}, {opacity: 1}], {duration: 100, fill: 'both'});
