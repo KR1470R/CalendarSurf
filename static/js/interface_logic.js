@@ -262,7 +262,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     opened_dropdown_country = true
                     document.getElementById('dropdown_country').style.cssText = 'display:block;opacity:1;background-color:transparent;'
                 } catch (e) {
-                    return
                 }
             }
 
