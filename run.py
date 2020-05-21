@@ -11,7 +11,20 @@ app = Flask(__name__)
 
 @app.route('/')
 def main():
-	print(sys.version)
+	for i in range(1,32):
+		input_path_img = str(os.path.abspath('static/img/IcoTab/defaultIcoTab.png'))
+		output_path_img = str(os.path.abspath(f'static/img/IcoTab/icoTab_{i}.png'))
+		img = Image.open(input_path_img)
+		draw = ImageDraw.Draw(img)
+		font = ImageFont.truetype(os.path.abspath('static/fonts/IOS13/IOS13.ttf'),190)
+		if len(str(i)) > 1: 
+			draw.text((17, 40),str(i),font=font,fill=(0,0,0))
+		else:
+			draw.text((70, 40),str(i),font=font,fill=(0,0,0))
+		if os.path.exists(output_path_img) == True:
+			continue
+		else:
+			img.save(output_path_img)
 	return render_template('index.html')
 
 @app.route('/countries/',methods=["POST"])
