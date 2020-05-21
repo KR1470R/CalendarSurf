@@ -116,17 +116,37 @@
         }
     }
  
+    class iconController {
+        // var el
+
+        constructor(el) {
+            if(typeof el === "undefined" || el === null) {
+                throw new Error("No element to mount");
+            }
+
+            this.el = el;
+            this.el.setAttribute("rel", "icon");
+        }
+
+        set(monthDay) {
+            this.el.setAttribute("href", `static/img/IcoTab/icons/icoTab_${monthDay}.png`);
+        }
+    }
+
     class Calendar {
         // var preloader: Preloader
         // var menu: Menu
         // var menuButton: MenuButton
+        // var iconController: IconController
  
         constructor() {
             this.preloader = new Preloader(document.getElementById("preloader-div"));
             this.menu = new Menu(document.getElementById("nav_menu"));
             this.menuButton = new MenuButton(document.getElementById("menu"), this.menu);
- 
+            this.iconController = new iconController(document.getElementById("link-icon"));
+
             this.preloader.start(1000);
+            this.iconController.set((new Date()).getDate());
         }
     }
  
@@ -193,7 +213,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('ico_country_current').setAttribute('draggable', false);
     let number_selected = null
-    document.head.innerHTML += "<link rel='icon' href='static/img/IcoTab/icoTab_"+element_month_day.innerHTML+".png'>"
 
     document.addEventListener('click', function (e) {
         let c = e.target.getAttribute('class')
