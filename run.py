@@ -16,7 +16,7 @@ def main():
 
 
 @app.route('/countries/', methods=["POST"])
-def sendDataByCountry():
+def send_data_by_country():
     if request.method == 'POST':
         year = request.json['year']
         country = request.json['country']
@@ -45,7 +45,7 @@ def sendDataByCountry():
 
 
 @app.route('/icoTab/', methods=["POST"])
-def sendIcoByDay():
+def send_ico_by_day():
     if request.method == "POST":
         try:
             response = "OK"
