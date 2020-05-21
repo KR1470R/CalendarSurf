@@ -372,7 +372,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    el = document.getElementById('calendar')
+    let el = document.getElementById('calendar')
     el.addEventListener("touchstart", startTouch, false);
     el.addEventListener("touchmove", moveTouch, false);
 
@@ -440,8 +440,7 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => get_go_to_div.style.cssText = 'opacity:0;display:none', 100)
         }))
 
-    // about container
-    get_button_about.addEventListener("click", () => {
+    function animation() {
         get_div_bg.style.display = 'block'
         get_background.style.cssText = 'display:block;animation:0.1s linear blur_background;';
         setTimeout(() => get_background.style.cssText = 'filter:blur(1rem);')
@@ -454,6 +453,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         get_button_for_switch_to_current_date.style.cssText = 'animation:0.1s linear blur_background;';
         setTimeout(() => get_button_for_switch_to_current_date.style.cssText = 'filter:blur(1rem);')
+    }
+
+    // about container
+    get_button_about.addEventListener("click", () => {
+        animation();
         get_div_about.style.display = 'block'
         get_div_about.animate([{opacity: 0}, {opacity: 1}], {duration: 100, fill: 'both'});
         setTimeout(() => get_div_about.style.cssText = 'opacity:1;display:block;')
@@ -461,18 +465,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //go to container
     get_button_go_to.addEventListener("click", () => {
-        get_div_bg.style.display = 'block'
-        get_background.style.cssText = 'display:block;animation:0.1s linear blur_background;';
-        setTimeout(() => get_background.style.cssText = 'filter:blur(1rem);')
-
-        get_background_arrow_buttons.style.cssText = 'animation:0.1s linear blur_background;';
-        setTimeout(() => get_background_arrow_buttons.style.cssText = 'filter:blur(1rem);')
-
-        get_event_list.style.cssText = 'margin-left:3%;display:block;animation:0.1s linear blur_background;';
-        setTimeout(() => get_event_list.style.cssText = 'margin-left:3%;display:block;filter:blur(1rem);')
-
-        get_button_for_switch_to_current_date.style.cssText = 'animation:0.1s linear blur_background;';
-        setTimeout(() => get_button_for_switch_to_current_date.style.cssText = 'filter:blur(1rem);')
+        animation();
         get_go_to_div.style.cssText = 'display:block;opacity:1;'
         get_go_to_div.animate([{opacity: 0}, {opacity: 1}], {duration: 100, fill: 'both'});
         setTimeout(() => get_go_to_div.style.cssText = 'opacity:1;display:block;')
