@@ -163,7 +163,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //LOGIC PAGE
     let menu = document.getElementById('nav_menu')
-    setTimeout(() => document.getElementById('go-to-div').style.cssText = 'display:none;', 1100)
 
     let one_selected = false
     let div_picker_selected_number = null
