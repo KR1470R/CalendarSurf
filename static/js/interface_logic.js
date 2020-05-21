@@ -48,6 +48,8 @@
  
             this.el = el;
             this.shown = false;
+
+            this.el.addEventListener("click", this.clickHandler.bind(this));
         }
  
         show() {
@@ -84,6 +86,10 @@
             } else {
                 this.show();
             }
+        }
+
+        clickHandler() {
+            this.hide();
         }
     }
  
@@ -400,11 +406,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
         }
-    });
-
-    menu.addEventListener('click', function () {
-        menu.animate([{opacity: 1}, {opacity: 0}], {duration: 100, fill: 'both'});
-        setTimeout(() => menu.style.display = 'none', 100)
     });
 
     //PART LOGIC OF CALENDAR
