@@ -139,7 +139,7 @@
         }
     }
 
-    class Calendar {
+    class App {
         // var preloader: Preloader
         // var menu: Menu
         // var menuButton: MenuButton
@@ -157,7 +157,7 @@
     }
  
     document.addEventListener("DOMContentLoaded", () => {
-        new Calendar();
+        new App();
     });
 })();
 
