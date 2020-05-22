@@ -1,2 +1,8 @@
 node_modules
 __pycache__
+.idea
+package-lock.json
+webpack.config.js
+yarn.lock
+package.json
+static/img/IcoTab
