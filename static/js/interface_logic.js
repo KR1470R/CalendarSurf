@@ -220,6 +220,8 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('ico_country_current').setAttribute('draggable', false);
     let number_selected = null
 
+    let mode = 'numbers'
+
     document.addEventListener('click', function (e) {
         let c = e.target.getAttribute('class')
         let i = e.target.getAttribute('id')
@@ -323,17 +325,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
                                 let previous_current_title_country = get_current_item_title.innerHTML
                                 let previus_current_ico_country = get_current_item_ico.getAttribute("src")
-                                try{
-                                    get_current_item_title.innerHTML = get_content_from_title.innerHTML;get_content_from_title.innerHTML = previous_current_title_country
-                                    get_current_item_ico.setAttribute("src",String(get_ico_from_item.getAttribute("src")));get_ico_from_item.setAttribute("src",String(previus_current_ico_country))
-                                    
-                                        let get_dropdown_list = document.getElementById('dropdown_list_countries')
-                                        let get_dropdown_list_ul = document.getElementById('dropdown_list_ul')
-                                        get_dropdown_list.animate([{opacity:1},{opacity:0}],{duration:100,fill:'both'});setTimeout(()=>get_dropdown_list.style.cssText='opacity:0;display:none;',100)
-                                        get_dropdown_list_ul.animate([{opacity:1},{opacity:0}],{duration:100,fill:'both'});setTimeout(()=>get_dropdown_list_ul.style.cssText='opacity:0;display:none;',100)
-                                        opened_dropdown_country = true  
-                                        document.getElementById('dropdown_country').style.cssText = 'display:block;opacity:1;background-color:transparent;'
-                                }catch(e){return}
+                                //try{
+                                get_current_item_title.innerHTML = get_content_from_title.innerHTML;get_content_from_title.innerHTML = previous_current_title_country
+                                get_current_item_ico.setAttribute("src",String(get_ico_from_item.getAttribute("src")));get_ico_from_item.setAttribute("src",String(previus_current_ico_country))
+                                
+                                let get_dropdown_list = document.getElementById('dropdown_list_countries')
+                                let get_dropdown_list_ul = document.getElementById('dropdown_list_ul')
+                                get_dropdown_list.animate([{opacity:1},{opacity:0}],{duration:100,fill:'both'});setTimeout(()=>get_dropdown_list.style.cssText='opacity:0;display:none;',100)
+                                get_dropdown_list_ul.animate([{opacity:1},{opacity:0}],{duration:100,fill:'both'});setTimeout(()=>get_dropdown_list_ul.style.cssText='opacity:0;display:none;',100)
+                                opened_dropdown_country = true  
+                                document.getElementById('dropdown_country').style.cssText = 'display:block;opacity:1;background-color:transparent;'
+                                //}catch(e){return}
                             }
                         }else{
                             let create_dropdown_list_ul = document.getElementById('dropdown_list_countries')
@@ -647,40 +649,58 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let events_btn = document.querySelector('#events_list')
     let event_container = document.querySelector('#events_container')
+		let get_container_center = document.getElementById('calendar_body')
+		let get_calendar_head = document.getElementById('nav_days_ul')
     events_btn.addEventListener("click", () => {
-        let get_container_center = document.getElementById('calendar_body')
-        let get_calendar_head = document.getElementById('nav_days_ul')
-        get_calendar_head.style.cssText = "animation:calendar_body_swipe_to_left 1s ease-in-out;";
-        setTimeout(() => get_calendar_head.style.cssText = 'margin-top:10px;margin-left:-200%;position:absolute;', 1000)
-        get_container_center.style.cssText = 'animation:center_container_to_left 1s ease-in-out;';
-        setTimeout(() => get_container_center.style.cssText = 'margin-left:-200%;margin-top: 180px;position:absolute;display:none;', 1000)
-        events_container.style.cssText = "display:block;animation: slide_events_container 1s ease-in-out;";
-        setTimeout(() => events_container.style.cssText = "margin-left:3%;display:block;", 1000)
-        let year = document.getElementById('year').innerHTML
-        let country_choosed = document.getElementById('dropdown_country_title').innerHTML
-        let data = {
-            'year': year,
-            'country': country_choosed,
-        }
-        dropdown_list_country.style.cssText = 'display:block;'
-        dropdown_list_country.animate([{opacity: 0}, {opacity: 1}], {duration: 1000, fill: 'both'});
-        setTimeout(() => {
-            dropdown_list_country.style.cssText = 'display:block;opacity:1;'
-        })
-        $.ajax({
-            type: "POST",
-            url: '/countries/',
-            data: JSON.stringify(data, null, '\t'),
-            contentType: 'application/json;charset=UTF-8',
-            success: function (response) {
-                let add_content_container = document.createElement("div")
-                add_content_container.setAttribute("id", "table_event_container")
-                add_content_container.innerHTML = response["data"]
-                get_event_list.appendChild(add_content_container)
-            },
-            error: (error) => {
-                console.log(error)
-            }
-        })
+    		if (mode === 'events'){
+    			mode = 'numbers'
+    			get_calendar_head.style.cssText = "animation:calendar_body_swipe_to_right 1s ease-in-out;";        setTimeout(() => get_calendar_head.style.cssText = 'margin-top: 10px;margin-left: -230px; position:absolute;', 1000)
+    			get_container_center.style.cssText = 'animation:left_to_center 1s ease-in-out;';
+	        setTimeout(() => get_container_center.style.cssText = 'margin-left:-280px;margin-top: 180px;position:absolute;display:block;', 1000)
+	        events_container.style.cssText = "display:block;animation: slide_events_container_back 1s ease-in-out;";
+	        setTimeout(() => {events_container.style.cssText = "margin-left:200%;display:none;";events_btn.innerHTML = 'Simple calendar'}, 1000)
+	       	dropdown_list_country.style.cssText = 'display:block;'
+	        dropdown_list_country.animate([{opacity: 1}, {opacity: 0}], {duration: 1000, fill: 'both'});
+	        setTimeout(() => {
+	            dropdown_list_country.style.cssText = 'display:none;opacity:0;'
+	        },1000)
+
+    		}else{
+    			events_btn.innerHTML = 'Simple calendar'
+	        get_calendar_head.style.cssText = "animation:calendar_body_swipe_to_left 1s ease-in-out;";
+	        setTimeout(() => get_calendar_head.style.cssText = 'margin-top:10px;margin-left:-200%;position:absolute;', 1000)
+	        get_container_center.style.cssText = 'animation:center_container_to_left 1s ease-in-out;';
+	        setTimeout(() => get_container_center.style.cssText = 'margin-left:-200%;margin-top: 180px;position:absolute;display:none;', 1000)
+	        events_container.style.cssText = "display:block;animation: slide_events_container 1s ease-in-out;";
+	        setTimeout(() => {events_container.style.cssText = "margin-left:3%;display:block;";}, 1000)
+	        let year = document.getElementById('year').innerHTML
+	        let country_choosed = document.getElementById('dropdown_country_title').innerHTML
+	        let data = {
+	            'year': year,
+	            'country': country_choosed,
+	        }
+	        dropdown_list_country.style.cssText = 'display:block;'
+	        dropdown_list_country.animate([{opacity: 0}, {opacity: 1}], {duration: 1000, fill: 'both'});
+	        setTimeout(() => {
+	            dropdown_list_country.style.cssText = 'display:block;opacity:1;'
+	        })
+	        $.ajax({
+	            type: "POST",
+	            url: '/countries/',
+	            data: JSON.stringify(data, null, '\t'),
+	            contentType: 'application/json;charset=UTF-8',
+	            success: function (response) {
+	                let add_content_container = document.createElement("div")
+	                add_content_container.setAttribute("id", "table_event_container")
+	                add_content_container.innerHTML = response["data"]
+	                get_event_list.appendChild(add_content_container)
+	                mode = 'events'
+	            },
+	            error: (error) => {
+	                console.log(error)
+	            }
+	        })
+    		}
+
     })
 })
