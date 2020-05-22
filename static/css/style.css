@@ -165,7 +165,7 @@ body::-webkit-scrollbar {
     width: auto;
     margin-right: -100px;
     margin-top: 100px;
-    padding-right: 100px;
+    
     cursor: pointer;
     z-index: 10;
     background-color: white;
@@ -179,6 +179,7 @@ body::-webkit-scrollbar {
     width: 127%;
     display: block;
     z-index: 2;
+    padding-right: 100px;
     transition: 0.1s;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
