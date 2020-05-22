@@ -47,8 +47,8 @@ def sendDataByCountry():
 		elif country == 'USA':
 			country = 'US'
 		url = f"https://calendarific.com/holidays/{year}/{country}"
-		#os.system(f"wget {url} -O templates/parse_data.html")
 		parse_file = "templates/parse_data.html"
+		os.system(f"wget {url} -O {parse_file}")
 		with open(parse_file,"r") as f:
 			content = f.read()
 			soup = bs4.BeautifulSoup(content, 'lxml')

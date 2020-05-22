@@ -336,6 +336,29 @@ document.addEventListener('DOMContentLoaded', () => {
                                 opened_dropdown_country = true  
                                 document.getElementById('dropdown_country').style.cssText = 'display:block;opacity:1;background-color:transparent;'
                                 //}catch(e){return}
+												        let year = document.getElementById('year').innerHTML
+												        let country_choosed = document.getElementById('dropdown_country_title').innerHTML
+												        let data = {
+												            'year': year,
+												            'country': country_choosed,
+												        }
+												        $.ajax({
+												            type: "POST",
+												            url: '/countries/',
+												            data: JSON.stringify(data, null, '\t'),
+												            contentType: 'application/json;charset=UTF-8',
+												            success: function (response) {
+												            		get_event_list.innerHTML = ''
+												                let add_content_container = document.createElement("div")
+												                add_content_container.setAttribute("id", "table_event_container")
+												                add_content_container.innerHTML = response["data"]
+												                get_event_list.appendChild(add_content_container)
+												                console.log('test')
+												            },
+												            error: (error) => {
+												                throw error
+												            }
+												        })
                             }
                         }else{
                             let create_dropdown_list_ul = document.getElementById('dropdown_list_countries')
@@ -654,11 +677,12 @@ document.addEventListener('DOMContentLoaded', () => {
     events_btn.addEventListener("click", () => {
     		if (mode === 'events'){
     			mode = 'numbers'
+    			events_btn.innerHTML = 'Event list'
     			get_calendar_head.style.cssText = "animation:calendar_body_swipe_to_right 1s ease-in-out;";        setTimeout(() => get_calendar_head.style.cssText = 'margin-top: 10px;margin-left: -230px; position:absolute;', 1000)
     			get_container_center.style.cssText = 'animation:left_to_center 1s ease-in-out;';
 	        setTimeout(() => get_container_center.style.cssText = 'margin-left:-280px;margin-top: 180px;position:absolute;display:block;', 1000)
 	        events_container.style.cssText = "display:block;animation: slide_events_container_back 1s ease-in-out;";
-	        setTimeout(() => {events_container.style.cssText = "margin-left:200%;display:none;";events_btn.innerHTML = 'Simple calendar'}, 1000)
+	        setTimeout(() => {events_container.style.cssText = "margin-left:200%;display:none;"}, 1000)
 	       	dropdown_list_country.style.cssText = 'display:block;'
 	        dropdown_list_country.animate([{opacity: 1}, {opacity: 0}], {duration: 1000, fill: 'both'});
 	        setTimeout(() => {
