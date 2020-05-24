@@ -1,171 +1,168 @@
-//(() => {
-	let get_preloader = null;
-	(() => {
-	  let monthDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-	  let monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-	  let dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+let calendar = null;
 
-	  class Preloader {
-	      // var el
+(() => {
+    let monthDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    let monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    let dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-	      constructor(el) {
-	          if(typeof el === "undefined" || el === null) {
-	              throw new Error("No element to mount");
-	          }
+    class Preloader {
+        // var el
 
-	          this.el = el;
-	      }
+        constructor(el) {
+            if (typeof el === "undefined" || el === null) {
+                throw new Error("No element to mount");
+            }
 
-	      start(timeout) {
-	          this.show();
-	          setTimeout(this.hide.bind(this), timeout);
-	      }
+            this.el = el;
+        }
 
-	      show() {
-	          this.el.classList.add("loaded_hiding");
-	      }
+        start(timeout) {
+            this.show();
+            setTimeout(this.hide.bind(this), timeout);
+        }
 
-	      hide(infinite, duration) {
-	          this.el.classList.add("loaded");
-	          this.el.classList.remove("loaded_hiding");
-	          if (infinite === true){}else{
-		          this.el.animate([
-		              {opacity: 1},
-		              {opacity: 0},
-		          ], {
-		              duration: duration,
-		              fill: "both",
-		          });
-		          setTimeout(() => this.el.style.display = "none", duration);
-	          }
+        show() {
+            this.el.classList.add("loaded_hiding");
+            this.el.classList.remove("loaded");
+            this.el.style.display = "initial";
+        }
 
-	      }
-	  }
+        hide() {
+            this.el.classList.add("loaded");
+            this.el.classList.remove("loaded_hiding");
+            this.el.animate([
+                { opacity: 1 },
+                { opacity: 0 },
+            ], {
+                duration: 1000,
+            });
+            setTimeout(() => this.el.style.display = "none", 1000);
+        }
+    }
 
-	  class Menu {
-	      // var el
-	      // var shown = false
+    class Menu {
+        // var el
+        // var shown = false
 
-	      constructor(el) {
-	          if(typeof el === "undefined" || el === null) {
-	              throw new Error("No element to mount");
-	          }
+        constructor(el) {
+            if (typeof el === "undefined" || el === null) {
+                throw new Error("No element to mount");
+            }
 
-	          this.el = el;
-	          this.shown = false;
+            this.el = el;
+            this.shown = false;
 
-	          this.el.addEventListener("click", this.clickHandler.bind(this));
-	      }
+            this.el.addEventListener("click", this.clickHandler.bind(this));
+        }
 
-	      show() {
-	          this.el.style.display = "block";
-	          this.el.style.opacity = 0;
-	          this.el.animate([
-	              {opacity: 0},
-	              {opacity: 1},
-	          ], {
-	              duration: 100,
-	              fill: "both",
-	          });
-	          setTimeout(() => this.el.style.display = "block", 100);
+        show() {
+            this.el.style.display = "block";
+            this.el.style.opacity = 0;
+            this.el.animate([
+                { opacity: 0 },
+                { opacity: 1 },
+            ], {
+                duration: 100,
+                fill: "both",
+            });
+            setTimeout(() => this.el.style.display = "block", 100);
 
-	          this.shown = true;
-	      }
+            this.shown = true;
+        }
 
-	      hide() {
-	          this.el.animate([
-	              {opacity: 1},
-	              {opacity: 0},
-	          ], {
-	              duration: 100,
-	              fill: "both",
-	          });
-	          setTimeout(() => this.el.style.display = "none", 100);
+        hide() {
+            this.el.animate([
+                { opacity: 1 },
+                { opacity: 0 },
+            ], {
+                duration: 100,
+                fill: "both",
+            });
+            setTimeout(() => this.el.style.display = "none", 100);
 
-	          this.shown = false;
-	      }
+            this.shown = false;
+        }
 
-	      toggle() {
-	          if(this.shown) {
-	              this.hide();
-	          } else {
-	              this.show();
-	          }
-	      }
+        toggle() {
+            if (this.shown) {
+                this.hide();
+            } else {
+                this.show();
+            }
+        }
 
-	      clickHandler() {
-	          this.hide();
-	      }
-	  }
+        clickHandler() {
+            this.hide();
+        }
+    }
 
-	  class MenuButton {
-	      // var el
-	      // var menu: Menu
+    class MenuButton {
+        // var el
+        // var menu: Menu
 
-	      constructor(el, menu) {
-	          if(typeof el === "undefined" || el === null) {
-	              throw new Error("No element to mount");
-	          }
-	          if(typeof menu !== "object") {
-	              throw new Error("No menu element to control");
-	          }
+        constructor(el, menu) {
+            if (typeof el === "undefined" || el === null) {
+                throw new Error("No element to mount");
+            }
+            if (typeof menu !== "object") {
+                throw new Error("No menu element to control");
+            }
 
-	          this.el = el;
-	          this.menu = menu;
-	          this.el.addEventListener("click", this.clickHandler.bind(this));
-	          document.addEventListener("click", this.documentClickHandler.bind(this));
-	      }
+            this.el = el;
+            this.menu = menu;
+            this.el.addEventListener("click", this.clickHandler.bind(this));
+            document.addEventListener("click", this.documentClickHandler.bind(this));
+        }
 
-	      clickHandler() {
-	          this.menu.toggle();
-	      }
+        clickHandler() {
+            this.menu.toggle();
+        }
 
-	      documentClickHandler(event) {
-	          if(event.target !== this.el && event.target !== this.menu.el) {
-	              this.menu.hide();
-	          }
-	      }
-	  }
+        documentClickHandler(event) {
+            if (event.target !== this.el && event.target !== this.menu.el) {
+                this.menu.hide();
+            }
+        }
+    }
 
-	  class iconController {
-	      // var el
+    class iconController {
+        // var el
 
-	      constructor(el) {
-	          if(typeof el === "undefined" || el === null) {
-	              throw new Error("No element to mount");
-	          }
+        constructor(el) {
+            if (typeof el === "undefined" || el === null) {
+                throw new Error("No element to mount");
+            }
 
-	          this.el = el;
-	          this.el.setAttribute("rel", "icon");
-	      }
+            this.el = el;
+            this.el.setAttribute("rel", "icon");
+        }
 
-	      set(monthDay) {
-	          this.el.setAttribute("href", `static/img/IcoTab/icons/icoTab_${monthDay}.png`);
-	      }
-	  }
+        set(monthDay) {
+            this.el.setAttribute("href", `static/img/IcoTab/icons/icoTab_${monthDay}.png`);
+        }
+    }
 
-	  class Calendar {
-	      // var preloader: Preloader
-	      // var menu: Menu
-	      // var menuButton: MenuButton
-	      // var iconController: IconController
+    class Calendar {
+        // var preloader: Preloader
+        // var menu: Menu
+        // var menuButton: MenuButton
+        // var iconController: IconController
 
-	      constructor() {
-	          this.preloader = new Preloader(document.getElementById("preloader-div"));
-	          this.menu = new Menu(document.getElementById("nav_menu"));
-	          this.menuButton = new MenuButton(document.getElementById("menu"), this.menu);
-	          this.iconController = new iconController(document.getElementById("link-icon"));
+        constructor() {
+            this.preloader = new Preloader(document.getElementById("preloader-div"));
+            this.menu = new Menu(document.getElementById("nav_menu"));
+            this.menuButton = new MenuButton(document.getElementById("menu"), this.menu);
+            this.iconController = new iconController(document.getElementById("link-icon"));
 
-	          this.preloader.hide(false,1000);
-	          this.iconController.set((new Date()).getDate());
-	      }
-	  }
+            this.preloader.hide(false, 1000);
+            this.iconController.set((new Date()).getDate());
+        }
+    }
 
-	  document.addEventListener("DOMContentLoaded", () => {
-	      new Calendar();
-	      get_preloader = new Preloader(document.getElementById("preloader-div"));
-	  });
-	})();
+    document.addEventListener("DOMContentLoaded", () => {
+        calendar = new Calendar();
+    });
+})();
 
 	document.addEventListener('DOMContentLoaded', () => {
 	    //Dates DB
@@ -344,18 +341,16 @@
 	                                //}catch(e){return}
 													        let year = document.getElementById('year').innerHTML
 													        let country_choosed = document.getElementById('dropdown_country_title').innerHTML
-													        let table_event_container = document.getElementById('table_event_container')
+													        // let table_event_container = document.getElementById('table_event_container')
 													        let data = {	
 													            'year': year,
 													            'country': country_choosed,
 													        }
-													        table_event_container.animate([{opacity:1},{opacity:0}],{duration:100, fill:"both"});setTimeout(()=>{
-													        	table_event_container.style.display = 'none';table_event_container.outerHTML = ''
+                                                            // table_event_container.animate([{opacity:1},{opacity:0}],{duration:100, fill:"both"});
+                                                            setTimeout(()=>{
+													        	// table_event_container.style.display = 'none';table_event_container.outerHTML = ''
 
-
-													        	let get_preloader_element = document.getElementById("preloader-div")
-													        	get_preloader_element.style.display = "block"
-													        	get_preloader.hide(true)
+                                                            calendar.preloader.show();
 
 													        	/// HERE IS MUST BE PRELOADER
 													        	/*
@@ -380,7 +375,7 @@
 														                add_content_container.innerHTML = response["data"]
 														                get_event_list.appendChild(add_content_container)
 														                //get_event_list.removeChild(add_loading_container)
-														                get_preloader.hide(false,1000)
+														                calendar.preloader.hide();
 														            },
 														            error: (error) => {
 														                throw error
