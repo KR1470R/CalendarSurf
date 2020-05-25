@@ -13,7 +13,6 @@
 	            if (typeof el === "undefined" || el === null) {
 	                throw new Error("No element to mount");
 	            }
-
 	            this.el = el;
 	        }
 
@@ -278,17 +277,6 @@
 		                cell.style.cssText = 'background-color:#C1C1C1;width:100px;height:100px;position:absolute;border-radius:10px;margin-left:130px;z-index:2;margin-top:10px;'
 		                one_selected = true
 		                number_selected = i.replace(/\D/g, '')
-
-		                //-----
-		                let get_selected_td = document.getElementById(div_picker_selected_number)
-		                get_selected_td.style.cssText = "padding: 50px 50px 50px 165px; text-align: center;"
-		                let get_selected_div = document.getElementById('span_' + div_picker_selected_number).remove()
-		                let create_selected_div = document.createElement('div')
-		                create_selected_div.innerHTML = div_picker_selected_number
-		                create_selected_div.setAttribute('id', 'span_' + div_picker_selected_number)
-		                create_selected_div.setAttribute('class', 'cell_div_selected')
-		                create_selected_div.style.cssText = 'color:#E73A3C;font-weight:bold;border-bottom:solid 5px;'
-		                get_selected_td.appendChild(create_selected_div)
 		            } else {
 		                let get_selected = document.getElementById(number_selected)
 		                let get_selected_span = document.getElementById('span_' + number_selected)
@@ -461,6 +449,7 @@
 		            get_container_center.style.cssText = 'animation:1s linear center_container_to_left;';
 		            setTimeout(() => get_container_center.style.cssText = 'margin-left:-280px;margin-top: 180px;position: absolute;', 100)
 		            get_container_center.innerHTML = get_container_right.innerHTML
+		            get_container_right.innerHTML = ""
 		        } else if (swiped === 'back') {
 		            render_cal('left_calendar_body')
 		            let get_container_right = document.getElementById('right_calendar_body')
@@ -471,6 +460,7 @@
 		            get_container_center.style.cssText = 'animation:1s linear center_container_to_right;';
 		            setTimeout(() => get_container_center.style.cssText = 'margin-left:-280px;margin-top: 180px;position: absolute;', 100)
 		            get_container_center.innerHTML = get_container_left.innerHTML
+		            get_container_left.innerHTML = ""
 		        } else {
 		            render_cal('calendar_body')
 		        }
