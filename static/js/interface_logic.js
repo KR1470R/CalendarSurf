@@ -194,6 +194,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('ico_country_current').setAttribute('draggable', false);
     let number_selected = null
+    document.head.innerHTML += "<link rel='icon' href='static/img/icoTab_"+element_month_day.innerHTML+".png'>"
 
     document.addEventListener('click', function (e) {
         let c = e.target.getAttribute('class')
