@@ -245,13 +245,14 @@ body::-webkit-scrollbar {
 #left_calendar_body {
     position: absolute;
     margin-top: 180px;
-    display: none;
+    margin-left: -2000px;
+    display: block;
 }
 
 #right_calendar_body {
     position: absolute;
     margin-top: 180px;
-    display: none;
+    display: block;
 }
 
 @keyframes left_to_center {
