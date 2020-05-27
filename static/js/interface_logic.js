@@ -512,18 +512,82 @@
 		        }
 		    }
 
-		    el = document.getElementById('calendar')
-		    el.addEventListener("touchstart", startTouch, false);
-		    el.addEventListener("touchmove", moveTouch, false);
+		    let x = 0
+		    let y = 0
+		    let leftSide = [58,950]
+		    let rightSide = [950,1800]
+		    let initialX = null
+		    let initialY = null
 
-		    // Swipe Left / Right
-		    let initialX = null;
-		    let initialY = null;
-
-		    function startTouch(e) {
+		    el = document.getElementById('calendar_body')
+		    let getCurrentPos = -Math.abs(Number(el.style.marginLeft.replace(/\D/g, '')))
+		    console.log(getCurrentPos)
+		    //el.addEventListener("touchstart", startTouch, false);
+		    //el.addEventListener("touchmove", moveTouch, false);
+		    el.addEventListener("touchstart",(e)=>{
 		        initialX = e.touches[0].clientX;
 		        initialY = e.touches[0].clientY;
-		    }
+		    	console.log("TOUCHSTART:","X - "+String(x),"; Y - "+String(y))
+		    },false)
+
+		    el.addEventListener("touchmove",(e)=>{
+	    		if (initialX === null) {
+						return
+	        }
+
+	        if (initialY === null) {
+	        	return
+	        }
+
+	        const currentX = e.touches[0].clientX;
+	        const currentY = e.touches[0].clientY;
+
+	        const diffX = initialX - currentX;
+	        const diffY = initialY - currentY;
+
+	        if (Math.abs(diffX) > Math.abs(diffY)) {
+	        	//back
+	        	if (getCurrentPos >= -100){
+	        		if (diffX <= 0){
+	        				getCurrentPos+=20
+	                el.style.marginLeft = String(getCurrentPos)+"px"		
+	        		}else{
+	        				getCurrentPos+=20
+	                el.style.marginLeft = String(getCurrentPos)+"px"
+	        		}
+	        	}else if (getCurrentPos <= -500){
+	        		if (diffX >= 0){
+	        				getCurrentPos+=20
+	                el.style.marginLeft = String(getCurrentPos)+"px"
+	        		}else{
+	        				getCurrentPos+=20
+	                el.style.marginLeft = String(getCurrentPos)+"px"   
+	        		}
+	        	//get in
+	        	}else{
+	            if (diffX > 0) {
+	                // swiped left
+	                getCurrentPos+=20
+	                el.style.marginLeft = String(getCurrentPos)+"px"
+	            } else {
+	                // swiped right
+	                getCurrentPos-=20
+	                el.style.marginLeft = String(getCurrentPos)+"px"
+	            }
+	        	}
+	        }
+	        e.preventDefault();
+		    },false)
+
+		    el.addEventListener("touchend",(e)=>{
+		    	if (el.style.marginLeft === "-280px"){
+		    		return
+		    	}else{
+		    		el.animate([{marginLeft:String(getCurrentPos)+"px"},{marginLeft:"-280px"}],{duration:100});setTimeout(()=>{el.style.marginLeft = "-280px"},100)
+		    	}
+		    	getCurrentPos = -280
+		    },false)
+
 				let year = Number(document.getElementById('year').innerHTML)
 				let country_choosed = document.getElementById('dropdown_country_title').innerHTML
 
@@ -595,37 +659,6 @@
 		    		throw "Can't get mode."
 		    	}
 
-		    }
-
-		    function moveTouch(e) {
-		        if (initialX === null) {
-		            return;
-		        }
-
-		        if (initialY === null) {
-		            return;
-		        }
-
-		        const currentX = e.touches[0].clientX;
-		        const currentY = e.touches[0].clientY;
-
-		        const diffX = initialX - currentX;
-		        const diffY = initialY - currentY;
-
-		        if (Math.abs(diffX) > Math.abs(diffY)) {
-		            if (diffX > 0) {
-		                // swiped left
-		                next()
-
-		            } else {
-		                // swiped right
-		                back()
-		            }
-		        }
-		        initialX = null;
-		        initialY = null;
-
-		        e.preventDefault();
 		    }
 
 		    function daysInMonth(iMonth, iYear) {
