@@ -823,3 +823,18 @@
 		    })
 		})
 })();
+ add_content_container = document.createElement("div")
+			                add_content_container.setAttribute("id", "table_event_container")
+			                add_content_container.innerHTML = response["data"]
+			                get_event_list.appendChild(add_content_container)
+			                mode = 'events'
+			            },
+			            error: (error) => {
+			                console.log(error)
+			            }
+			        })
+		    		}
+
+		    })
+		})
+})();
