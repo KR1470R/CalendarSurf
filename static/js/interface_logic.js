@@ -522,12 +522,10 @@
 		    el = document.getElementById('calendar_body')
 		    let getCurrentPos = -Math.abs(Number(el.style.marginLeft.replace(/\D/g, '')))
 		    console.log(getCurrentPos)
-		    //el.addEventListener("touchstart", startTouch, false);
-		    //el.addEventListener("touchmove", moveTouch, false);
 		    el.addEventListener("touchstart",(e)=>{
 		        initialX = e.touches[0].clientX;
 		        initialY = e.touches[0].clientY;
-		    	console.log("TOUCHSTART:","X - "+String(x),"; Y - "+String(y))
+		    	//console.log("TOUCHSTART:","X - "+String(x),"; Y - "+String(y))
 		    },false)
 
 		    el.addEventListener("touchmove",(e)=>{
@@ -549,29 +547,29 @@
 	        	//back
 	        	if (getCurrentPos >= -100){
 	        		if (diffX <= 0){
-	        				getCurrentPos+=20
-	                el.style.marginLeft = String(getCurrentPos)+"px"		
+	        			getCurrentPos-=20
+	                	el.style.marginLeft = String(getCurrentPos)+"px"		
 	        		}else{
-	        				return
+	        			return
 	        		}
 	        	}else if (getCurrentPos <= -500){
 	        		if (diffX >= 0){
-	        				getCurrentPos-=20
-	                el.style.marginLeft = String(getCurrentPos)+"px"
+	        			getCurrentPos+=20
+	                	el.style.marginLeft = String(getCurrentPos)+"px"
 	        		}else{
-	        				return 
+	        			return 
 	        		}
 	        	//get in
 	        	}else{
-	            if (diffX > 0) {
-	                // swiped left
-	                getCurrentPos+=20
-	                el.style.marginLeft = String(getCurrentPos)+"px"
-	            } else {
-	                // swiped right
-	                getCurrentPos-=20
-	                el.style.marginLeft = String(getCurrentPos)+"px"
-	            }
+		            if (diffX > 0) {
+		                // swiped left
+		                getCurrentPos+=20
+		                el.style.marginLeft = String(getCurrentPos)+"px"
+		            } else {
+		                // swiped right
+		                getCurrentPos-=20
+		                el.style.marginLeft = String(getCurrentPos)+"px"
+		            }
 	        	}
 	        }
 	        e.preventDefault();
@@ -809,21 +807,6 @@
 			            contentType: 'application/json;charset=UTF-8',
 			            success: function (response) {
 			                let add_content_container = document.createElement("div")
-			                add_content_container.setAttribute("id", "table_event_container")
-			                add_content_container.innerHTML = response["data"]
-			                get_event_list.appendChild(add_content_container)
-			                mode = 'events'
-			            },
-			            error: (error) => {
-			                console.log(error)
-			            }
-			        })
-		    		}
-
-		    })
-		})
-})();
- add_content_container = document.createElement("div")
 			                add_content_container.setAttribute("id", "table_event_container")
 			                add_content_container.innerHTML = response["data"]
 			                get_event_list.appendChild(add_content_container)
