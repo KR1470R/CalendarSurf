@@ -12,7 +12,7 @@ app = Flask(__name__)
 @app.route('/')
 def main():
 	for i in range(1,32):
-		if os.path.exists("static/img/IcoTab/icons/") == True:
+		if os.path.exists("static/img/IcoTab/icons/"):
 			pass
 		else:
 			os.mkdir("static/img/IcoTab/icons/")
@@ -25,7 +25,7 @@ def main():
 			draw.text((17, 40),str(i),font=font,fill=(0,0,0))
 		else:
 			draw.text((70, 40),str(i),font=font,fill=(0,0,0))
-		if os.path.exists(output_path_img) == True:
+		if os.path.exists(output_path_img):
 			continue
 		else:
 			img.save(output_path_img)
