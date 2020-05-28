@@ -33,7 +33,7 @@ def main():
 
 
 @app.route('/countries/', methods=["POST"])
-def sendDataByCountry():
+def send_data_by_country():
     if request.method == 'POST':
         year = request.json['year']
         country = request.json['country']
