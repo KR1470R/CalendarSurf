@@ -7,6 +7,7 @@
           rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/flickity@2.0.11/dist/flickity.css">
+    <link id="link-icon" rel="icon" href="" />
 </head>
 <noscript><p>JS support not enabled!</p></noscript>
 <body id='body'>
@@ -70,7 +71,7 @@
 
 <div id='background'></div>
 <div id='about'>
-    <ul id='about_ul'>ы
+    <ul id='about_ul'>
         <li class='about_li'>
             <div id='title_div'>
                 <ul id='title_ul'>
@@ -87,7 +88,7 @@
         </li>
     </ul>
 </div>
-<div id='got_to_div'>
+<div id='go-to-div'>
     <div id='choose_date'>
         <div id='month_div' class='column' data-flickity='{
               "percentPosition": false,
@@ -144,7 +145,7 @@
 <div id='events_container'></div>
 
 </body>
-<script type="text/javascript" src='{{ url_for("static", filename="js/interface_logic.min.js") }}'></script>
+<script type="text/javascript" src='{{ url_for("static", filename="js/interface_logic.js") }}'></script>
 <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
 <script type="text/javascript" src='https://unpkg.com/flickity@2.0.11/dist/flickity.pkgd.js'></script>
 <script type="text/javascript" src='https://code.jquery.com/jquery-3.5.0.min.js'></script>
