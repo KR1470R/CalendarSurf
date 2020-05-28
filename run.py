@@ -1,10 +1,9 @@
 # FLASK_APP=run.py FLASK_DEBUG=1 flask run
-from flask import Flask, render_template, request, jsonify
-import json
-import bs4
 import os
-import sys
+
+import bs4
 from PIL import Image, ImageDraw, ImageFont
+from flask import Flask, render_template, request, jsonify
 
 app = Flask(__name__)
 
