@@ -434,7 +434,7 @@
 		    const createYear = generate_year_range(1970, 2050);
 		    showCalendar(currentMonth, currentYear, 'None')
 
-		    function showCalendar(month, year, swiped, swiped_mode) {
+		    function showCalendar(month, year, swiped, swiped_mode, marginValueLeft, marginValueCenter, marginValueRight){
 		        let firstDay = (new Date(year, month)).getDay()
 
 		        element_month.innerHTML = months[month];
@@ -443,33 +443,37 @@
 		        	if (swiped_mode === "preview"){
 		        		render_cal('right_calendar_body')
 		        	}else{
+		        			console.log("next")
 			            render_cal('right_calendar_body')
 			            let get_container_right = document.getElementById('right_calendar_body')
 			            let get_container_left = document.getElementById('left_calendar_body')
 			            let get_container_center = document.getElementById('calendar_body')
-			            get_container_right.style.cssText = 'animation:1s linear right_to_center;';
-			            setTimeout(() => get_container_right.style.cssText = 'margin-left:200%;margin-top: 180px;position: absolute;', 100)
-			            get_container_center.style.cssText = 'animation:1s linear center_container_to_left;';
+			            //get_container_right.style.cssText = 'animation:1s linear right_to_center;';
+			            get_container_right.animate([{marginLeft:String(marginValueRight)+"px"},{marginLeft:"-280px"}],{duration:100})
+			            setTimeout(() => get_container_right.style.cssText = 'margin-left:-2200px;margin-top: 180px;position: absolute;', 100)
+			            //get_container_center.style.cssText = 'animation:1s linear center_container_to_left;';
+			            get_container_center.animate([{marginLeft:String(marginValueCenter)+"px"},{marginLeft:"-2200px"}],{duration:100})
 			            setTimeout(() => get_container_center.style.cssText = 'margin-left:-280px;margin-top: 180px;position: absolute;', 100)
 			            get_container_center.innerHTML = get_container_right.innerHTML
 			            get_container_right.innerHTML = ""	        		
 		        	}
 		        } else if (swiped === "back") {
 		        	if (swiped_mode === "preview"){
-		        		console.log("preview mode")
 		        		render_cal('left_calendar_body')
 		        	}else{
-		        		console.log("something else: ", swiped_mode)
-			            render_cal('left_calendar_body')
-			            let get_container_right = document.getElementById('right_calendar_body')
-			            let get_container_left = document.getElementById('left_calendar_body')
-			            let get_container_center = document.getElementById('calendar_body')
-			            get_container_left.style.cssText = 'animation:1s linear left_to_center;';
-			            setTimeout(() => get_container_left.style.cssText = 'margin-left: -200%;margin-top: 180px;position: absolute;', 100)
-			            get_container_center.style.cssText = 'animation:1s linear center_container_to_right;';
-			            setTimeout(() => get_container_center.style.cssText = 'margin-left:-280px;margin-top: 180px;position: absolute;', 100)
-			            get_container_center.innerHTML = get_container_left.innerHTML
-			            get_container_left.innerHTML = ""
+		        		console.log('back')
+								render_cal('left_calendar_body')
+								let get_container_right = document.getElementById('right_calendar_bo	dy')
+								let get_container_left = document.getElementById('left_calendar_body')
+								let get_container_center = document.getElementById('calendar_body')
+								//get_container_left.style.cssText = 'animation:1s linear left_to_center;';
+								get_container_left.animate([{marginLeft:String(marginValueLeft)+"px"},{marginLeft:"-280px"}],{duration:100})
+								setTimeout(() => get_container_left.style.cssText = 'margin-left: 1650px;margin-top: 180px;position: absolute;', 100)
+								//get_container_center.style.cssText = 'animation:1s linear center_container_to_right;';
+								get_container_center.animate([{marginLeft:String(marginValueCenter)+"px"},{marginLeft:"-2200px"}],{duration:100})
+								setTimeout(() => get_container_center.style.cssText = 'margin-left:-280px;margin-top: 180px;position: absolute;', 100)
+								get_container_center.innerHTML = get_container_left.innerHTML
+								get_container_left.innerHTML = ""
 		        	}
 		        } else {
 		            render_cal('calendar_body')
@@ -533,119 +537,118 @@
 		    el = document.getElementById("calendar_body")
 		    rel = document.getElementById("right_calendar_body")
 
-		    document.getElementById("left_calendar_body").style.cssText = "display:block;margin-left:-2000px;"
-			document.getElementById("right_calendar_body").style.cssText = "display:block;margin-left:1000px;"
+				document.getElementById("left_calendar_body").style.cssText = "display:block;margin-left:-2200px;"
+				document.getElementById("right_calendar_body").style.cssText = "display:block;margin-left:1650px;"
 
 		    let lgetCurrentPos = -Math.abs(Number(lel.style.marginLeft.replace(/\D/g, '')))
 		    let getCurrentPos = -Math.abs(Number(el.style.marginLeft.replace(/\D/g, '')))
 		    let rgetCurrentPos = Math.abs(Number(rel.style.marginLeft.replace(/\D/g, '')))
 		    console.log(lgetCurrentPos)
 		    el.addEventListener("touchstart",(e)=>{
-		        initialX = e.touches[0].clientX;
-		        initialY = e.touches[0].clientY;
+	        initialX = e.touches[0].clientX;
+	        initialY = e.touches[0].clientY;
 
-				let selectedCurrentMonth = months.indexOf(document.getElementById("month_name").innerHTML)
-				let selectedCurrentYear = Number(document.getElementById("year").innerHTML)
+					let selectedCurrentMonth = months.indexOf(document.getElementById("month_name").innerHTML)
+					let selectedCurrentYear = Number(document.getElementById("year").innerHTML)
 
-				currentYear = (selectedCurrentMonth === 0) ? selectedCurrentYear - 1 : selectedCurrentYear;
-				currentMonth = (selectedCurrentMonth === 0) ? 11 : selectedCurrentMonth - 1;
-				showCalendar(currentMonth, currentYear, "back", "preview");
+					//currentYear = (selectedCurrentMonth === 0) ? selectedCurrentYear - 1 : selectedCurrentYear;
+					//currentMonth = (selectedCurrentMonth === 0) ? 11 : selectedCurrentMonth - 1;
+					showCalendar(currentMonth, currentYear, "back", "preview");
 
-				currentYear = (selectedCurrentMonth === 11) ? selectedCurrentYear + 1 : selectedCurrentYear;
-				currentMonth = (selectedCurrentMonth + 1) % 12;
-				showCalendar(currentMonth, currentYear, "next", "preview");	
-		    	//console.log("TOUCHSTART:","X - "+String(x),"; Y - "+String(y))
+					//currentYear = (selectedCurrentMonth === 11) ? selectedCurrentYear + 1 : selectedCurrentYear;
+					//currentMonth = (selectedCurrentMonth + 1) % 12;
+					showCalendar(currentMonth, currentYear, "next", "preview");	
+			    	//console.log("TOUCHSTART:","X - "+String(x),"; Y - "+String(y))
 		    },false)
 		    el.addEventListener("touchmove",(e)=>{
-		    	if (initialX === null) {
-					return
-		        }
+					if (initialX === null) {
+						return
+					}
 
-		        if (initialY === null) {
-		        	return
-		        }
+					if (initialY === null) {
+						return
+					}
 
-		        const currentX = e.touches[0].clientX;
-		        const currentY = e.touches[0].clientY;
+					const currentX = e.touches[0].clientX;
+					const currentY = e.touches[0].clientY;
 
-		        diffX = initialX - currentX;
-		        diffY = initialY - currentY;
+					diffX = initialX - currentX;
+					diffY = initialY - currentY;
 
-		        console.log(lgetCurrentPos,rgetCurrentPos)
+					if (Math.abs(diffX) > Math.abs(diffY)) {
+					//back
+						if (getCurrentPos >= 200){
+							if (diffX >= 0){
+								lgetCurrentPos-=20
+								getCurrentPos-=20
+								rgetCurrentPos-=20
 
-		        if (Math.abs(diffX) > Math.abs(diffY)) {
-		        	//back
-		        	if (getCurrentPos >= -100){
-		        		if (diffX >= 0){
-		        			lgetCurrentPos-=20
-		        			getCurrentPos-=20
-		        			rgetCurrentPos-=20
+								lel.style.marginLeft = String(lgetCurrentPos)+"px"
+								el.style.marginLeft = String(getCurrentPos)+"px"
+								rel.style.marginLeft = String(rgetCurrentPos)+"px"		
+							}else{
+								return
+							}
+						}else if (getCurrentPos <= -900){
+							if (diffX <= 0){
+								lgetCurrentPos+=20
+								getCurrentPos+=20
+								rgetCurrentPos+=20
 
-		        			lel.style.marginLeft = String(lgetCurrentPos)+"px"
-		                	el.style.marginLeft = String(getCurrentPos)+"px"
-		                	rel.style.marginLeft = String(rgetCurrentPos)+"px"		
-		        		}else{
-		        			return
-		        		}
-		        	}else if (getCurrentPos <= -500){
-		        		if (diffX <= 0){
-		        			lgetCurrentPos+=20
-		        			getCurrentPos+=20
-		        			rgetCurrentPos+=20
+								lel.style.marginLeft = String(lgetCurrentPos)+"px"
+								el.style.marginLeft = String(getCurrentPos)+"px"
+								rel.style.marginLeft = String(rgetCurrentPos)+"px"	
+							}else{
+								return 
+							}
+						//get in
+						}else{
+							if (diffX > 0) {
+							  // swiped left
+								lgetCurrentPos-=20
+								getCurrentPos-=20
+								rgetCurrentPos-=20
 
-		        			lel.style.marginLeft = String(lgetCurrentPos)+"px"
-		                	el.style.marginLeft = String(getCurrentPos)+"px"
-		                	rel.style.marginLeft = String(rgetCurrentPos)+"px"	
-		        		}else{
-		        			return 
-		        		}
-		        	//get in
-		        	}else{
-			            if (diffX > 0) {
-			                // swiped left
-		        			lgetCurrentPos-=20
-		        			getCurrentPos-=20
-		        			rgetCurrentPos-=20
+								lel.style.marginLeft = String(lgetCurrentPos)+"px"
+								el.style.marginLeft = String(getCurrentPos)+"px"
+								rel.style.marginLeft = String(rgetCurrentPos)+"px"	
+							} else {
+								  // swiped right
+									lgetCurrentPos+=20
+									getCurrentPos+=20
+									rgetCurrentPos+=20
 
-		        			lel.style.marginLeft = String(lgetCurrentPos)+"px"
-		                	el.style.marginLeft = String(getCurrentPos)+"px"
-		                	rel.style.marginLeft = String(rgetCurrentPos)+"px"	
-			            } else {
-			                // swiped right
-		        			lgetCurrentPos+=20
-		        			getCurrentPos+=20
-		        			rgetCurrentPos+=20
-
-		        			lel.style.marginLeft = String(lgetCurrentPos)+"px"
-		                	el.style.marginLeft = String(getCurrentPos)+"px"
-		                	rel.style.marginLeft = String(rgetCurrentPos)+"px"
-			            }
-		        	}
-		        }
-		       	//el.preventDefault()   
-		    },false)
+									lel.style.marginLeft = String(lgetCurrentPos)+"px"
+									el.style.marginLeft = String(getCurrentPos)+"px"
+									rel.style.marginLeft = String(rgetCurrentPos)+"px"
+								}
+							}
+						}
+					//el.preventDefault()   
+					},false)
 
 		    el.addEventListener("touchend",(e)=>{
-		    	/*
+		    	
 		    	if (el.style.marginLeft === "-280px"){
 		    		return
 		    	}else{
-		    		if (diffX < -330){
-		    			next()
-		    		}else if (diffX > 330){
-		    			back()
+		    		if (diffX < -400){
+		    			back(lgetCurrentPos,getCurrentPos,rgetCurrentPos)
+		    		}else if (diffX > 400){
+		    			next(lgetCurrentPos,getCurrentPos,rgetCurrentPos)
 		    		}
 
-		    		//el.animate([{marginLeft:String(getCurrentPos)+"px"},{marginLeft:"-280px"}],{duration:100});setTimeout(()=>{el.style.marginLeft = "-280px"},100)		
 		    	}
-		    	*/
-		    	//getCurrentPos = -280	
+
+		    	lgetCurrentPos = -2200
+		    	getCurrentPos = -280	
+		    	rgetCurrentPos = 1650
 		    },false)
 
-			let year = Number(document.getElementById('year').innerHTML)
-			let country_choosed = document.getElementById('dropdown_country_title').innerHTML
+				let year = Number(document.getElementById('year').innerHTML)
+				let country_choosed = document.getElementById('dropdown_country_title').innerHTML
 
-		    function back(){
+		    function back(marginValueLeft, marginValueCenter, marginValueRight){
 		    		if (mode === "events"){
 		    			year--
 					    let data = {
@@ -668,17 +671,17 @@
 			            }
 			        })
 		    		}else if (mode === "numbers"){
-						let selectedCurrentMonth = months.indexOf(document.getElementById("month_name").innerHTML)
-						let selectedCurrentYear = Number(document.getElementById("year").innerHTML)
-						currentYear = (selectedCurrentMonth === 0) ? selectedCurrentYear - 1 : selectedCurrentYear;
-						currentMonth = (selectedCurrentMonth === 0) ? 11 : selectedCurrentMonth - 1;
-						showCalendar(currentMonth, currentYear, 'back');
+							let selectedCurrentMonth = months.indexOf(document.getElementById("month_name").innerHTML)
+							let selectedCurrentYear = Number(document.getElementById("year").innerHTML)
+							currentYear = (selectedCurrentMonth === 0) ? selectedCurrentYear - 1 : selectedCurrentYear;
+							currentMonth = (selectedCurrentMonth === 0) ? 11 : selectedCurrentMonth - 1;
+							showCalendar(currentMonth, currentYear, "back", "numbers", marginValueLeft, marginValueCenter, marginValueRight);
 		    		}else{
 		    			throw "Can't get mode."
 		    		}
 		    }
 
-		    function next(){
+		    function next(marginValueLeft, marginValueCenter, marginValueRight){
 		    	if (mode === "events"){
 		    		if (year >= now.getFullYear()){}else if (year <= now.getFullYear()){
 		    			year++
@@ -704,11 +707,11 @@
 		    		}
 
 		    	}else if (mode === "numbers"){
-					let selectedCurrentMonth = months.indexOf(document.getElementById("month_name").innerHTML)
-					let selectedCurrentYear = Number(document.getElementById("year").innerHTML)
-					currentYear = (selectedCurrentMonth === 11) ? selectedCurrentYear + 1 : selectedCurrentYear;
-					currentMonth = (selectedCurrentMonth + 1) % 12;
-					showCalendar(currentMonth, currentYear, 'next');	    		
+						let selectedCurrentMonth = months.indexOf(document.getElementById("month_name").innerHTML)
+						let selectedCurrentYear = Number(document.getElementById("year").innerHTML)
+						currentYear = (selectedCurrentMonth === 11) ? selectedCurrentYear + 1 : selectedCurrentYear;
+						currentMonth = (selectedCurrentMonth + 1) % 12;
+						showCalendar(currentMonth, currentYear, 'next',"numbers",marginValueLeft,marginValueCenter, marginValueRight);	    		
 		    	}else{
 		    		throw "Can't get mode."
 		    	}
