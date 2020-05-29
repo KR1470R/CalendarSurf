@@ -449,26 +449,27 @@
 			            let get_container_left = document.getElementById('left_calendar_body')
 			            let get_container_center = document.getElementById('calendar_body')
 			            //get_container_right.style.cssText = 'animation:1s linear right_to_center;';
+			            console.log(marginValueRight,marginValueCenter)
 			            get_container_right.animate([{marginLeft:String(marginValueRight)+"px"},{marginLeft:"-280px"}],{duration:100})
-			            setTimeout(() => get_container_right.style.cssText = 'margin-left:-2200px;margin-top: 180px;position: absolute;', 100)
+			            setTimeout(()=>{get_container_right.style.cssText = 'margin-left:1650px;margin-top: 180px;position: absolute;'}, 100)
 			            //get_container_center.style.cssText = 'animation:1s linear center_container_to_left;';
-			            get_container_center.animate([{marginLeft:String(marginValueCenter)+"px"},{marginLeft:"-2200px"}],{duration:100})
-			            setTimeout(() => get_container_center.style.cssText = 'margin-left:-280px;margin-top: 180px;position: absolute;', 100)
+			            get_container_center.animate([{marginLeft:String(marginValueCenter)+"px"},{marginLeft:"2200px"}],{duration:100})
+			            setTimeout(()=>{get_container_center.style.cssText = 'margin-left:-280px;margin-top: 180px;position: absolute;'}, 100)
 			            get_container_center.innerHTML = get_container_right.innerHTML
 			            get_container_right.innerHTML = ""	        		
 		        	}
-		        } else if (swiped === "back") {
+		        } else if (swiped === "back") {	
 		        	if (swiped_mode === "preview"){
 		        		render_cal('left_calendar_body')
 		        	}else{
 		        		console.log('back')
 								render_cal('left_calendar_body')
-								let get_container_right = document.getElementById('right_calendar_bo	dy')
+								let get_container_right = document.getElementById('right_calendar_body')
 								let get_container_left = document.getElementById('left_calendar_body')
 								let get_container_center = document.getElementById('calendar_body')
 								//get_container_left.style.cssText = 'animation:1s linear left_to_center;';
 								get_container_left.animate([{marginLeft:String(marginValueLeft)+"px"},{marginLeft:"-280px"}],{duration:100})
-								setTimeout(() => get_container_left.style.cssText = 'margin-left: 1650px;margin-top: 180px;position: absolute;', 100)
+								setTimeout(() => get_container_left.style.cssText = 'margin-left:-2200px;margin-top: 180px;position: absolute;', 100)
 								//get_container_center.style.cssText = 'animation:1s linear center_container_to_right;';
 								get_container_center.animate([{marginLeft:String(marginValueCenter)+"px"},{marginLeft:"-2200px"}],{duration:100})
 								setTimeout(() => get_container_center.style.cssText = 'margin-left:-280px;margin-top: 180px;position: absolute;', 100)
