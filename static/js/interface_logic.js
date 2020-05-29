@@ -587,7 +587,7 @@
 
 					if (Math.abs(diffX) > Math.abs(diffY)) {
 					//back
-						if (getCurrentPos >= 200){
+						if (getCurrentPos >= 400){
 							if (diffX >= 0){
 								lgetCurrentPos-=20
 								getCurrentPos-=20
@@ -599,7 +599,7 @@
 							}else{
 								return
 							}
-						}else if (getCurrentPos <= -900){
+						}else if (getCurrentPos <= -1000){
 							if (diffX <= 0){
 								lgetCurrentPos+=20
 								getCurrentPos+=20
@@ -638,7 +638,6 @@
 					},false)
 
 		    el.addEventListener("touchend",(e)=>{
-		    	
 		    	if (el.style.marginLeft === "-280px"){
 		    		return
 		    	}else{
@@ -646,15 +645,12 @@
 		    			back(lgetCurrentPos,getCurrentPos,rgetCurrentPos)
 		    		}else if (diffX > 400){
 		    			next(lgetCurrentPos,getCurrentPos,rgetCurrentPos)
+		    		}else if (diffX > -400 || diffX < 400){
+							lel.animate([{marginLeft:String(getCurrentPos)+"px"},{marginLeft:"-280px"}],{duration:100});setTimeout(()=>{lel.style.marginLeft = "-2200px"},100)
+							el.animate([{marginLeft:String(getCurrentPos)+"px"},{marginLeft:"-280px"}],{duration:100});setTimeout(()=>{el.style.marginLeft = "-280px"},100)
+							rel.animate([{marginLeft:String(getCurrentPos)+"px"},{marginLeft:"-280px"}],{duration:100});setTimeout(()=>{rel.style.marginLeft = "1650px"},100)
 		    		}
 		    	}
-
-					//lel.animate([{marginLeft:String(getCurrentPos)+"px"},{marginLeft:"-280px"}],{duration:100});setTimeout(()=>{el.style.marginLeft = "-2200px"},100)
-
-					//el.animate([{marginLeft:String(getCurrentPos)+"px"},{marginLeft:"-280px"}],{duration:100});setTimeout(()=>{el.style.marginLeft = "-280px"},100)
-
-					//rel.animate([{marginLeft:String(getCurrentPos)+"px"},{marginLeft:"-280px"}],{duration:100});setTimeout(()=>{el.style.marginLeft = "1650px"},100)
-
 
 		    	lgetCurrentPos = -2200
 		    	getCurrentPos = -280	
