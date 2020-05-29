@@ -450,7 +450,7 @@
 			            let get_container_center = document.getElementById('calendar_body')
 			            //get_container_right.style.cssText = 'animation:1s linear right_to_center;';
 			            console.log(marginValueRight,marginValueCenter)
-			            get_container_right.animate([{marginLeft:String(marginValueRight)+"px"},{marginLeft:"-280px"}],{duration:100})
+			            get_container_right.animate([{marginLeft:String(marginValueRight)},{marginLeft:"-280px"}],{duration:100})
 			            setTimeout(()=>{get_container_right.style.cssText = 'margin-left:1650px;margin-top: 180px;position: absolute;'}, 100)
 			            //get_container_center.style.cssText = 'animation:1s linear center_container_to_left;';
 			            get_container_center.animate([{marginLeft:String(marginValueCenter)+"px"},{marginLeft:"2200px"}],{duration:100})
