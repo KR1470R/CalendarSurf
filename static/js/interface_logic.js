@@ -434,16 +434,40 @@
 		    const createYear = generate_year_range(1970, 2050);
 		    showCalendar(currentMonth, currentYear, 'None')
 
-		    function showCalendar(month, year, swiped, swiped_mode, marginValueLeft, marginValueCenter, marginValueRight){
+		    function showCalendar(month, year, swiped, swiped_mode, marginValueLeft, marginValueCenter, marginValueRight,clickedOnButton){
 		        let firstDay = (new Date(year, month)).getDay()
 
 		        element_month.innerHTML = months[month];
 		        element_year.innerHTML = year
-		        if (swiped === "next") {
-		        	if (swiped_mode === "preview"){
-		        		render_cal('right_calendar_body')
-		        	}else{
-		        		console.log("next")
+
+						if(clickedOnButton){
+							if (swiped === "next") {
+								render_cal('right_calendar_body')
+								let get_container_right = document.getElementById('right_calendar_body')
+								let get_container_left = document.getElementById('left_calendar_body')
+								let get_container_center = document.getElementById('calendar_body')
+								get_container_right.style.cssText = 'animation:1s linear right_to_center;';
+								setTimeout(() => get_container_right.style.cssText = 'margin-left:200%;margin-top: 180px;position: absolute;', 100)
+								get_container_center.style.cssText = 'animation:1s linear center_container_to_left;';
+								setTimeout(() => get_container_center.style.cssText = 'margin-left:-280px;margin-top: 180px;position: absolute;', 100)
+								get_container_center.innerHTML = get_container_right.innerHTML
+							}else if(swiped === "back"){
+								render_cal('left_calendar_body')
+								let get_container_right = document.getElementById('right_calendar_body')
+								let get_container_left = document.getElementById('left_calendar_body')
+								let get_container_center = document.getElementById('calendar_body')
+								get_container_left.style.cssText = 'animation:1s linear left_to_center;';
+								setTimeout(() => get_container_left.style.cssText = 'margin-left: -200%;margin-top: 180px;position: absolute;', 100)
+								get_container_center.style.cssText = 'animation:1s linear center_container_to_right;';
+								setTimeout(() => get_container_center.style.cssText = 'margin-left:-280px;margin-top: 180px;position: absolute;', 100)
+								get_container_center.innerHTML = get_container_left.innerHTML
+							}
+			        
+					}else if(clickedOnButton === false){
+						if (swiped === "next") {
+			        	if (swiped_mode === "preview"){
+			        		render_cal('right_calendar_body')
+			        	}else{
 			            render_cal('right_calendar_body')
 			            let get_container_right = document.getElementById('right_calendar_body')
 			            let get_container_left = document.getElementById('left_calendar_body')
@@ -462,77 +486,77 @@
 			            	get_container_center.innerHTML = get_container_right.innerHTML
 										get_container_right.innerHTML = ""
 									}, 300)
-		        	}
-		        } else if (swiped === "back") {	
-		        	if (swiped_mode === "preview"){
-		        		render_cal('left_calendar_body')
-		        	}else{
-		        		console.log('back')
-								render_cal('left_calendar_body')
-								let get_container_right = document.getElementById('right_calendar_body')
-								let get_container_left = document.getElementById('left_calendar_body')
-								let get_container_center = document.getElementById('calendar_body')
-								//get_container_left.style.cssText = 'animation:1s linear left_to_center;';
-								get_container_left.animate([{marginLeft:String(marginValueLeft)+"px"},{marginLeft:"-280px"}],{duration:300})
-								setTimeout(() => get_container_left.style.cssText = 'margin-left:-2200px;margin-top: 180px;position: absolute;', 300)
-								//get_container_center.style.cssText = 'animation:1s linear center_container_to_right;';
-								get_container_center.animate([{marginLeft:String(marginValueCenter)+"px"},{marginLeft:"1650px"}],{duration:300})
-								setTimeout(()=>{
-									get_container_center.style.cssText = 'margin-left:-280px;margin-top: 180px;position: absolute;'
-									get_container_center.innerHTML = get_container_left.innerHTML
-									get_container_right.innerHTML = ""	 
-									get_container_left.innerHTML = ""
-								}, 300)
-		        	}
-		        } else {
-		            render_cal('calendar_body')
-		        }
+			        	}
+			        } else if (swiped === "back") {	
+				        	if (swiped_mode === "preview"){
+				        		render_cal('left_calendar_body')
+				        	}else{
+										render_cal('left_calendar_body')
+										let get_container_right = document.getElementById('right_calendar_body')
+										let get_container_left = document.getElementById('left_calendar_body')
+										let get_container_center = document.getElementById('calendar_body')
+										//get_container_left.style.cssText = 'animation:1s linear left_to_center;';
+										get_container_left.animate([{marginLeft:String(marginValueLeft)+"px"},{marginLeft:"-280px"}],{duration:300})
+										setTimeout(() => get_container_left.style.cssText = 'margin-left:-2200px;margin-top: 180px;position: absolute;', 300)
+										//get_container_center.style.cssText = 'animation:1s linear center_container_to_right;';
+										get_container_center.animate([{marginLeft:String(marginValueCenter)+"px"},{marginLeft:"1650px"}],{duration:300})
+										setTimeout(()=>{
+											get_container_center.style.cssText = 'margin-left:-280px;margin-top: 180px;position: absolute;'
+											get_container_center.innerHTML = get_container_left.innerHTML
+											get_container_right.innerHTML = ""	 
+											get_container_left.innerHTML = ""
+										}, 300)
+									}
+								}
+					}else{
+						render_cal("calendar_body")
+					}
 
-		        //CREATING CELLS
-		        function render_cal(id) {
-		            let tbl = document.getElementById(id)
-		            tbl.innerHTML = ''
-		            let date = 1
-		            for (let i = 0; i < 6; i++) {
-		                let row = document.createElement('tr')
-		                row.style.cssText = "font-size: 30px;font-family: 'Lato', sans-serif;"
-		                for (var j = 0; j < 7; j++) {
-		                    if (i === 0 && j < firstDay) {
-		                        let cell = document.createElement('td')
-		                        let cellText = document.createTextNode("")
-		                        cell.appendChild(cellText)
-		                        row.appendChild(cell)
-		                    } else if (date > daysInMonth(month, year)) {
-		                        break;
-		                    } else {
-		                        let cell = document.createElement('td'), cell_span
-		                        cell.setAttribute("data-date", date)
-		                        cell.setAttribute('data-month', month + 1)
-		                        cell.setAttribute('data-year', year)
-		                        cell.setAttribute('data-month_name', months[month])
-		                        cell.setAttribute('id', date)
-		                        cell.className = 'date-picker'
-		                        cell_span = document.createElement('div')
-		                        cell_span.innerHTML = date
-		                        cell_span.setAttribute('id', 'span_' + date)
-		                        cell_span.setAttribute('class', 'cell_div')
-		                        cell.appendChild(cell_span)
-		                        cell.style.cssText = 'padding:50px;padding-left:165px;text-align:center;'
+	        //CREATING CELLS
+	        function render_cal(id) {
+	            let tbl = document.getElementById(id)
+	            tbl.innerHTML = ''
+	            let date = 1
+	            for (let i = 0; i < 6; i++) {
+	                let row = document.createElement('tr')
+	                row.style.cssText = "font-size: 30px;font-family: 'Lato', sans-serif;"
+	                for (var j = 0; j < 7; j++) {
+	                    if (i === 0 && j < firstDay) {
+	                        let cell = document.createElement('td')
+	                        let cellText = document.createTextNode("")
+	                        cell.appendChild(cellText)
+	                        row.appendChild(cell)
+	                    } else if (date > daysInMonth(month, year)) {
+	                        break;
+	                    } else {
+	                        let cell = document.createElement('td'), cell_span
+	                        cell.setAttribute("data-date", date)
+	                        cell.setAttribute('data-month', month + 1)
+	                        cell.setAttribute('data-year', year)
+	                        cell.setAttribute('data-month_name', months[month])
+	                        cell.setAttribute('id', date)
+	                        cell.className = 'date-picker'
+	                        cell_span = document.createElement('div')
+	                        cell_span.innerHTML = date
+	                        cell_span.setAttribute('id', 'span_' + date)
+	                        cell_span.setAttribute('class', 'cell_div')
+	                        cell.appendChild(cell_span)
+	                        cell.style.cssText = 'padding:50px;padding-left:165px;text-align:center;'
 
-		                        if (date === now.getDate() && year === now.getFullYear() && month === now.getMonth()) {
-		                            div_picker_selected_number = date
-		                            cell.className = 'date-picker selected'
-		                            cell_span.className = 'cell_div_selected'
-		                            cell_span.style.cssText = 'z-index:1;color:white;text-align:center;margin-top:30px;padding-right:5px;'
-		                            cell.style.cssText = 'background-color:#E73A3C;width:100px;height:100px;position:absolute;border-radius:10px;margin-left:130px;z-index:2;margin-top:10px;'
-		                        }
-		                        row.appendChild(cell)
-		                        date++
-		                    }
-		                }
-		                tbl.appendChild(row)
-		            }
-		        }
+	                        if (date === now.getDate() && year === now.getFullYear() && month === now.getMonth()) {
+	                            div_picker_selected_number = date
+	                            cell.className = 'date-picker selected'
+	                            cell_span.className = 'cell_div_selected'
+	                            cell_span.style.cssText = 'z-index:1;color:white;text-align:center;margin-top:30px;padding-right:5px;'
+	                            cell.style.cssText = 'background-color:#E73A3C;width:100px;height:100px;position:absolute;border-radius:10px;margin-left:130px;z-index:2;margin-top:10px;'
+	                        }
+	                        row.appendChild(cell)
+	                        date++
+	                    }
+	                }
+	                tbl.appendChild(row)
+	            }
+	        }
 		    }
 
 		    let x = 0
@@ -553,21 +577,19 @@
 		    let getCurrentPos = -Math.abs(Number(el.style.marginLeft.replace(/\D/g, '')))
 		    let rgetCurrentPos = Math.abs(Number(rel.style.marginLeft.replace(/\D/g, '')))
 
-		    console.log(lgetCurrentPos)
 		    el.addEventListener("touchstart",(e)=>{
 	        initialX = e.touches[0].clientX;
 	        initialY = e.touches[0].clientY;
-
 					let selectedCurrentMonth = months.indexOf(document.getElementById("month_name").innerHTML)
 					let selectedCurrentYear = Number(document.getElementById("year").innerHTML)
 
 					//currentYear = (selectedCurrentMonth === 0) ? selectedCurrentYear - 1 : selectedCurrentYear;
 					//currentMonth = (selectedCurrentMonth === 0) ? 11 : selectedCurrentMonth - 1;
-					showCalendar(currentMonth, currentYear, "back", "preview");
+					showCalendar(currentMonth, currentYear, "back", "preview",null,null,null, false);
 
 					//currentYear = (selectedCurrentMonth === 11) ? selectedCurrentYear + 1 : selectedCurrentYear;
 					//currentMonth = (selectedCurrentMonth + 1) % 12;
-					showCalendar(currentMonth, currentYear, "next", "preview");	
+					showCalendar(currentMonth, currentYear, "next", "preview",null,null,null, false);	
 			    	//console.log("TOUCHSTART:","X - "+String(x),"; Y - "+String(y))
 		    },false)
 		    el.addEventListener("touchmove",(e)=>{
@@ -642,9 +664,9 @@
 		    		return
 		    	}else{
 		    		if (diffX < -400){
-		    			back(lgetCurrentPos,getCurrentPos,rgetCurrentPos)
+		    			back(false,lgetCurrentPos,getCurrentPos,rgetCurrentPos)
 		    		}else if (diffX > 400){
-		    			next(lgetCurrentPos,getCurrentPos,rgetCurrentPos)
+		    			next(false,lgetCurrentPos,getCurrentPos,rgetCurrentPos)
 		    		}else if (diffX > -400 || diffX < 400){
 							lel.animate([{marginLeft:String(getCurrentPos)+"px"},{marginLeft:"-280px"}],{duration:100});setTimeout(()=>{lel.style.marginLeft = "-2200px"},100)
 							el.animate([{marginLeft:String(getCurrentPos)+"px"},{marginLeft:"-280px"}],{duration:100});setTimeout(()=>{el.style.marginLeft = "-280px"},100)
@@ -660,7 +682,7 @@
 				let year = Number(document.getElementById('year').innerHTML)
 				let country_choosed = document.getElementById('dropdown_country_title').innerHTML
 
-		    function back(marginValueLeft, marginValueCenter, marginValueRight){
+		    function back(clickedOnButton,marginValueLeft, marginValueCenter, marginValueRight){
 		    		if (mode === "events"){
 		    			year--
 					    let data = {
@@ -687,13 +709,13 @@
 							let selectedCurrentYear = Number(document.getElementById("year").innerHTML)
 							currentYear = (selectedCurrentMonth === 0) ? selectedCurrentYear - 1 : selectedCurrentYear;
 							currentMonth = (selectedCurrentMonth === 0) ? 11 : selectedCurrentMonth - 1;
-							showCalendar(currentMonth, currentYear, "back", "numbers", marginValueLeft, marginValueCenter, marginValueRight);
+							showCalendar(currentMonth, currentYear, "back", "numbers", marginValueLeft, marginValueCenter, marginValueRight,clickedOnButton);
 		    		}else{
 		    			throw "Can't get mode."
 		    		}
 		    }
 
-		    function next(marginValueLeft, marginValueCenter, marginValueRight){
+		    function next(clickedOnButton,marginValueLeft, marginValueCenter, marginValueRight){
 		    	if (mode === "events"){
 		    		if (year >= now.getFullYear()){}else if (year <= now.getFullYear()){
 		    			year++
@@ -723,7 +745,7 @@
 						let selectedCurrentYear = Number(document.getElementById("year").innerHTML)
 						currentYear = (selectedCurrentMonth === 11) ? selectedCurrentYear + 1 : selectedCurrentYear;
 						currentMonth = (selectedCurrentMonth + 1) % 12;
-						showCalendar(currentMonth, currentYear, 'next',"numbers",marginValueLeft,marginValueCenter, marginValueRight);	    		
+						showCalendar(currentMonth, currentYear, 'next',"numbers",marginValueLeft,marginValueCenter, marginValueRight,clickedOnButton);	    		
 		    	}else{
 		    		throw "Can't get mode."
 		    	}
@@ -802,11 +824,11 @@
 		    })
 
 		    get_button_back.addEventListener("click", () => {
-		    	back()
+		    	back(true)
 		    })
 
 		    get_button_next.addEventListener("click", () => {
-		    	next()
+		    	next(true)
 		    })
 
 		    for (let m in months) {
