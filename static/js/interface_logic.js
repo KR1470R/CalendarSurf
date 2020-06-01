@@ -176,7 +176,10 @@
 		    document.getElementById('month_name').innerHTML = current_month
 		    document.getElementById('month_day').innerHTML = now.getDate()
 
-		    document.getElementById('text_current_date_content').innerHTML = now.getDate()
+		    let ico_cal_current_date_btn = document.getElementById("ico_cal_current_date_btn")
+		    let text_current_date_content = document.getElementById('text_current_date_content')
+		    text_current_date_content.innerHTML = now.getDate()
+
 		    let currentMonth = now.getMonth()
 		    let currentYear = now.getFullYear()
 		    let container_days = document.getElementById('nav_days_ul')
@@ -225,7 +228,32 @@
 
 		    let mode = 'numbers'
 
-		    document.addEventListener('click', function (e) {
+		    function visibleCurrentDateBtn(){
+		    	if (mode === "numbers"){
+						if (element_month.innerHTML == current_month && element_month_day.innerHTML == now.getDate() && element_year.innerHTML == currentYear) {
+							get_current_date_btn.style.display = 'none'
+						} else {
+							get_current_date_btn.style.cssText = 'background-color: #D5D5D5;width: 100px;height: 100px;border-radius: 99999px;position: relative;display: flex;flex-direction: column;float: right;position: fixed;bottom: 3%;left: 92%;align-self: flex-end;cursor: pointer;z-index: 10;'
+							ico_cal_current_date_btn.width = "75";ico_cal_current_date_btn.height = "75"
+						}	  		
+		    	}else if (mode === "events"){
+						if (element_year.innerHTML == currentYear) {
+							get_current_date_btn.style.display = 'none'
+						} else {
+							get_current_date_btn.style.cssText = 'background-color: #D5D5D5;width: 200px;height: 100px;border-radius: 35px;position: relative;display: flex;flex-direction: column;float: right;position: fixed;bottom: 3%;left: 85%;align-self: flex-end;cursor: pointer;z-index: 10;'
+							text_current_date_content.innerHTML = now.getFullYear()
+							ico_cal_current_date_btn.width = "150";ico_cal_current_date_btn.height = "95"
+							ico_cal_current_date_btn.style.marginTop = "-50px"
+						}	 
+		    	}
+
+		    }
+
+		    document.addEventListener("mouseover", function (e){
+					visibleCurrentDateBtn()
+		    },false)
+
+		    document.addEventListener("click", function (e) {
 		        let c = e.target.getAttribute('class')
 		        let i = e.target.getAttribute('id')
 		        let opened_dropdown_country = false
@@ -234,12 +262,7 @@
 		        let get_month_count = months_days_count[get_index_month]
 		        let wtn = 31 - get_month_count
 
-		        if (element_month.innerHTML == current_month && element_month_day.innerHTML == now.getDate() && element_year.innerHTML == currentYear) {
-		            get_current_date_btn.style.display = 'none'
-
-		        } else {
-		            get_current_date_btn.style.cssText = 'background-color: #D5D5D5;width: 100px;height: 100px;border-radius: 99999px;position: relative;display: flex;flex-direction: column;float: right;position: fixed;bottom: 3%;left: 92%;align-self: flex-end;cursor: pointer;z-index: 10;'
-		        }
+						visibleCurrentDateBtn()
 
 		        if (wtn === 0) {
 		            for (let el = 1; el <= 31; el++) {
@@ -344,16 +367,15 @@
 														            data: JSON.stringify(data, null, '\t'),
 														            contentType: 'application/json;charset=UTF-8',
 														            success: function (response) {
-														            		//get_event_list.innerHTML = ''
-														                let add_content_container = document.createElement("div")
-														                add_content_container.setAttribute("id", "table_event_container")
-														                add_content_container.innerHTML = response["data"]
-														                get_event_list.appendChild(add_content_container)
-														                //get_event_list.removeChild(add_loading_container)
-														                calendar.preloader.hide();
+																					get_event_list.innerHTML = ''
+																					let add_content_container = document.createElement("div")
+																					add_content_container.setAttribute("id", "table_event_container")
+																					add_content_container.innerHTML = response["data"]
+																					get_event_list.appendChild(add_content_container)
+																					calendar.preloader.hide();
 														            },
 														            error: (error) => {
-														                throw error
+																					throw error
 														            }
 														        })
 		                            }
@@ -373,19 +395,19 @@
 		                        create_dropdown_list_ul.innerHTML = '\
 		                                        <ul id="dropdown_list_ul">\
 		                                            <li class="nav_ul"><div id="country_dropdown_list" id="country_dropdown_list_li">\
-		                                                <img id="ico_country" src="https://image.flaticon.com/icons/png/512/330/330437.png" width="80" height="80">\
+		                                                <img id="ico_country" src="/static/img/IcoCountryes/ru.png" width="80" height="80">\
 		                                                <p id="dropdown_country_title_list" class="ru">Russia</p>\
 		                                            </div></li>\
 		                                            <li class="nav_ul"><div id="country_dropdown_list" id="country_dropdown_list_li">\
-		                                                <img id="ico_country" src="https://image.flaticon.com/icons/svg/330/330550.svg" width="80" height="80">\
+		                                                <img id="ico_country" src="/static/img/IcoCountryes/by.svg" width="80" height="80">\
 		                                                <p id="dropdown_country_title_list" class="by">Belarus</p>\
 		                                            </div></li>\
 		                                            <li class="nav_ul"><div id="country_dropdown_list" id="country_dropdown_list_li">\
-		                                                <img id="ico_country" src="https://image.flaticon.com/icons/png/512/330/330459.png" width="80" height="80">\
+		                                                <img id="ico_country" src="/static/img/IcoCountryes/usa.png" width="80" height="80">\
 		                                                <p id="dropdown_country_title_list" class="us">USA</p>\
 		                                            </div></li>\
 		                                            <li class="nav_ul"><div id="country_dropdown_list" id="country_dropdown_list_li">\
-		                                                <img id="ico_country" src="https://image.flaticon.com/icons/png/512/330/330495.png" width="80" height="80">\
+		                                                <img id="ico_country" src="/static/img/IcoCountryes/uz.png" width="80" height="80">\
 		                                                <p id="dropdown_country_title_list" class="uz">Uzbekistan</p>\
 		                                            </div></li>\
 		                                        </ul>'
@@ -679,18 +701,21 @@
 		    	rgetCurrentPos = 1650
 		    },false)
 
-				let year = Number(document.getElementById('year').innerHTML)
-				let country_choosed = document.getElementById('dropdown_country_title').innerHTML
+				//let year = document.getElementById('year').innerHTML
+				//let country_choosed = document.getElementById('dropdown_country_title').innerHTML
 
 		    function back(clickedOnButton,marginValueLeft, marginValueCenter, marginValueRight){
 		    		if (mode === "events"){
+		    			let year = document.getElementById('year').innerHTML
+							let country_choosed = document.getElementById('dropdown_country_title').innerHTML
 		    			year--
+		    			document.getElementById('year').innerHTML = year
 					    let data = {
 								'year': year,
 								'country': country_choosed,
 							}
 							calendar.preloader.show();
-			        $.ajax({
+			        $.ajax({	
 			            type: "POST",
 			            url: '/countries/',
 			            data: JSON.stringify(data, null, '\t'),
@@ -717,8 +742,11 @@
 
 		    function next(clickedOnButton,marginValueLeft, marginValueCenter, marginValueRight){
 		    	if (mode === "events"){
+		    		let year = document.getElementById('year').innerHTML
+						let country_choosed = document.getElementById('dropdown_country_title').innerHTML
 		    		if (year >= now.getFullYear()){}else if (year <= now.getFullYear()){
-		    			year++
+		    			year++;
+		    			document.getElementById('year').innerHTML = year
 					    let data = {
 								'year': year,
 								'country': country_choosed,
@@ -780,47 +808,111 @@
 		    get_button_about.addEventListener("click", () => {
 		        get_div_bg.style.display = 'block'
 		        get_background.style.cssText = 'display:block;animation:0.1s linear blur_background;';
-		        setTimeout(() => get_background.style.cssText = 'filter:blur(1rem);')
+		        setTimeout(() => get_background.style.cssText = 'filter:blur(1rem);',100)
 
 		        get_background_arrow_buttons.style.cssText = 'animation:0.1s linear blur_background;';
-		        setTimeout(() => get_background_arrow_buttons.style.cssText = 'filter:blur(1rem);')
+		        setTimeout(() => get_background_arrow_buttons.style.cssText = 'filter:blur(1rem);',100)
 
 		        get_event_list.style.cssText = 'margin-left:3%;display:block;animation:0.1s linear blur_background;';
-		        setTimeout(() => get_event_list.style.cssText = 'margin-left:3%;display:block;filter:blur(1rem);')
+		        setTimeout(() => get_event_list.style.cssText = 'margin-left:3%;display:block;filter:blur(1rem);',100)
 
 		        get_button_for_switch_to_current_date.style.cssText = 'animation:0.1s linear blur_background;';
-		        setTimeout(() => get_button_for_switch_to_current_date.style.cssText = 'filter:blur(1rem);')
+		        setTimeout(() => get_button_for_switch_to_current_date.style.filter = 'blur(1rem)',100)
+
 		        get_div_about.style.display = 'block'
 		        get_div_about.animate([{opacity: 0}, {opacity: 1}], {duration: 100, fill: 'both'});
-		        setTimeout(() => get_div_about.style.cssText = 'opacity:1;display:block;')
+		        setTimeout(() => get_div_about.style.cssText = 'opacity:1;display:block;',100)
 		    })
 
 		    //go to container
 		    get_button_go_to.addEventListener("click", () => {
 		        get_div_bg.style.display = 'block'
 		        get_background.style.cssText = 'display:block;animation:0.1s linear blur_background;';
-		        setTimeout(() => get_background.style.cssText = 'filter:blur(1rem);')
+		        setTimeout(() => get_background.style.cssText = 'filter:blur(1rem);',100)
 
 		        get_background_arrow_buttons.style.cssText = 'animation:0.1s linear blur_background;';
-		        setTimeout(() => get_background_arrow_buttons.style.cssText = 'filter:blur(1rem);')
+		        setTimeout(() => get_background_arrow_buttons.style.cssText = 'filter:blur(1rem);',100)
 
 		        get_event_list.style.cssText = 'margin-left:3%;display:block;animation:0.1s linear blur_background;';
-		        setTimeout(() => get_event_list.style.cssText = 'margin-left:3%;display:block;filter:blur(1rem);')
+		        setTimeout(() => get_event_list.style.cssText = 'margin-left:3%;display:block;filter:blur(1rem);',100)
 
 		        get_button_for_switch_to_current_date.style.cssText = 'animation:0.1s linear blur_background;';
-		        setTimeout(() => get_button_for_switch_to_current_date.style.cssText = 'filter:blur(1rem);')
+		        setTimeout(() => get_button_for_switch_to_current_date.style.filter = 'blur(1rem)',100)
+
 		        get_go_to_div.style.cssText = 'display:block;opacity:1;'
 		        get_go_to_div.animate([{opacity: 0}, {opacity: 1}], {duration: 100, fill: 'both'});
-		        setTimeout(() => get_go_to_div.style.cssText = 'opacity:1;display:block;')
+		        setTimeout(() => get_go_to_div.style.cssText = 'opacity:1;display:block;',100)
 		    })
 
 		    //current date
 		    get_button_for_switch_to_current_date.addEventListener("click", () => {
+
+		    	if (mode === "numbers"){
 		        showCalendar(now.getMonth(), now.getFullYear())
+		        get_current_date_btn.style.display = 'none'
+		    	}else if (mode === "events"){
+						let year = now.getFullYear()
+						let country_choosed =  document.getElementById('dropdown_country_title').innerHTML
+						// let table_event_container = document.getElementById('table_event_container')
+						let data = {	
+							'year': year,
+							'country': country_choosed,
+						}
+						calendar.preloader.show();
+						$.ajax({
+							type: "POST",
+							url: '/countries/',
+							data: JSON.stringify(data, null, '\t'),
+							contentType: 'application/json;charset=UTF-8',
+							success: function (response) {
+								get_event_list.innerHTML = ''
+								let add_content_container = document.createElement("div")
+								add_content_container.setAttribute("id", "table_event_container")		
+								add_content_container.innerHTML = response["data"]						
+								get_event_list.appendChild(add_content_container)
+								calendar.preloader.hide();
+								element_year.innerHTML = year
+								get_current_date_btn.style.display = 'none'
+							},
+							error: (error) => {
+								throw error
+							}
+						})
+		    	}
 		    })
 
 		    get_button_ok_go_to.addEventListener("click", () => {
+		    	if (mode === "numbers"){
+		    		get_event_list.innerHTML = "";get_event_list.style.display = "none"
 		        showCalendar(months.indexOf(document.getElementsByClassName('option-choose-month is-selected')[0].innerHTML), document.getElementsByClassName('option-choose-year is-selected')[0].innerHTML, 'None');
+		    	}else if(mode === "events"){
+						let year = document.querySelector('.option-choose-year.is-selected').innerHTML
+						let country_choosed =  document.getElementById('dropdown_country_title').innerHTML
+						// let table_event_container = document.getElementById('table_event_container')
+						let data = {	
+							'year': year,
+							'country': country_choosed,
+						}
+						calendar.preloader.show();
+						$.ajax({
+							type: "POST",
+							url: '/countries/',
+							data: JSON.stringify(data, null, '\t'),
+							contentType: 'application/json;charset=UTF-8',
+							success: function (response) {
+								get_event_list.innerHTML = ''
+								let add_content_container = document.createElement("div")
+								add_content_container.setAttribute("id", "table_event_container")		
+								add_content_container.innerHTML = response["data"]						
+								get_event_list.appendChild(add_content_container)
+								calendar.preloader.hide();
+								element_year.innerHTML = year
+							},
+							error: (error) => {
+								throw error
+							}
+						})
+		    	}
 		    })
 
 		    get_button_back.addEventListener("click", () => {
@@ -865,11 +957,12 @@
 		    		if (mode === 'events'){
 		    			mode = 'numbers'
 		    			events_btn.innerHTML = 'Event list'
+
 		    			get_calendar_head.style.cssText = "animation:calendar_body_swipe_to_right 1s ease-in-out;";        setTimeout(() => get_calendar_head.style.cssText = 'margin-top: 10px;margin-left: -230px; position:absolute;', 1000)
 		    			get_container_center.style.cssText = 'animation:left_to_center 1s ease-in-out;';
 			        setTimeout(() => get_container_center.style.cssText = 'margin-left:-280px;margin-top: 180px;position:absolute;display:block;', 1000)
 			        events_container.style.cssText = "display:block;animation: slide_events_container_back 1s ease-in-out;";
-			        setTimeout(() => {events_container.style.cssText = "margin-left:200%;display:none;"}, 1000)
+			        setTimeout(() => {events_container.style.cssText = "margin-left:200%;display:none;";event_container.innerHTML = ""}, 1000)
 			       	dropdown_list_country.style.cssText = 'display:block;'
 			        dropdown_list_country.animate([{opacity: 1}, {opacity: 0}], {duration: 1000, fill: 'both'});
 			        setTimeout(() => {

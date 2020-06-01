@@ -53,8 +53,10 @@ def sendDataByCountry():
 			content = f.read()
 			soup = bs4.BeautifulSoup(content, 'lxml')
 			response_content = soup.find("table")
-			response_content.find("tbody")['id'] = "event_tbody"
-
+			response_content.find("thead")["id"] = "event_thead"
+			response_content.find("tbody")["id"] = "event_tbody"
+			if len(response_content.find("tbody").text) <= 1:
+				response_content = "Data not found. 404"
 			return jsonify({
 				"data":str(response_content)
 				})	

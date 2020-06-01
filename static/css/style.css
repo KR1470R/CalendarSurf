@@ -194,6 +194,10 @@ body::-webkit-scrollbar {
     background-color: #F5F5F5;
 }
 
+.container_year_day{
+    margin-left: 11.7%;
+}
+
 #events_list {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
@@ -919,6 +923,9 @@ a {
     z-index: -1;
     margin-left: 3%;
     display: block;
+    text-align:center;
+    font-family: 'Lato', sans-serif;
+    font-size:50px;
 }
 
 #ico_cal_current_date_btn {
