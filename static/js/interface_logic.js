@@ -223,18 +223,24 @@
 
 		    let get_current_date_btn = document.getElementById('get_current_date')
 
+		    let pop_up_opened = false
+
 		    document.getElementById('ico_country_current').setAttribute('draggable', false);
 		    let number_selected = null
 
 		    let mode = 'numbers'
 
 		    function visibleCurrentDateBtn(){
+
 		    	if (mode === "numbers"){
 						if (element_month.innerHTML == current_month && element_month_day.innerHTML == now.getDate() && element_year.innerHTML == currentYear) {
 							get_current_date_btn.style.display = 'none'
 						} else {
 							get_current_date_btn.style.cssText = 'background-color: #D5D5D5;width: 100px;height: 100px;border-radius: 99999px;position: relative;display: flex;flex-direction: column;float: right;position: fixed;bottom: 3%;left: 92%;align-self: flex-end;cursor: pointer;z-index: 10;'
+							text_current_date_content.innerHTML = now.getDate()
 							ico_cal_current_date_btn.width = "75";ico_cal_current_date_btn.height = "75"
+							ico_cal_current_date_btn.style.marginTop = "-40px"
+
 						}	  		
 		    	}else if (mode === "events"){
 						if (element_year.innerHTML == currentYear) {
@@ -245,6 +251,9 @@
 							ico_cal_current_date_btn.width = "150";ico_cal_current_date_btn.height = "95"
 							ico_cal_current_date_btn.style.marginTop = "-50px"
 						}	 
+		    	}
+		    	if (pop_up_opened === false){return}else{
+		    		get_button_for_switch_to_current_date.style.filter = 'blur(1rem)'
 		    	}
 
 		    }
@@ -290,42 +299,6 @@
 
 		        if (c === 'nav_menu_li') {
 		            return;
-		        }
-
-		        if (c === 'cell_div') {
-		            if (one_selected === false) {
-		                let cell = document.getElementById(i.replace(/\D/g, ''))
-		                cell_span = document.getElementById('span_' + i.replace(/\D/g, ''))
-		                cell_span.style.cssText = 'z-index:1;color:white;text-align:center;margin-top:30px;padding-right:5px;'
-		                cell.style.cssText = 'background-color:#C1C1C1;width:100px;height:100px;position:absolute;border-radius:10px;margin-left:130px;z-index:2;margin-top:10px;'
-		                one_selected = true
-		                number_selected = i.replace(/\D/g, '')
-		            } else {
-		                let get_selected = document.getElementById(number_selected)
-		                let get_selected_span = document.getElementById('span_' + number_selected)
-		                get_selected.style.cssText = 'padding: 50px 50px 50px 165px; text-align: center;'
-		                get_selected_span.style.cssText = 'color:black;'
-		                // ------
-		                let cell = document.getElementById(i.replace(/\D/g, ''))
-		                cell_span = document.getElementById('span_' + i.replace(/\D/g, ''))
-		                cell_span.style.cssText = 'z-index:1;color:white;text-align:center;margin-top:30px;padding-right:5px;'
-		                cell.style.cssText = 'background-color:#C1C1C1;width:100px;height:100px;position:absolute;border-radius:10px;margin-left:130px;z-index:2;margin-top:10px;'
-		                one_selected = true
-		                number_selected = i.replace(/\D/g, '')
-		            }
-		        } else if (c === 'date-picker selected' || c === 'cell_div_selected') {
-		            try {
-		                let get_selected_td = document.getElementById(div_picker_selected_number)
-		                get_selected_td.style.cssText = "padding: 50px 50px 50px 165px; text-align: center;"
-		                let get_selected_div = document.getElementById('span_' + div_picker_selected_number)
-		                get_selected_div.style.cssText = 'z-index:1;color:white;text-align:center;margin-top:30px;padding-right:5px;'
-		                get_selected_td.style.cssText = 'background-color:#E73A3C;width:100px;height:100px;position:absolute;border-radius:10px;margin-left:130px;z-index:2;margin-top:10px;'
-		                let get_selected = document.getElementById(number_selected)
-		                let get_selected_span = document.getElementById('span_' + number_selected)
-		                get_selected.style.cssText = 'padding: 50px 50px 50px 165px; text-align: center;'
-		                get_selected_span.style.cssText = 'color:black;'
-		                one_selected = false
-		            } catch (e) {return}
 		        }else if (i === 'dropdown_country' || i === 'dropdown_list_ul' || i === 'country_dropdown_list' || i === 'dropdown_country_title_list' || i === 'selected_country' || i === 'ico_country_current'){
 
 		                if (opened_dropdown_country === false){
@@ -353,7 +326,7 @@
 		                                document.getElementById('dropdown_country').style.cssText = 'display:block;opacity:1;background-color:transparent;'
 		                                //}catch(e){return}
 														        let year = document.getElementById('year').innerHTML
-														        let country_choosed = document.getElementById('dropdown_country_title').innerHTML
+														        let country_choosed = document.getElementById('dropdown_country_title').className
 														        // let table_event_container = document.getElementById('table_event_container')
 														        let data = {	
 														            'year': year,
@@ -496,8 +469,6 @@
 			            let get_container_center = document.getElementById('calendar_body')
 			            //get_container_right.style.cssText = 'animation:1s linear right_to_center;';
 
-			            console.log("marginValueRight: ",marginValueRight,"marginValueCenter: ",marginValueCenter)
-
 			            get_container_right.animate([{marginLeft:String(marginValueRight)+"px"},{marginLeft:"-280px"}],{duration:300})
 
 			            setTimeout(()=>{get_container_right.style.cssText = 'margin-left:1650px;margin-top: 180px;position: absolute;'}, 300)
@@ -588,9 +559,11 @@
 		    let diffX = null
 		    let diffY = null
 
-		    lel = document.getElementById("left_calendar_body")
-		    el = document.getElementById("calendar_body")
-		    rel = document.getElementById("right_calendar_body")
+		    let lel = document.getElementById("left_calendar_body")
+		    let el = document.getElementById("calendar_body")
+		    let rel = document.getElementById("right_calendar_body")
+
+		    let eventsel = document.getElementById("events_container")
 
 				lel.style.cssText = "display:block;margin-left:-2200px;"
 				rel.style.cssText = "display:block;margin-left:1650px;"
@@ -599,23 +572,11 @@
 		    let getCurrentPos = -Math.abs(Number(el.style.marginLeft.replace(/\D/g, '')))
 		    let rgetCurrentPos = Math.abs(Number(rel.style.marginLeft.replace(/\D/g, '')))
 
-		    el.addEventListener("touchstart",(e)=>{
-	        initialX = e.touches[0].clientX;
-	        initialY = e.touches[0].clientY;
-					let selectedCurrentMonth = months.indexOf(document.getElementById("month_name").innerHTML)
-					let selectedCurrentYear = Number(document.getElementById("year").innerHTML)
+		    let getCurrentPosEvents = Math.abs(Number(eventsel.style.marginLeft.replace(/\D/g,'')))
 
-					//currentYear = (selectedCurrentMonth === 0) ? selectedCurrentYear - 1 : selectedCurrentYear;
-					//currentMonth = (selectedCurrentMonth === 0) ? 11 : selectedCurrentMonth - 1;
-					showCalendar(currentMonth, currentYear, "back", "preview",null,null,null, false);
 
-					//currentYear = (selectedCurrentMonth === 11) ? selectedCurrentYear + 1 : selectedCurrentYear;
-					//currentMonth = (selectedCurrentMonth + 1) % 12;
-					showCalendar(currentMonth, currentYear, "next", "preview",null,null,null, false);	
-			    	//console.log("TOUCHSTART:","X - "+String(x),"; Y - "+String(y))
-		    },false)
-		    el.addEventListener("touchmove",(e)=>{
-					if (initialX === null) {
+		    function elementsTouchmove(element,pos,event){
+		    	if (initialX === null) {
 						return
 					}
 
@@ -623,8 +584,8 @@
 						return
 					}
 
-					const currentX = e.touches[0].clientX;
-					const currentY = e.touches[0].clientY;
+					const currentX = event.touches[0].clientX;
+					const currentY = event.touches[0].clientY;
 
 					diffX = initialX - currentX;
 					diffY = initialY - currentY;
@@ -633,52 +594,87 @@
 					//back
 						if (getCurrentPos >= 400){
 							if (diffX >= 0){
-								lgetCurrentPos-=20
-								getCurrentPos-=20
-								rgetCurrentPos-=20
-
-								lel.style.marginLeft = String(lgetCurrentPos)+"px"
-								el.style.marginLeft = String(getCurrentPos)+"px"
-								rel.style.marginLeft = String(rgetCurrentPos)+"px"		
+								element.forEach(
+									function(part,index,array){
+										array[index].style.marginLeft = String(pos[index] -= 20)+"px"
+									}
+								)
 							}else{
 								return
 							}
 						}else if (getCurrentPos <= -1000){
 							if (diffX <= 0){
-								lgetCurrentPos+=20
-								getCurrentPos+=20
-								rgetCurrentPos+=20
-
-								lel.style.marginLeft = String(lgetCurrentPos)+"px"
-								el.style.marginLeft = String(getCurrentPos)+"px"
-								rel.style.marginLeft = String(rgetCurrentPos)+"px"	
+								element.forEach(
+									function(part,index,array){
+										array[index].style.marginLeft = String(pos[index] += 20)+"px"
+									}
+								)
 							}else{
 								return 
 							}
 						//get in
 						}else{
 							if (diffX > 0) {
-							  // swiped left
-								lgetCurrentPos-=20
-								getCurrentPos-=20
-								rgetCurrentPos-=20
-
-								lel.style.marginLeft = String(lgetCurrentPos)+"px"
-								el.style.marginLeft = String(getCurrentPos)+"px"
-								rel.style.marginLeft = String(rgetCurrentPos)+"px"	
+								element.forEach(
+									function(part,index,array){
+										array[index].style.marginLeft = String(pos[index] -= 20)+"px"
+									}
+								)
 							} else {
-								  // swiped right
-									lgetCurrentPos+=20
-									getCurrentPos+=20
-									rgetCurrentPos+=20
-
-									lel.style.marginLeft = String(lgetCurrentPos)+"px"
-									el.style.marginLeft = String(getCurrentPos)+"px"
-									rel.style.marginLeft = String(rgetCurrentPos)+"px"
+									element.forEach(
+										function(part,index,array){
+											array[index].style.marginLeft = String(pos[index] += 20)+"px"
+										}
+									)
 								}
 							}
-						}
-					//el.preventDefault()   
+		    }if (mode === "numbers"){
+		    	lgetCurrentPos = pos[0]
+		    	getCurrentPos = pos[1]
+		    	rgetCurrentPos = pos[2]
+		    }else if (mode === "events"){
+		    	getCurrentPosEvents = pos[0]
+		    }}
+		    eventsel.addEventListener("touchstart",(e)=>{
+					initialX = e.touches[0].clientX;
+	        initialY = e.touches[0].clientY;
+				},false)
+		    eventsel.addEventListener("touchmove",(e)=>{
+		    	elementsTouchmove([eventsel],[getCurrentPosEvents],e)
+		    },false)
+		    eventsel.addEventListener("touchend",(e)=>{
+		    	function moveBack(){
+						eventsel.animate([{marginLeft:String(getCurrentPosEvents)+"px"},{marginLeft:"50px"}],{duration:100});setTimeout(()=>{eventsel.style.cssText = "margin-left:50px";},100)		    		
+		    	}
+		    	if (eventsel.style.marginLeft === "50px"){
+		    		return
+		    	}else{
+		    		if (diffX < -400){
+		    			back(false,lgetCurrentPos,getCurrentPos,rgetCurrentPos)
+		    			moveBack()
+		    		}else if (diffX > 400){
+		    			next(false,lgetCurrentPos,getCurrentPos,rgetCurrentPos)
+		    			moveBack()
+		    		}else if(diffX > -400 || diffX < 400){
+		    			moveBack()
+		    		
+		    		}
+		    	}
+					getCurrentPosEvents = 50
+					console.log(getCurrentPosEvents)
+		    },false)
+ 					
+		    el.addEventListener("touchstart",(e)=>{
+	        initialX = e.touches[0].clientX;
+	        initialY = e.touches[0].clientY;
+					let selectedCurrentMonth = months.indexOf(document.getElementById("month_name").innerHTML)
+					let selectedCurrentYear = Number(document.getElementById("year").innerHTML)
+					showCalendar(currentMonth, currentYear, "back", "preview",null,null,null, false);
+					showCalendar(currentMonth, currentYear, "next", "preview",null,null,null, false);	
+		    },false)
+
+		    el.addEventListener("touchmove",(e)=>{
+		    		elementsTouchmove([lel,el,rel],[lgetCurrentPos,getCurrentPos,rgetCurrentPos],e)
 					},false)
 
 		    el.addEventListener("touchend",(e)=>{
@@ -707,7 +703,7 @@
 		    function back(clickedOnButton,marginValueLeft, marginValueCenter, marginValueRight){
 		    		if (mode === "events"){
 		    			let year = document.getElementById('year').innerHTML
-							let country_choosed = document.getElementById('dropdown_country_title').innerHTML
+							let country_choosed = document.getElementById('dropdown_country_title').className
 		    			year--
 		    			document.getElementById('year').innerHTML = year
 					    let data = {
@@ -743,7 +739,7 @@
 		    function next(clickedOnButton,marginValueLeft, marginValueCenter, marginValueRight){
 		    	if (mode === "events"){
 		    		let year = document.getElementById('year').innerHTML
-						let country_choosed = document.getElementById('dropdown_country_title').innerHTML
+						let country_choosed = document.getElementById('dropdown_country_title').className
 		    		if (year >= now.getFullYear()){}else if (year <= now.getFullYear()){
 		    			year++;
 		    			document.getElementById('year').innerHTML = year
@@ -802,6 +798,7 @@
 		            //=-=-=-=-=-=-=-=-
 		            get_go_to_div.animate([{opacity: 1}, {opacity: 0}], {duration: 100, fill: 'both'});
 		            setTimeout(() => get_go_to_div.style.cssText = 'opacity:0;display:none', 100)
+		            pop_up_opened = false
 		        }))
 
 		    // about container
@@ -822,6 +819,7 @@
 		        get_div_about.style.display = 'block'
 		        get_div_about.animate([{opacity: 0}, {opacity: 1}], {duration: 100, fill: 'both'});
 		        setTimeout(() => get_div_about.style.cssText = 'opacity:1;display:block;',100)
+		        pop_up_opened = true
 		    })
 
 		    //go to container
@@ -842,6 +840,7 @@
 		        get_go_to_div.style.cssText = 'display:block;opacity:1;'
 		        get_go_to_div.animate([{opacity: 0}, {opacity: 1}], {duration: 100, fill: 'both'});
 		        setTimeout(() => get_go_to_div.style.cssText = 'opacity:1;display:block;',100)
+		        pop_up_opened = true
 		    })
 
 		    //current date
@@ -852,7 +851,7 @@
 		        get_current_date_btn.style.display = 'none'
 		    	}else if (mode === "events"){
 						let year = now.getFullYear()
-						let country_choosed =  document.getElementById('dropdown_country_title').innerHTML
+						let country_choosed =  document.getElementById('dropdown_country_title').className
 						// let table_event_container = document.getElementById('table_event_container')
 						let data = {	
 							'year': year,
@@ -882,6 +881,7 @@
 		    })
 
 		    get_button_ok_go_to.addEventListener("click", () => {
+		    	pop_up_opened = false
 		    	if (mode === "numbers"){
 		    		get_event_list.innerHTML = "";get_event_list.style.display = "none"
 		        showCalendar(months.indexOf(document.getElementsByClassName('option-choose-month is-selected')[0].innerHTML), document.getElementsByClassName('option-choose-year is-selected')[0].innerHTML, 'None');
@@ -974,11 +974,11 @@
 			        get_calendar_head.style.cssText = "animation:calendar_body_swipe_to_left 1s ease-in-out;";
 			        setTimeout(() => get_calendar_head.style.cssText = 'margin-top:10px;margin-left:-200%;position:absolute;', 1000)
 			        get_container_center.style.cssText = 'animation:center_container_to_left 1s ease-in-out;';
-			        setTimeout(() => get_container_center.style.cssText = 'margin-left:-200%;margin-top: 180px;position:absolute;display:none;', 1000)
+			        setTimeout(() => get_container_center.style.cssText = 'margin-left:-200%;margin-top: 180px;position:absolute;display:none;;', 1000)
 			        events_container.style.cssText = "display:block;animation: slide_events_container 1s ease-in-out;";
-			        setTimeout(() => {events_container.style.cssText = "margin-left:3%;display:block;";}, 1000)
+			        setTimeout(() => {events_container.style.cssText = "margin-left:50px;display:block;";}, 1000)
 			        let year = document.getElementById('year').innerHTML
-			        let country_choosed = document.getElementById('dropdown_country_title').innerHTML
+			        let country_choosed = document.getElementById('dropdown_country_title').className
 			        let data = {
 			            'year': year,
 			            'country': country_choosed,

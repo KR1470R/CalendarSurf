@@ -1,18 +1,19 @@
 # FLASK_APP=run.py FLASK_DEBUG=1 flask run
-from flask import Flask, render_template,request,jsonify 
+from flask import Flask, render_template, request,jsonify 
 import json
 import bs4
 import os
 import sys
 from PIL import Image, ImageDraw, ImageFont
-
+from requests import get 
+import urllib.request
 
 app = Flask(__name__)
 
 @app.route('/')
 def main():
 	for i in range(1,32):
-		if os.path.exists("static/img/IcoTab/icons/") == True:
+		if os.path.exists("static/img/IcoTab/icons/"):
 			pass
 		else:
 			os.mkdir("static/img/IcoTab/icons/")
@@ -25,38 +26,34 @@ def main():
 			draw.text((17, 40),str(i),font=font,fill=(0,0,0))
 		else:
 			draw.text((70, 40),str(i),font=font,fill=(0,0,0))
-		if os.path.exists(output_path_img) == True:
+		if os.path.exists(output_path_img):
 			continue
 		else:
 			img.save(output_path_img)
 	return render_template('index.html')
 
 @app.route('/countries/',methods=["POST"])
-def sendDataByCountry():
+def send_data_by_country():
 	if request.method == 'POST':
 		year = request.json['year']
-		country = request.json['country']
-		if country == 'Ukraine':
-			country = 'UA'
-		elif country == 'Russia':
-			country = 'RU'
-		elif country == 'Belarus':
-			country = 'BY'
-		elif country == 'Uzbekistan':
-			country = 'UZ'
-		elif country == 'USA':
-			country = 'US'
+		country = request.json['country'].upper()
+		print(country)
 		url = f"https://calendarific.com/holidays/{year}/{country}"
-		parse_file = "templates/parse_data.html"
-		os.system(f"wget {url} -O {parse_file}")
-		with open(parse_file,"r") as f:
-			content = f.read()
-			soup = bs4.BeautifulSoup(content, 'lxml')
-			response_content = soup.find("table")
-			response_content.find("thead")["id"] = "event_thead"
-			response_content.find("tbody")["id"] = "event_tbody"
-			if len(response_content.find("tbody").text) <= 1:
-				response_content = "Data not found. 404"
-			return jsonify({
-				"data":str(response_content)
-				})	
+		req = urllib.request.Request(
+			url,
+			data=None,
+			headers={
+				"User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36"
+			}
+		)
+		f = urllib.request.urlopen(req)
+		content = f.read().decode("utf-8")
+		soup = bs4.BeautifulSoup(content, 'lxml')
+		response_content = soup.find("table")
+		response_content.find("thead")["id"] = "event_thead"
+		response_content.find("tbody")["id"] = "event_tbody"
+		if len(response_content.find("tbody").text) <= 1:
+			response_content = "Data not found. 404"
+		return jsonify({
+			"data":str(response_content)
+			})	
