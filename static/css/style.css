@@ -56,8 +56,7 @@ body::-webkit-scrollbar {
 
 @keyframes preloader-bounce {
 
-    0%,
-    100% {
+    0%,100% {
         transform: scale(0);
     }
 
@@ -489,7 +488,6 @@ a {
     justify-content: space-between;
     text-align: center;
     margin-right: 100px;
-    /*background:linear-gradient(180deg, white, white 60%, transparent 100%)*/
 }
 
 #opacitylow_bottom {
@@ -867,13 +865,6 @@ a {
     min-height: 50px;
     height: auto;
     background-color: transparent;
-    /*display: none;*/
-    /*pointer-events: none;*/
-
-    /*	-webkit-box-shadow: 0px 0px 23px -5px rgba(0,0,0,0.75);
-        -moz-box-shadow: 0px 0px 23px -5px rgba(0,0,0,0.75);
-        box-shadow: 0px 0px 23px -5px rgba(0,0,0,0.75);
-    */
     border-radius: 10px;
 }
 
@@ -907,17 +898,6 @@ a {
     transition: 0.1s;
     background-color: #F5F5F5;
 }
-
-/*
-	display: inline;
-	position: absolute;
-	margin-top: -30%;
-	white-space: nowrap;
-	background-color: white;
-	margin-left: 20%;
-	padding-top: 30px;
-}
-*/
 
 #events_container {
     z-index: -1;

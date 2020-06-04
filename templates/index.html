@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Calendar</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/style.css') }}">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto:wght@500&display=swap"
-          rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="https://unpkg.com/flickity@2.0.11/dist/flickity.css">
-    <link id="link-icon" rel="icon" href="" />
+  <title>Calendar</title>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/style.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto:wght@500&display=swap"
+        rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="https://unpkg.com/flickity@2.0.11/dist/flickity.css">
+  <link id="link-icon" rel="icon" href="" />
 </head>
 <noscript><p>JS support not enabled!</p></noscript>
 <body id='body'>
-
   <div class="preloader" id='preloader-div'>
       <div class="preloader__row">
           <div class="preloader__item"></div>
@@ -51,10 +50,9 @@
           <thead id='calendar_head'>
           <tr id='nav_days_ul'></tr>
           </thead>
-
           <tbody id='left_calendar_body'></tbody>
           <tbody id='calendar_body' style='position:absolute;margin-top:180px;margin-left:-280px;'></tbody>
-          <tbody id='right_calendar_body'></tbody>
+          <tbody id='right_calendar_body'></tbody>            
       </table>
       <div id='events_container'></div>
   </div>
@@ -138,8 +136,7 @@
   <div id='get_current_date'>
       <div id='get_current_date_first'></div>
       <div id='text_current_date_center'>
-          <img id='ico_cal_current_date_btn' src='{{ url_for("static", filename="img/calendar.png") }}' width="75"
-               height="75" alt="calendar">
+          <img id='ico_cal_current_date_btn' src='{{ url_for("static", filename="img/calendar.png") }}' width="75" height="75" alt="calendar">
           <p id='text_current_date_content'></p>
       </div>
 
@@ -148,7 +145,6 @@
   
 </body>
 <script type="text/javascript" src='{{ url_for("static", filename="js/interface_logic.js") }}'></script>
-<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
 <script type="text/javascript" src='https://unpkg.com/flickity@2.0.11/dist/flickity.pkgd.js'></script>
 <script type="text/javascript" src='https://code.jquery.com/jquery-3.5.0.min.js'></script>
 </html>

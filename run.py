@@ -5,7 +5,6 @@ import bs4
 import os
 import sys
 from PIL import Image, ImageDraw, ImageFont
-from requests import get 
 import urllib.request
 
 app = Flask(__name__)
@@ -37,7 +36,6 @@ def send_data_by_country():
 	if request.method == 'POST':
 		year = request.json['year']
 		country = request.json['country'].upper()
-		print(country)
 		url = f"https://calendarific.com/holidays/{year}/{country}"
 		req = urllib.request.Request(
 			url,
