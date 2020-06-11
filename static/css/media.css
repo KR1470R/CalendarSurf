@@ -1,4 +1,5 @@
-@media all and (max-width:2000px){
+/*
+@media all and (max-width:2100px){
 	.day{
 		padding: 145px 113px;
 	}
@@ -106,17 +107,32 @@
 	.day{
 		padding:145px 51px;
 	}
+	.date-picker{
+		padding: 37px;
+    padding-left: 90px;
+    text-align: center;
+    transform: translate(-15px, -150px);
+	}
 }
 
 @media all and (max-width:1100px){
 	.day{
 		padding:145px 49px;
 	}
+	.date-picker{
+		padding-left: 82px;
+	}
 }
 
 @media all and (max-width:1050px){
 	.day{
 		padding:145px 46px;
+	}
+	.date-picker{
+			padding-left: 66px;
+	}
+	.nav_li{
+		font-size: 55px;
 	}
 }
 
@@ -133,9 +149,13 @@
 }
 
 @media all and (max-width:900px){
+	.date-picker{
+		transform:translate(89px, -114px);
+		padding-left: 0;
+	}
 	.day{
 		padding:145px 36px;
-		transform: translateX(16px);
+		transform: translateX(70px);
 	}
 	#additionally{
 		padding-right: 7px;
@@ -164,21 +184,16 @@
 	#calendar_head{
 		transform: translateY(-30px);
 	}
-	.date-picker{
-		transform: translateX(68px);
-		padding-left: 37px;
-		padding-top:0;
-	}
 }
 
 @media all and (max-width:850px){
 	.day{
 		padding:145px 35px;
 		font-size:26px;
-		transform: translateX(38px);
+		transform: translateX(63px);
 	}
 	.date-picker{
-		transform: translateX(106px);
+		transform: translate(73px, -114px);
 		padding-left: 26px;
 		padding-top:0;
 	}
@@ -227,12 +242,15 @@
 
 @media all and (max-width:600px){
 	.day{
-		padding:145px 18px;
+		padding:145px 25.5px;
 		font-size: 18px;
 		margin-left: 12px;
 	}
 	.date-picker{
 		padding-left: 5px;
+	}
+	.table_calendar{
+		transform: translate(50px, -210px);
 	}
 }
 
@@ -243,8 +261,11 @@
 		margin-left: 13px;
 	}
 	.date-picker{
-		padding-left: 1px;
+		padding-left: 5px;
 		font-size: 17px;
+	}
+	.table_calendar{
+		transform:translate(25px,-210px);
 	}
 }
 
@@ -327,7 +348,7 @@
 		font-size: 30px;
 		margin-left: 0;
 	}
-	.nav_li_y,.nav_li_d{
+	.nav_li_y,.nav_li_d{	
 		font-size: 25px;
 	}
 }
@@ -339,19 +360,18 @@
 	}
 	.date-picker{
 		padding-right:20px;
-		transform:translateX(90px);		
+		transform: translate(67px,-130px);
 	}
 }
 
 @media all and (max-width:325px){
 	.day{
-		padding:145px 9px;
+		padding:145px 12px;
 		font-size: 16px;
 		margin-left: -4px;
 	}
 	.date-picker{
-		transform:translateX(-90px);	
-		background-color: red;
+		transform: translate(67px,-130px);
 	}
 }
 
@@ -370,8 +390,218 @@
 		margin-left: -2px;
 	}
 }
+*/
 
 
+
+					/* ANDROID */ 
+
+	/* Smartphones */
+
+@media all and (max-width:480px){
+	.table_calendar{
+		transform: translate(70px,-220px);
+	}
+
+	#nav{
+		transform: translateX(-15px);
+	}
+
+	#month_name{
+		transform: translate(-20px,-12px);
+	}
+	#month_day{
+		transform: translate(-45px,-12px);
+	}
+	.nav_li{
+		font-size: 40px;
+	}
+	.container_year_day{
+		transform: translate(28px,-40px);
+	}
+
+	.day{
+		padding:145px 10px;
+		font-size:20px;
+	}
+
+	.date-picker{
+		padding:18px;
+		padding-left: 21.5px;
+		font-size: 20px;
+		transform: translate(-12px,-153px);
+	}
+
+	.selected{
+		padding: 20px 20px 20px 20px;
+		margin: -20px -20px -20px -20px;
+	}
+}
+
+@media all and (max-width:412px){
+	.table_calendar{
+		transform: translate(70px,-220px);
+	}
+
+	#nav{
+		transform: translateX(-15px);
+	}
+
+	#month_name{
+		transform: translate(-20px,-12px);
+	}
+	#month_day{
+		transform: translate(-45px,-12px);
+	}
+	.nav_li{
+		font-size: 40px;
+	}
+	.container_year_day{
+		transform: translate(28px,-40px);
+	}
+
+	.day{
+		padding:145px 4.5px;
+		font-size:20px;
+	}
+
+	.date-picker{
+		padding:18px;
+		padding-left: 5px;
+		font-size: 20px;
+		transform: translate(7px,-153px);
+	}
+
+	.selected{
+    padding: 10px 10px 10px 10px;
+    margin: -10px -10px -10px -10px;
+	}	
+}
+
+@media all and (max-width:361px){
+	.table_calendar{
+		transform: translate(70px,-220px);
+	}
+
+	#nav{
+		transform: translateX(-15px);
+	}
+
+	#month_name{
+		transform: translate(-20px,-12px);
+	}
+	#month_day{
+		transform: translate(-45px,-12px);
+	}
+	.nav_li{
+		font-size: 40px;
+	}
+	.container_year_day{
+		transform: translate(28px,-40px);
+	}
+
+	.day{
+		padding:145px 4.5px;
+		font-size:20px;
+	}
+
+	.date-picker{
+		padding:18px;
+		padding-left: 1px;
+		font-size: 20px;
+		transform: translate(7px,-153px);
+	}
+
+	.selected{
+    padding: 10px 10px 10px 10px;
+    margin: -10px -10px -10px -10px;
+	}	
+}
+
+@media all and (max-width:325px){
+	.table_calendar{
+		transform: translate(70px,-220px);
+	}
+
+	#nav{
+		transform: translateX(-15px);
+	}
+
+	#month_name{
+		transform: translate(-20px,-12px);
+	}
+	#month_day{
+		transform: translate(-45px,-12px);
+	}
+	.nav_li{
+		font-size: 40px;
+	}
+	.container_year_day{
+		transform: translate(28px,-40px);
+	}
+
+	.day{
+		padding:145px 0px;
+		font-size:20px;
+	}
+
+	.date-picker{
+		padding:17px;
+		padding-left: 0px;
+		font-size: 20px;
+		transform: translate(3px,-153px);
+	}
+
+	.selected{
+    padding: 10px 10px 10px 10px;
+    margin: -10px -10px -10px -10px;
+	}
+}
+
+	/* Tablets */
+
+@media all and (max-width:1280px){
+
+}
+
+@media all and (max-width:800px){
+
+}
+
+@media all and (max-width:768px){
+
+}
+
+@media all and (max-width:600px){
+
+}
+
+
+					/* Apple */
+
+	/* Iphones */ 
+
+@media all and (max-width:414px){
+
+}
+
+@media all and (max-width:375px){
+
+}
+
+@media all and (max-width:320px){
+
+}
+
+	/* Ipads */
+
+@media all and (max-width:1024px){
+
+}
+
+@media all and (max-width:768px){
+
+}
 
 
 
