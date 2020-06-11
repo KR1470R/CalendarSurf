@@ -202,6 +202,8 @@
 		dropdown_list_country.style.display = 'none'
 		const get_event_list = document.getElementById("events_container")
 
+		const getDaySat = document.getElementById("Sat")
+
 		const get_current_date_btn = document.getElementById('get_current_date')
 
 		let pop_up_opened = false
@@ -210,6 +212,20 @@
 		let number_selected = null
 
 		let mode = 'numbers'
+//         MOBILE CHECK
+		function mobileCheck(){
+			if (typeof window.orientation !== "undefined"){  													
+				return true																		
+			}else{
+				return false
+			}
+		}
+		let outMobileCheck = mobileCheck()
+//	
+
+		if (outMobileCheck === true){															// true if Mobile		
+			get_background_arrow_buttons.style.display = "none"   // false if NOT Mobile
+		}else{}
 
 		function requestAjax(data){
 			$.ajax({
@@ -391,17 +407,15 @@
 		}});
 
 		//PART LOGIC OF CALENDAR
-
+/*
 		for (let count in days) {
 			let newElem = document.createElement('th')
 			newElem.innerHTML = days[count]
 			newElem.id = days[count]
 			newElem.className = 'day'
-			newElem.style.cssText = 'text-decoration: none;display: block;float: left;padding: 145px 100px;text-decoration: none;font-size:30px;font-family: "Roboto", sans-serif;width: auto;'
-			container_days.style.cssText = 'position:absolute;margin-top:10px;margin-left:-230px;'
 			container_days.appendChild(newElem)
 		}
-
+*/
 		function generate_year_range(start, end) {
 			let years = "";
 			for (let year = start; year <= end; year++) {
@@ -426,9 +440,7 @@
 					let get_container_right = document.getElementById('right_calendar_body')
 					let get_container_left = document.getElementById('left_calendar_body')
 					let get_container_center = document.getElementById('calendar_body')
-					get_container_right.style.cssText = 'animation:1s linear right_to_center;';
-					setTimeout(() => get_container_right.style.cssText = 'margin-left:200%;margin-top: 180px;position: absolute;', 100)
-					get_container_center.style.cssText = 'animation:1s linear center_container_to_left;';
+					get_container_center.style.cssText = '-webkit-animation: animation_next 1000ms linear both;animation: animation_next 1000ms linear both;';
 					setTimeout(() => get_container_center.style.cssText = 'margin-left:-280px;margin-top: 180px;position: absolute;', 100)
 					get_container_center.innerHTML = get_container_right.innerHTML
 				}else if(swiped === "back"){
@@ -436,9 +448,7 @@
 					let get_container_right = document.getElementById('right_calendar_body')
 					let get_container_left = document.getElementById('left_calendar_body')
 					let get_container_center = document.getElementById('calendar_body')
-					get_container_left.style.cssText = 'animation:1s linear left_to_center;';
-					setTimeout(() => get_container_left.style.cssText = 'margin-left: -200%;margin-top: 180px;position: absolute;', 100)
-					get_container_center.style.cssText = 'animation:1s linear center_container_to_right;';
+					get_container_center.style.cssText = '-webkit-animation: animation_back 1000ms linear both;animation: animation_back 1000ms linear both;';
 					setTimeout(() => get_container_center.style.cssText = 'margin-left:-280px;margin-top: 180px;position: absolute;', 100)
 					get_container_center.innerHTML = get_container_left.innerHTML
 				}
@@ -471,7 +481,6 @@
 						let get_container_right = document.getElementById('right_calendar_body')
 						let get_container_left = document.getElementById('left_calendar_body')
 						let get_container_center = document.getElementById('calendar_body')
-						console.log("xpos - ",xPos)
 						get_container_left.animate([{transform:"translateX("+xPos+"px)"},{transform:"translateX(2000px)"}],{duration:300})
 						get_container_center.animate([{transform:"translateX("+xPos+"px)"},{transform:"translateX(2000px)"}],{duration:300})
 						setTimeout(()=>{
@@ -491,10 +500,20 @@
 					let tbl = document.getElementById(id)
 					tbl.innerHTML = ''
 					let date = 1
+					let row_day = document.createElement("tr")
+					for (let count in days) {
+						let newElem = document.createElement('td')
+						newElem.innerHTML = days[count]
+						newElem.id = days[count]
+						newElem.className = 'day'
+						row_day.appendChild(newElem)
+					}
+					tbl.appendChild(row_day)
 					for (let i = 0; i < 6; i++) {
 						let row = document.createElement('tr')
 						row.style.cssText = "font-size: 30px;font-family: 'Lato', sans-serif;"
 						for (let j = 0; j < 7; j++) {
+
 							if (i === 0 && j < firstDay) {
 								let cell = document.createElement('td')
 								let cellText = document.createTextNode("")
@@ -515,14 +534,10 @@
 								cell_span.setAttribute('id', 'span_' + date)
 								cell_span.setAttribute('class', 'cell_div')
 								cell.appendChild(cell_span)
-								cell.style.cssText = 'padding:50px;padding-left:165px;text-align:center;'
 
 								if (date === now.getDate() && year === now.getFullYear() && month === now.getMonth()) {
 									div_picker_selected_number = date
-									cell.className = 'date-picker selected'
-									cell_span.className = 'cell_div_selected'
-									cell_span.style.cssText = 'z-index:1;color:white;text-align:center;margin-top:30px;padding-right:5px;'
-									cell.style.cssText = 'background-color:#E73A3C;width:100px;height:100px;position:absolute;border-radius:10px;margin-left:130px;z-index:2;margin-top:10px;'
+									cell_span.className = 'cell_div_selected selected'
 								}
 								row.appendChild(cell)
 								date++
@@ -821,25 +836,19 @@
 			events_btn.addEventListener("click", () => {
 				if (mode === 'events'){
 					mode = "numbers"
-					get_calendar_head.style.cssText = "animation:calendar_body_swipe_to_right 1s ease-in-out;";        setTimeout(() => get_calendar_head.style.cssText = 'margin-top: 10px;margin-left: -230px; position:absolute;', 1000)
-					get_container_center.style.cssText = 'animation:left_to_center 1s ease-in-out;';
-					setTimeout(() => get_container_center.style.cssText = 'margin-left:-280px;margin-top: 180px;position:absolute;display:block;', 1000)
-					events_container.style.cssText = "display:block;animation: slide_events_container_back 1s ease-in-out;";
-					setTimeout(() => {events_container.style.cssText = "margin-left:200%;display:none;";event_container.innerHTML = ""}, 1000)
+					get_container_center.style.cssText = 'margin-left:-280px;margin-top: 180px;position:absolute;display:block;'
+					events_container.style.cssText = "margin-left:200%;display:none;";event_container.innerHTML
 						dropdown_list_country.style.cssText = 'display:block;'
-					dropdown_list_country.animate([{opacity: 1}, {opacity: 0}], {duration: 1000, fill: 'both'});
+					dropdown_list_country.animate([{opacity: 1}, {opacity: 0}], {duration: 100, fill: 'both'});
 					setTimeout(() => {
 						dropdown_list_country.style.cssText = 'display:none;opacity:0;';events_btn.innerHTML = 'Event list'
 					},1000)
 
 				}else{
 					mode = "events"
-					get_calendar_head.style.cssText = "animation:calendar_body_swipe_to_left 1s ease-in-out;";
-					setTimeout(() => get_calendar_head.style.cssText = 'margin-top:10px;margin-left:-200%;position:absolute;', 1000)
-					get_container_center.style.cssText = 'animation:center_container_to_left 1s ease-in-out;';
-					setTimeout(() => get_container_center.style.cssText = 'margin-left:-200%;margin-top: 180px;position:absolute;display:none;;', 1000)
-					events_container.style.cssText = "display:block;animation: slide_events_container 1s ease-in-out;";
-					setTimeout(() => {events_container.style.cssText = "margin-left:50px;display:block;";}, 1000)
+					calendar.preloader.show();
+					get_container_center.style.cssText = 'margin-left:-200%;margin-top: 180px;position:absolute;display:none;'
+					events_container.style.cssText = "margin-left:50px;display:block;"
 					let year = document.getElementById('year').innerHTML
 					let country_choosed = document.getElementById('dropdown_country_title').className
 					let data = {
@@ -856,4 +865,5 @@
 
 			})
 		})
+
 })();

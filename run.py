@@ -34,6 +34,7 @@ def main():
 @app.route('/countries/',methods=["POST"])
 def send_data_by_country():
 	if request.method == 'POST':
+		print("DATA ",request.json)
 		year = request.json['year']
 		country = request.json['country'].upper()
 		url = f"https://calendarific.com/holidays/{year}/{country}"

@@ -1,0 +1,378 @@
+@media all and (max-width:2000px){
+	.day{
+		padding: 145px 113px;
+	}
+}
+
+@media all and (max-width:1950px){
+	.day{
+		padding: 145px 110px;
+	}
+}
+
+
+@media all and (max-width:1900px){
+	.day{
+		padding: 145px 107px;
+	}
+}
+
+@media all and (max-width:1850px){
+	.day{
+		padding: 145px 102px;
+	}
+}
+
+@media all and (max-width:1800px){
+	.day{
+		padding: 145px 100px;
+	}
+}
+
+@media all and (max-width:1750px){
+	.day{
+		padding: 145px 95px;
+	}
+}
+
+@media all and (max-width:1700px){
+	.day{
+		padding: 145px 92px;
+	}
+}
+
+@media all and (max-width:1650px){
+	.day{
+		padding:145px 87px;
+	}
+}
+
+
+@media all and (max-width:1600px){
+	.day{
+		padding:145px 84px;
+	}
+}
+
+@media all and (max-width:1550px){
+	.day{
+		padding:145px 79px;
+	}
+}
+
+@media all and (max-width:1500px){
+	.day{
+		padding:145px 77px;
+	}
+}
+
+@media all and (max-width:1450px){
+	.day{
+		padding:145px 74px;
+	}
+}
+
+@media all and (max-width:1400px){
+	.day{
+		padding:145px 71px;
+	}
+}
+
+@media all and (max-width:1350px){
+	.day{
+		padding:145px 65px;
+	}
+}
+
+@media all and (max-width:1300px){
+	.day{
+		padding:145px 63px;
+	}
+}
+
+@media all and (max-width:1250px){
+	.day{
+		padding:145px 58px;
+	}
+}
+
+@media all and (max-width:1200px){
+	.day{
+		padding:145px 56px;
+	}
+}
+
+@media all and (max-width:1150px){
+	.day{
+		padding:145px 51px;
+	}
+}
+
+@media all and (max-width:1100px){
+	.day{
+		padding:145px 49px;
+	}
+}
+
+@media all and (max-width:1050px){
+	.day{
+		padding:145px 46px;
+	}
+}
+
+@media all and (max-width:1000px){
+	.day{
+		padding:145px 42px;
+	}
+}
+
+@media all and (max-width:950px){
+	.day{
+		padding:145px 39px;
+	}
+}
+
+@media all and (max-width:900px){
+	.day{
+		padding:145px 36px;
+		transform: translateX(16px);
+	}
+	#additionally{
+		padding-right: 7px;
+		font-size: 50px;
+	}
+
+	#menu{
+		font-size: 50px;
+	}
+	#month_name{
+		margin-left: -25px;
+	}
+	.nav_li{
+		font-size: 40px;
+		padding:14px 5px;
+	}
+	#year{
+		margin-left: -120px;
+	}
+	#day_identificator{
+		margin-left: -40px;
+	}
+	.container_year_day{
+		transform: translateY(-20px);
+	}
+	#calendar_head{
+		transform: translateY(-30px);
+	}
+	.date-picker{
+		transform: translateX(68px);
+		padding-left: 37px;
+		padding-top:0;
+	}
+}
+
+@media all and (max-width:850px){
+	.day{
+		padding:145px 35px;
+		font-size:26px;
+		transform: translateX(38px);
+	}
+	.date-picker{
+		transform: translateX(106px);
+		padding-left: 26px;
+		padding-top:0;
+	}
+}
+
+@media all and (max-width:800px){
+	.day{
+		padding:145px 31.5px;
+		font-size:26px;
+	}
+	.date-picker{
+		padding-left: 19px;
+	}
+}
+
+@media all and (max-width:750px){
+	.day{
+		padding:145px 33px;
+		font-size: 20px;
+	}
+	.date-picker{
+		padding-left: 13px;
+	}
+}
+
+@media all and (max-width:700px){
+	.day{
+		padding:145px 31px;
+		font-size: 18px;
+	}
+	.date-picker{
+		padding-left: 15px;
+		font-size: 20px;
+	}
+}
+
+@media all and (max-width:650px){
+	.day{
+		padding:145px 28px;
+		font-size: 18px;
+	}
+	.date-picker{
+		padding-left: 11px;
+	}
+}
+
+@media all and (max-width:600px){
+	.day{
+		padding:145px 18px;
+		font-size: 18px;
+		margin-left: 12px;
+	}
+	.date-picker{
+		padding-left: 5px;
+	}
+}
+
+@media all and (max-width:550px){
+	.day{
+		padding:145px 14px;
+		font-size: 18px;
+		margin-left: 13px;
+	}
+	.date-picker{
+		padding-left: 1px;
+		font-size: 17px;
+	}
+}
+
+@media all and (max-width:500px){
+	.day{
+		padding:145px 18px;
+		font-size: 18px;
+		margin-left: 10px;
+	}
+	.date-picker{
+		padding-left: 0;
+		padding-right:55px;
+		font-size: 17px;
+		transform:translateX(46px);
+	}
+}
+
+@media all and (max-width:450px){
+	#nav_days_ul{
+		margin-left: -232px;
+	}
+	.day{
+		padding:145px 14.5px;
+		font-size: 18px;
+		margin-left: 0px;
+	}
+	.date-picker{
+		padding-left: 0;
+		padding-right:38px;
+		font-size: 17px;
+		transform:translateX(106px);		
+	}
+}
+
+@media all and (max-width: 420px){
+	.day{
+		padding:145px 11.3px;
+		font-size:18px;
+		margin-left: 0px;
+	}
+	.date-picker{
+		padding-right: 28px;
+		transform: translateX(106px);
+	}
+	.selected{
+		padding: 10px 10px 10px 10px;
+    margin: -10px -10px -10px -10px;
+	}	
+}
+
+@media all and (max-width:400px){
+	.day{
+		padding:145px 10.5px;
+		font-size: 18px;
+		margin-left: 0px;
+	}
+	.date-picker{
+		padding-right:29px;
+		transform:translateX(106px);		
+	}
+}
+@media all and (max-width:370px){
+	.day{
+		padding:145px 11.7px;
+	}
+	.date-picker{
+		padding-right: 23px;
+		transform: translateX(92px);
+	}
+	.container_year_day{
+		transform: translate3d(10px, -35px, 0px);
+	}
+	#day_identificator{
+		margin-left: -57px;
+	}
+	#month_name{
+		font-size: 30px;
+	}
+	#month_day{
+		font-size: 30px;
+		margin-left: 0;
+	}
+	.nav_li_y,.nav_li_d{
+		font-size: 25px;
+	}
+}
+@media all and (max-width:350px){
+	.day{
+		padding:145px 9px;
+		font-size: 18px;
+		margin-left: -4px;
+	}
+	.date-picker{
+		padding-right:20px;
+		transform:translateX(90px);		
+	}
+}
+
+@media all and (max-width:325px){
+	.day{
+		padding:145px 9px;
+		font-size: 16px;
+		margin-left: -4px;
+	}
+	.date-picker{
+		transform:translateX(-90px);	
+		background-color: red;
+	}
+}
+
+@media all and (max-width:300px){
+	.day{
+		padding:145px 5px;
+		font-size: 18px;
+		margin-left: -2px;
+	}
+}
+
+@media all and (max-width:250px){
+	.day{
+		padding:145px 1.5px;
+		font-size: 18px;
+		margin-left: -2px;
+	}
+}
+
+
+
+
+
+
