@@ -238,7 +238,7 @@
         function visibleCurrentDateBtn() {
 
             if (mode === "numbers") {
-                if (element_month.innerHTML == current_month && element_month_day.innerHTML == now.getDate() && element_year.innerHTML == currentYear) {
+                if (element_month.innerHTML === current_month && element_month_day.innerHTML === now.getDate() && element_year.innerHTML === currentYear) {
                     get_current_date_btn.style.display = 'none'
                 } else {
                     get_current_date_btn.style.cssText = 'background-color: #D5D5D5;width: 100px;height: 100px;border-radius: 99999px;position: relative;display: flex;flex-direction: column;float: right;position: fixed;bottom: 3%;left: 92%;align-self: flex-end;cursor: pointer;z-index: 10;'
@@ -249,7 +249,7 @@
 
                 }
             } else if (mode === "events") {
-                if (element_year.innerHTML == currentYear) {
+                if (element_year.innerHTML === currentYear) {
                     get_current_date_btn.style.display = 'none'
                 } else {
                     get_current_date_btn.style.cssText = 'background-color: #D5D5D5;width: 200px;height: 100px;border-radius: 35px;position: relative;display: flex;flex-direction: column;float: right;position: fixed;bottom: 3%;left: 85%;align-self: flex-end;cursor: pointer;z-index: 10;'
@@ -308,8 +308,8 @@
             if (c === 'nav_menu_li') {
             } else if (i === 'dropdown_country' || i === 'dropdown_list_ul' || i === 'country_dropdown_list' || i === 'dropdown_country_title_list' || i === 'selected_country' || i === 'ico_country_current') {
                 if (opened_dropdown_country === false) {
-                    if (document.getElementById("dropdown_list_countries") != null === true) {
-                        if (opened_dropdown_country === false && i != 'selected_country' == true) {
+                    if (document.getElementById("dropdown_list_countries") != null) {
+                        if (opened_dropdown_country === false && i !== 'selected_country') {
                             let get_value_clicked_item = e.target
                             if (get_value_clicked_item.getAttribute('id') === 'dropdown_list_ul' || get_value_clicked_item.getAttribute('id') === 'dropdown_country') {
                                 return
