@@ -306,7 +306,6 @@
             }
 
             if (c === 'nav_menu_li') {
-                return;
             } else if (i === 'dropdown_country' || i === 'dropdown_list_ul' || i === 'country_dropdown_list' || i === 'dropdown_country_title_list' || i === 'selected_country' || i === 'ico_country_current') {
                 if (opened_dropdown_country === false) {
                     if (document.getElementById("dropdown_list_countries") != null === true) {
@@ -412,7 +411,6 @@
                         opened_dropdown_country = true
                         document.getElementById('dropdown_country').style.cssText = 'display:block;opacity:1;background-color:transparent;'
                     } catch (e) {
-                        return
                     }
                 }
             }
