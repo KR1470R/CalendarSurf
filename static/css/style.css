@@ -56,7 +56,7 @@ body::-webkit-scrollbar {
 
 @keyframes preloader-bounce {
 
-    0%,100% {
+    0%, 100% {
         transform: scale(0);
     }
 
@@ -174,12 +174,11 @@ body::-webkit-scrollbar {
     text-decoration: none;
     font-size: 40px;
     font-family: 'Open Sans', sans-serif;
-    padding: 20px;
     width: 127%;
     display: block;
     z-index: 2;
     transition: 0.1s;
-    padding-right: 100px;
+    padding: 20px 100px 20px 20px;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
@@ -193,7 +192,7 @@ body::-webkit-scrollbar {
     background-color: #F5F5F5;
 }
 
-.container_year_day{
+.container_year_day {
     margin-left: 11.7%;
 }
 
@@ -316,11 +315,11 @@ body::-webkit-scrollbar {
 @keyframes calendar_body_swipe_to_right {
     0% {
         margin-top: 10px;
-        margin-left: -200%;        
+        margin-left: -200%;
     }
     100% {
         margin-top: 10px;
-        margin-left: -230px; 
+        margin-left: -230px;
     }
 }
 
@@ -431,7 +430,7 @@ a {
     filter: blur(0rem);
     position: absolute;
     overflow: hidden;
-    width:100%;
+    width: 100%;
     height: 100%
     /*pointer-events: all;*/
 }
@@ -903,9 +902,9 @@ a {
     z-index: -1;
     margin-left: 3%;
     display: block;
-    text-align:center;
+    text-align: center;
     font-family: 'Lato', sans-serif;
-    font-size:50px;
+    font-size: 50px;
 }
 
 #ico_cal_current_date_btn {
@@ -920,7 +919,8 @@ a {
     text-align: center;
     margin-left: -3px;
 }
-#loading{
+
+#loading {
     position: absolute;
     text-align: center;
     width: 100%;
