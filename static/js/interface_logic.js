@@ -225,6 +225,7 @@
 
 		if (outMobileCheck === true){															// true if Mobile		
 			get_background_arrow_buttons.style.display = "none"   // false if NOT Mobile
+			menu.style.position = "absolute"
 		}else{}
 
 		function requestAjax(data){
@@ -501,6 +502,7 @@
 					tbl.innerHTML = ''
 					let date = 1
 					let row_day = document.createElement("tr")
+					row_day.style.paddingTop = "100px"
 					for (let count in days) {
 						let newElem = document.createElement('td')
 						newElem.innerHTML = days[count]
@@ -603,7 +605,7 @@
 
 			function setTranslateBack(elements){
 				elements.forEach(
-					j => {j.animate([{transform:"translateX("+currentX+"px)"},{transform:"translateX(0px)"}],{duration:100});setTimeout(()=>{j.style.transform = "translateX(0px)"},100)		}
+					j => {j.animate([{transform:"translateX("+currentX+"px)"},{transform:"translateX(0px)"}],{duration:100});setTimeout(()=>{j.style.transform = "translateX(0px)";},100)		}
 				)
 			}
 
@@ -611,6 +613,7 @@
 			el.addEventListener("touchmove",drag,false)
 
 			el.addEventListener("touchend",(e)=>{
+				document.getElementById("calendar_body").style.pointerEvents = "all";
 				if (el.style.transform === "translateX('0px')"){
 					return
 				}else{
@@ -620,6 +623,7 @@
 						back(false,currentX)
 					}else if (currentX > -400 || currentX < 400){
 						setTranslateBack([lel,el,rel])
+
 					}
 				}
 				xOffset = 0

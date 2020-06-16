@@ -243,6 +243,7 @@ body::-webkit-scrollbar {
 }
 
 #calendar_body {
+    /*pointer-events: none;*/
     position: absolute;
     margin-top: 180px;
 }
@@ -497,6 +498,11 @@ body::-webkit-scrollbar {
     position:absolute;
     margin-top:10px;
     margin-left:-230px;
+}
+
+#nav{
+    position: relative;
+    z-index: 99999999999;
 }
 
 .day{
