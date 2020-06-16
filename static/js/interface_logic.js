@@ -260,7 +260,6 @@
                 }
             }
             if (pop_up_opened === false) {
-                return
             } else {
                 get_button_for_switch_to_current_date.style.filter = 'blur(1rem)'
             }
