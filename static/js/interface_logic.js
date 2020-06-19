@@ -212,6 +212,43 @@
 
         let mode = 'numbers'
 
+//         MOBILE CHECK
+        function mobileCheck(){
+            if (typeof window.orientation !== "undefined"){                                                     
+                return true                                                                     
+            }else{
+                return false
+            }
+        }
+        let outMobileCheck = mobileCheck()
+//  
+
+        if (outMobileCheck === true){                              // true if Mobile       
+            get_background_arrow_buttons.style.display = "none"   // false if NOT Mobile
+            menu.style.position = "absolute"
+        }else{}
+
+        function setAttributes(el, atrs) {
+          for (let key in atrs){
+            el.setAttribute(key, atrs[key]);
+          }
+        }
+
+        dict_dropdown_list_countries = {
+            "Russia":["/static/img/IcoCountryes/ru.png","ru"],
+            "Belarus":["/static/img/IcoCountryes/by.svg","by"],
+            "USA":["/static/img/IcoCountryes/usa.png","us"],
+            "Uzbekistan":["/static/img/IcoCountryes/uz.png","uz"],
+        }
+
+        let dropdown_list_elms = ["dropdown_country","dropdown_list_ul","country_dropdown_list","dropdown_country_title_list","selected_country","ico_country_current"]
+
+        function setAttributes(el, atrs) {
+          for (let key in atrs){
+            el.setAttribute(key, atrs[key]);
+          }
+        }
+
         function requestAjax(data) {
             $.ajax({
                 type: "POST",
@@ -227,6 +264,7 @@
                     calendar.preloader.hide();
                     if (mode === "events") {
                         events_btn.innerHTML = 'Simple calendar'
+                        add_content_container.innerHTML = response["data"]
                     }
                 },
                 error: (error) => {
@@ -305,128 +343,107 @@
                 }
             }
 
+            function swapElements(obj1, obj2) {
+                let obj1_id = obj1.id 
+                let obj2_id = obj2.id 
+                obj1.id = obj2_id
+                obj2.id = obj1_id
+                let parent2 = obj2.parentNode;
+                let next2 = obj2.nextSibling;
+                if (next2 === obj1) {
+                    parent2.insertBefore(obj1, obj2);
+                } else {
+                    obj1.parentNode.insertBefore(obj2, obj1);
+                    if (next2) {
+                        parent2.insertBefore(obj1, next2);
+                    } else {
+                        parent2.appendChild(obj1);
+                    }
+                }
+            }
+
             if (c === 'nav_menu_li') {
-            } else if (i === 'dropdown_country' || i === 'dropdown_list_ul' || i === 'country_dropdown_list' || i === 'dropdown_country_title_list' || i === 'selected_country' || i === 'ico_country_current') {
-                if (opened_dropdown_country === false) {
-                    if (document.getElementById("dropdown_list_countries") != null) {
-                        if (opened_dropdown_country === false && i !== 'selected_country') {
+                return;
+            }else if(!dropdown_list_elms.includes(i)){
+                try{
+                    let get_dropdown_list = document.getElementById('dropdown_list_countries')
+                    let get_dropdown_list_ul = document.getElementById('dropdown_list_ul')
+                    get_dropdown_list.animate([{opacity:1},{opacity:0}],{duration:100,fill:'both'});setTimeout(()=>get_dropdown_list.style.cssText='opacity:0;display:none;',100)
+                    get_dropdown_list_ul.animate([{opacity:1},{opacity:0}],{duration:100,fill:'both'});setTimeout(()=>get_dropdown_list_ul.style.cssText='opacity:0;display:none;',100)
+                    opened_dropdown_country = true  
+                    document.getElementById('dropdown_country').style.cssText = 'display:block;opacity:1;background-color:transparent;'
+                }catch(e){return}
+            }else if (dropdown_list_elms.includes(i)){
+                if (opened_dropdown_country === false){
+                    if (document.getElementById("dropdown_list_countries") != null === true){
+                        if (opened_dropdown_country === false && i != 'selected_country' == true){
                             let get_value_clicked_item = e.target
-                            if (get_value_clicked_item.getAttribute('id') === 'dropdown_list_ul' || get_value_clicked_item.getAttribute('id') === 'dropdown_country') {
-                                return
-                            } else {
+                            if (get_value_clicked_item.getAttribute('id') === 'dropdown_list_ul' || get_value_clicked_item.getAttribute('id') === 'dropdown_country'){return}else{
                                 let get_content_from_title = get_value_clicked_item.querySelector('#dropdown_country_title_list')
                                 let get_ico_from_item = get_value_clicked_item.querySelector('#ico_country')
                                 let get_current_item_ico = document.getElementById('ico_country_current')
                                 let get_current_item_title = document.getElementById('dropdown_country_title')
                                 let previous_current_title_country = get_current_item_title.innerHTML
                                 let previus_current_ico_country = get_current_item_ico.getAttribute("src")
-                                get_current_item_title.innerHTML = get_content_from_title.innerHTML;
-                                get_content_from_title.innerHTML = previous_current_title_country
-                                get_current_item_ico.setAttribute("src", String(get_ico_from_item.getAttribute("src")));
-                                get_ico_from_item.setAttribute("src", String(previus_current_ico_country))
+                                swapElements(get_content_from_title,get_current_item_title)
+                                get_current_item_ico.setAttribute("src",String(get_ico_from_item.getAttribute("src")));get_ico_from_item.setAttribute("src",String(previus_current_ico_country))
                                 let get_dropdown_list = document.getElementById('dropdown_list_countries')
                                 let get_dropdown_list_ul = document.getElementById('dropdown_list_ul')
-                                get_dropdown_list.animate([{opacity: 1}, {opacity: 0}], {duration: 100, fill: 'both'});
-                                setTimeout(() => get_dropdown_list.style.cssText = 'opacity:0;display:none;', 100)
-                                get_dropdown_list_ul.animate([{opacity: 1}, {opacity: 0}], {
-                                    duration: 100,
-                                    fill: 'both'
-                                });
-                                setTimeout(() => get_dropdown_list_ul.style.cssText = 'opacity:0;display:none;', 100)
-                                opened_dropdown_country = true
+                                get_dropdown_list.animate([{opacity:1},{opacity:0}],{duration:100,fill:'both'});setTimeout(()=>get_dropdown_list.style.cssText='opacity:0;display:none;',100)
+                                get_dropdown_list_ul.animate([{opacity:1},{opacity:0}],{duration:100,fill:'both'});setTimeout(()=>get_dropdown_list_ul.style.cssText='opacity:0;display:none;',100)
+                                opened_dropdown_country = true  
                                 document.getElementById('dropdown_country').style.cssText = 'display:block;opacity:1;background-color:transparent;'
                                 let year = document.getElementById('year').innerHTML
                                 let country_choosed = document.getElementById('dropdown_country_title').className
-                                let data = {
+                                let data = {    
                                     'year': year,
                                     'country': country_choosed,
                                 }
-
                                 calendar.preloader.show();
                                 requestAjax(data)
                             }
-                        } else {
+                        }else{
                             let create_dropdown_list_ul = document.getElementById('dropdown_list_countries')
                             let get_dropdown_list_ul = document.getElementById('dropdown_list_ul')
                             get_dropdown_list_ul.style.cssText = 'display:block;opacity:0;'
                             create_dropdown_list_ul.style.cssText = 'display:block;opacity:0;'
-                            create_dropdown_list_ul.animate([{opacity: 0}, {opacity: 1}], {
-                                duration: 100,
-                                fill: "both"
-                            });
-                            setTimeout(() => create_dropdown_list_ul.cssText = "opacity:1;")
-                            get_dropdown_list_ul.animate([{opacity: 0}, {opacity: 1}], {duration: 100, fill: "both"});
-                            setTimeout(() => get_dropdown_list_ul.cssText = "opacity:1;")
-                            document.getElementById('dropdown_country').style.cssText = "background-color:white;min-height:50px;height:auto;-webkit-box-shadow: 0px 0px 23px -5px rgba(0,0,0,0.75);-moz-box-shadow: 0px 0px 23px -5px rgba(0,0,0,0.75);box-shadow: 0px 0px 23px -5px rgba(0,0,0,0.75);"
+                            create_dropdown_list_ul.animate([{opacity:0},{opacity:1}],{duration:100,fill:"both"});setTimeout(()=>create_dropdown_list_ul.cssText="opacity:1;")
+                            get_dropdown_list_ul.animate([{opacity:0},{opacity:1}],{duration:100,fill:"both"});setTimeout(()=>get_dropdown_list_ul.cssText="opacity:1;")
+                            document.getElementById('dropdown_country').style.cssText = "background-color:white;min-height:50px;height:auto;-webkit-box-shadow: 0px 0px 23px -5px rgba(0,0,0,0.75);-moz-box-shadow: 0px 0px 23px -5px rgba(0,0,0,0.75);box-shadow: 0px 0px 23px -5px rgba(0,0,0,0.75);" 
                         }
 
-                    } else if (document.getElementById("dropdown_list_countries") === null) {
+                    }else if (document.getElementById("dropdown_list_countries") === null){
                         let create_dropdown_list_ul = document.createElement('div')
                         create_dropdown_list_ul.setAttribute('id', "dropdown_list_countries")
-                        create_dropdown_list_ul.innerHTML = '\
-							<ul id="dropdown_list_ul">\
-								<li class="nav_ul">\
-									<div id="country_dropdown_list" id="country_dropdown_list_li">\
-										<img id="ico_country" src="/static/img/IcoCountryes/ru.png" width="80" height="80">\
-										<p id="dropdown_country_title_list" class="ru">Russia</p>\
-									</div>\
-								</li>\
-								<li class="nav_ul">\
-										<div id="country_dropdown_list" id="country_dropdown_list_li">\
-											<img id="ico_country" src="/static/img/IcoCountryes/by.svg" width="80" height="80">\
-											<p id="dropdown_country_title_list" class="by">Belarus</p>\
-										</div>\
-								</li>\
-								<li class="nav_ul">\
-									<div id="country_dropdown_list" id="country_dropdown_list_li">\
-										<img id="ico_country" src="/static/img/IcoCountryes/usa.png" width="80" height="80">\
-										<p id="dropdown_country_title_list" class="us">USA</p>\
-									</div>\
-								</li>\
-								<li class="nav_ul">\
-									<div id="country_dropdown_list" id="country_dropdown_list_li">\
-										<img id="ico_country" src="/static/img/IcoCountryes/uz.png" width="80" height="80">\
-										<p id="dropdown_country_title_list" class="uz">Uzbekistan</p>\
-									</div>\
-								</li>\
-							</ul>'
+                        let create_dropdown_list_ul_el = document.createElement("ul")
+                        create_dropdown_list_ul_el.setAttribute("id","dropdown_list_ul")
+                        create_dropdown_list_ul.appendChild(create_dropdown_list_ul_el)
+                        for (let [name,value] of Object.entries(dict_dropdown_list_countries)){
+                            let dropdown_list_ul_li = document.createElement("li")
+                            dropdown_list_ul_li.setAttribute("class","nav_ul")
+                            create_dropdown_list_ul_el.appendChild(dropdown_list_ul_li)
+                            let dropdown_list_ul_li_div = document.createElement("div")
+                            dropdown_list_ul_li_div.setAttribute("id","country_dropdown_list")
+                            dropdown_list_ul_li.appendChild(dropdown_list_ul_li_div)
+                            let dropdown_list_ul_li_div_img = document.createElement("img")
+                            setAttributes(dropdown_list_ul_li_div_img,{"id":"ico_country","src":value[0],"width":"80","height":"80"})
+                            let dropdown_list_ul_li_div_p = document.createElement("p")
+                            setAttributes(dropdown_list_ul_li_div_p,{"id":"dropdown_country_title_list","class":value[1]})
+                            dropdown_list_ul_li_div_p.innerHTML = name 
+                            dropdown_list_ul_li_div.appendChild(dropdown_list_ul_li_div_img);dropdown_list_ul_li_div.appendChild(dropdown_list_ul_li_div_p)
+                        }
                         document.getElementById('dropdown_country').appendChild(create_dropdown_list_ul)
                         create_dropdown_list_ul.style.cssText = 'display:block;opacity:0;'
-                        create_dropdown_list_ul.animate([{opacity: 0}, {opacity: 1}], {duration: 100, fill: "both"});
-                        setTimeout(() => {
-                            create_dropdown_list_ul.cssText = "opacity:1;"
-                        }, 100)
+                        create_dropdown_list_ul.animate([{opacity:0},{opacity:1}],{duration:100,fill:"both"});setTimeout(()=>{create_dropdown_list_ul.cssText="opacity:1;"},100)
                         document.getElementById('dropdown_country').style.cssText = "background-color:white;min-height:50px;height:auto;z-index:10;-webkit-box-shadow: 0px 0px 23px -5px rgba(0,0,0,0.75);-moz-box-shadow: 0px 0px 23px -5px rgba(0,0,0,0.75);box-shadow: 0px 0px 23px -5px rgba(0,0,0,0.75);"
                         document.getElementById('ico_country').setAttribute('draggable', false);
                     }
                     opened_dropdown_country = true
-                } else if (opened_dropdown_country === false) {
-                    try {
-                        let get_dropdown_list = document.getElementById('dropdown_list_countries')
-                        let get_dropdown_list_ul = document.getElementById('dropdown_list_ul')
-                        get_dropdown_list.animate([{opacity: 1}, {opacity: 0}], {duration: 100, fill: 'both'});
-                        setTimeout(() => get_dropdown_list.style.cssText = 'opacity:0;display:none;', 100)
-                        get_dropdown_list_ul.animate([{opacity: 1}, {opacity: 0}], {duration: 100, fill: 'both'});
-                        setTimeout(() => get_dropdown_list_ul.style.cssText = 'opacity:0;display:none;', 100)
-                        opened_dropdown_country = true
-                        document.getElementById('dropdown_country').style.cssText = 'display:block;opacity:1;background-color:transparent;'
-                    } catch (e) {
-                    }
-                }
+                    return
             }
-        });
+        }});
 
         //PART LOGIC OF CALENDAR
-
-        for (let count in days) {
-            let newElem = document.createElement('th')
-            newElem.innerHTML = days[count]
-            newElem.id = days[count]
-            newElem.className = 'day'
-            newElem.style.cssText = 'text-decoration: none;display: block;float: left;padding: 145px 100px;text-decoration: none;font-size:30px;font-family: "Roboto", sans-serif;width: auto;'
-            container_days.style.cssText = 'position:absolute;margin-top:10px;margin-left:-230px;'
-            container_days.appendChild(newElem)
-        }
 
         function generate_year_range(start, end) {
             let years = "";
@@ -447,25 +464,21 @@
                 element_year.innerHTML = year
             }
 
-            if (clickedOnButton) {
+            if(clickedOnButton){
                 if (swiped === "next") {
                     render_cal('right_calendar_body')
                     let get_container_right = document.getElementById('right_calendar_body')
                     let get_container_left = document.getElementById('left_calendar_body')
                     let get_container_center = document.getElementById('calendar_body')
-                    get_container_right.style.cssText = 'animation:1s linear right_to_center;';
-                    setTimeout(() => get_container_right.style.cssText = 'margin-left:200%;margin-top: 180px;position: absolute;', 100)
-                    get_container_center.style.cssText = 'animation:1s linear center_container_to_left;';
+                    get_container_center.style.cssText = '-webkit-animation: animation_next 1000ms linear both;animation: animation_next 1000ms linear both;';
                     setTimeout(() => get_container_center.style.cssText = 'margin-left:-280px;margin-top: 180px;position: absolute;', 100)
                     get_container_center.innerHTML = get_container_right.innerHTML
-                } else if (swiped === "back") {
+                }else if(swiped === "back"){
                     render_cal('left_calendar_body')
                     let get_container_right = document.getElementById('right_calendar_body')
                     let get_container_left = document.getElementById('left_calendar_body')
                     let get_container_center = document.getElementById('calendar_body')
-                    get_container_left.style.cssText = 'animation:1s linear left_to_center;';
-                    setTimeout(() => get_container_left.style.cssText = 'margin-left: -200%;margin-top: 180px;position: absolute;', 100)
-                    get_container_center.style.cssText = 'animation:1s linear center_container_to_right;';
+                    get_container_center.style.cssText = '-webkit-animation: animation_back 1000ms linear both;animation: animation_back 1000ms linear both;';
                     setTimeout(() => get_container_center.style.cssText = 'margin-left:-280px;margin-top: 180px;position: absolute;', 100)
                     get_container_center.innerHTML = get_container_left.innerHTML
                 }
@@ -498,7 +511,6 @@
                         let get_container_right = document.getElementById('right_calendar_body')
                         let get_container_left = document.getElementById('left_calendar_body')
                         let get_container_center = document.getElementById('calendar_body')
-                        console.log("xpos - ", xPos)
                         get_container_left.animate([{transform: "translateX(" + xPos + "px)"}, {transform: "translateX(2000px)"}], {duration: 300})
                         get_container_center.animate([{transform: "translateX(" + xPos + "px)"}, {transform: "translateX(2000px)"}], {duration: 300})
                         setTimeout(() => {
@@ -518,6 +530,16 @@
                 let tbl = document.getElementById(id)
                 tbl.innerHTML = ''
                 let date = 1
+                let row_day = document.createElement("tr")
+                row_day.style.paddingTop = "100px"
+                for (let count in days) {
+                    let newElem = document.createElement('td')
+                    newElem.innerHTML = days[count]
+                    newElem.id = days[count]
+                    newElem.className = 'day'
+                    row_day.appendChild(newElem)
+                }
+                tbl.appendChild(row_day)
                 for (let i = 0; i < 6; i++) {
                     let row = document.createElement('tr')
                     row.style.cssText = "font-size: 30px;font-family: 'Lato', sans-serif;"
@@ -542,14 +564,10 @@
                             cell_span.setAttribute('id', 'span_' + date)
                             cell_span.setAttribute('class', 'cell_div')
                             cell.appendChild(cell_span)
-                            cell.style.cssText = 'padding:50px;padding-left:165px;text-align:center;'
 
                             if (date === now.getDate() && year === now.getFullYear() && month === now.getMonth()) {
                                 div_picker_selected_number = date
-                                cell.className = 'date-picker selected'
-                                cell_span.className = 'cell_div_selected'
-                                cell_span.style.cssText = 'z-index:1;color:white;text-align:center;margin-top:30px;padding-right:5px;'
-                                cell.style.cssText = 'background-color:#E73A3C;width:100px;height:100px;position:absolute;border-radius:10px;margin-left:130px;z-index:2;margin-top:10px;'
+                                cell_span.className = 'cell_div_selected selected'
                             }
                             row.appendChild(cell)
                             date++
@@ -855,34 +873,21 @@
         let get_container_center = document.getElementById('calendar_body')
         let get_calendar_head = document.getElementById('nav_days_ul')
         events_btn.addEventListener("click", () => {
-            if (mode === 'events') {
+            if (mode === 'events'){
                 mode = "numbers"
-                get_calendar_head.style.cssText = "animation:calendar_body_swipe_to_right 1s ease-in-out;";
-                setTimeout(() => get_calendar_head.style.cssText = 'margin-top: 10px;margin-left: -230px; position:absolute;', 1000)
-                get_container_center.style.cssText = 'animation:left_to_center 1s ease-in-out;';
-                setTimeout(() => get_container_center.style.cssText = 'margin-left:-280px;margin-top: 180px;position:absolute;display:block;', 1000)
-                events_container.style.cssText = "display:block;animation: slide_events_container_back 1s ease-in-out;";
+                get_container_center.style.cssText = 'margin-left:-280px;margin-top: 180px;position:absolute;display:block;'
+                events_container.style.cssText = "margin-left:200%;display:none;";event_container.innerHTML
+                    dropdown_list_country.style.cssText = 'display:block;'
+                dropdown_list_country.animate([{opacity: 1}, {opacity: 0}], {duration: 100, fill: 'both'});
                 setTimeout(() => {
-                    events_container.style.cssText = "margin-left:200%;display:none;";
-                    event_container.innerHTML = ""
-                }, 1000)
-                dropdown_list_country.style.cssText = 'display:block;'
-                dropdown_list_country.animate([{opacity: 1}, {opacity: 0}], {duration: 1000, fill: 'both'});
-                setTimeout(() => {
-                    dropdown_list_country.style.cssText = 'display:none;opacity:0;';
-                    events_btn.innerHTML = 'Event list'
-                }, 1000)
+                    dropdown_list_country.style.cssText = 'display:none;opacity:0;';events_btn.innerHTML = 'Event list'
+                },1000)
 
-            } else {
+            }else{
                 mode = "events"
-                get_calendar_head.style.cssText = "animation:calendar_body_swipe_to_left 1s ease-in-out;";
-                setTimeout(() => get_calendar_head.style.cssText = 'margin-top:10px;margin-left:-200%;position:absolute;', 1000)
-                get_container_center.style.cssText = 'animation:center_container_to_left 1s ease-in-out;';
-                setTimeout(() => get_container_center.style.cssText = 'margin-left:-200%;margin-top: 180px;position:absolute;display:none;;', 1000)
-                events_container.style.cssText = "display:block;animation: slide_events_container 1s ease-in-out;";
-                setTimeout(() => {
-                    events_container.style.cssText = "margin-left:50px;display:block;";
-                }, 1000)
+                calendar.preloader.show();
+                get_container_center.style.cssText = 'margin-left:-200%;margin-top: 180px;position:absolute;display:none;'
+                events_container.style.cssText = "margin-left:50px;display:block;"
                 let year = document.getElementById('year').innerHTML
                 let country_choosed = document.getElementById('dropdown_country_title').className
                 let data = {
