@@ -3,11 +3,13 @@
 <head>
   <title>Calendar</title>
   <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/style.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/media.css') }}">
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto:wght@500&display=swap"
         rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="https://unpkg.com/flickity@2.0.11/dist/flickity.css">
   <link id="link-icon" rel="icon" href="" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 </head>
 <noscript><p>JS support not enabled!</p></noscript>
 <body id='body'>
@@ -47,9 +49,6 @@
           </ul>
       </div>
       <table id='calendar' class='table_calendar'>
-          <thead id='calendar_head'>
-          <tr id='nav_days_ul'></tr>
-          </thead>
           <tbody id='left_calendar_body'></tbody>
           <tbody id='calendar_body' style='position:absolute;margin-top:180px;margin-left:-280px;'></tbody>
           <tbody id='right_calendar_body'></tbody>            

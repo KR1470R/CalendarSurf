@@ -1,0 +1,236 @@
+					/* ANDROID */ 
+
+	/* Smartphones */
+
+@media all and (max-width:480px){
+	.table_calendar{
+		transform: translate(70px,-220px);
+	}
+
+	#nav{
+		transform: translateX(-15px);
+	}
+
+	#month_name{
+		transform: translate(-20px,-12px);
+	}
+	#month_day{
+		transform: translate(-45px,-12px);
+	}
+	.nav_li{
+		font-size: 40px;
+	}
+	.container_year_day{
+		transform: translate(28px,-40px);
+	}
+
+	.day{
+		padding:145px 10px;
+		font-size:20px;
+	}
+
+	.date-picker{
+		padding:18px;
+		padding-left: 21.5px;
+		font-size: 20px;
+		transform: translate(-12px,-153px);
+	}
+
+	.selected{
+		padding: 20px 20px 20px 20px;
+		margin: -20px -20px -20px -20px;
+	}
+	#nav_menu{
+		transform: translate(200px, -27px);	
+	}
+	.nav_menu_li{
+		font-size: 25px;
+	}
+	#go-to-div{
+		width: 90%;
+	}
+	#buttons_div{
+		transform: translate(2%,100%);
+	}
+	#cancel,#ok{
+		font-size:40px;
+		padding:0 0 0 0; 
+	}
+}
+
+@media all and (max-width:412px){
+	.table_calendar{
+		transform: translate(70px,-220px);
+	}
+
+	#nav{
+		transform: translateX(-15px);
+	}
+
+	#month_name{
+		transform: translate(-20px,-12px);
+	}
+	#month_day{
+		transform: translate(-45px,-12px);
+	}
+	.nav_li{
+		font-size: 40px;
+	}
+	.container_year_day{
+		transform: translate(28px,-40px);
+	}
+
+	.day{
+		padding:145px 4.5px;
+		font-size:20px;
+	}
+
+	.date-picker{
+		padding:18px;
+		padding-left: 5px;
+		font-size: 20px;
+		transform: translate(7px,-153px);
+	}
+
+	.selected{
+    padding: 10px 10px 10px 10px;
+    margin: -10px -10px -10px -10px;
+	}	
+	#nav_menu{
+		transform: translate(120px, -27px);	
+	}
+	.nav_menu_li{
+		font-size: 25px;
+	}
+}
+
+@media all and (max-width:361px){
+	.table_calendar{
+		transform: translate(70px,-220px);
+	}
+
+	#nav{
+		transform: translateX(-15px);
+	}
+
+	#month_name{
+		transform: translate(-20px,-12px);
+	}
+	#month_day{
+		transform: translate(-45px,-12px);
+	}
+	.nav_li{
+		font-size: 40px;
+	}
+	.container_year_day{
+		transform: translate(28px,-40px);
+	}
+
+	.day{
+		padding:145px 4.5px;
+		font-size:20px;
+	}
+
+	.date-picker{
+		padding:18px;
+		padding-left: 1px;
+		font-size: 20px;
+		transform: translate(7px,-153px);
+	}
+
+	.selected{
+    padding: 10px 10px 10px 10px;
+    margin: -10px -10px -10px -10px;
+	}	
+	#nav_menu{
+		transform: translate(70px, -27px);	
+	}
+	.nav_menu_li{
+		font-size: 25px;
+	}
+}
+
+@media all and (max-width:325px){
+	.table_calendar{
+		transform: translate(70px,-220px);
+	}
+
+	#nav{
+		transform: translateX(-15px);
+	}
+
+	#month_name{
+		transform: translate(-20px,-12px);
+	}
+	#month_day{
+		transform: translate(-45px,-12px);
+	}
+	.nav_li{
+		font-size: 40px;
+	}
+	.container_year_day{
+		transform: translate(28px,-40px);
+	}
+
+	.day{
+		padding:145px 0px;
+		font-size:20px;
+	}
+
+	.date-picker{
+		padding:17px;
+		padding-left: 0px;
+		font-size: 20px;
+		transform: translate(3px,-153px);
+	}
+
+	.selected{
+    padding: 10px 10px 10px 10px;
+    margin: -10px -10px -10px -10px;
+	}
+}
+
+	/* Tablets */
+
+@media all and (max-width:1280px){
+
+}
+
+@media all and (max-width:800px){
+
+}
+
+@media all and (max-width:768px){
+
+}
+
+@media all and (max-width:600px){
+
+}
+
+
+					/* Apple */
+
+	/* Iphones */ 
+
+@media all and (max-width:414px){
+
+}
+
+@media all and (max-width:375px){
+
+}
+
+@media all and (max-width:320px){
+
+}
+
+	/* Ipads */
+
+@media all and (max-width:1024px){
+
+}
+
+@media all and (max-width:768px){
+
+}
