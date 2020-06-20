@@ -7,7 +7,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto:wght@500&display=swap"
         rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="https://unpkg.com/flickity@2.0.11/dist/flickity.css">
   <link id="link-icon" rel="icon" href="" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 </head>
@@ -90,38 +89,21 @@
   </div>
   <div id='go-to-div'>
       <div id='choose_date'>
-          <div id='month_div' class='column' data-flickity='{
-                "percentPosition": false,
-                "groupCells": 1,
-                "pageDots": false,
-                "prevNextButtons":false,
-                "contain":true,
-                "setGallerySize":false,
-                "wrapAround":true
-              }'></div>
-          <!--<div id='month_div' class='column'></div>-->
-          <div id='day_div' class='column' data-flickity='{
-                "percentPosition": false,
-                "groupCells": 1,
-                "pageDots": false,
-                "prevNextButtons":false,
-                "contain":true,
-                "setGallerySize":false,
-                "wrapAround":true,
-                "adaptiveHeight":true	
-              }'></div>
-          <div id='year_div' class='column' data-flickity='{
-                "percentPosition": false,
-                "groupCells": 1,
-                "pageDots": false,
-                "prevNextButtons":false,
-                "contain":true,
-                "setGallerySize":false,
-                "dragThreshold":100,
-                "wrapAround":true	
-              }'></div>
-          <div id='opacitylow_top'></div>
-          <div id='opacitylow_bottom'></div>
+          <div id='month_div' class='column'>
+            <select id='month_div_select' class="choose_select_class">
+              
+            </select>
+          </div>
+          <div id='day_div' class='column'>
+            <select id='day_div_select' class="choose_select_class">
+              
+            </select>
+          </div>
+          <div id='year_div' class='column'>
+            <select id='year_div_select' class="choose_select_class">
+              
+            </select>
+          </div>
       </div>
       <div id='buttons_comfirm_div'>
           <div id='left_buttons_div'></div>

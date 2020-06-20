@@ -175,6 +175,10 @@
 
         const month_days_div = document.getElementById('day_div')
 
+        const month_div_select = document.getElementById("month_div_select")
+        const year_div_select = document.getElementById("year_div_select")
+        const month_days_div_select = document.getElementById("day_div_select")
+
         //LOGIC PAGE
         const menu = document.getElementById('nav_menu')
 
@@ -243,10 +247,24 @@
 
         let dropdown_list_elms = ["dropdown_country","dropdown_list_ul","country_dropdown_list","dropdown_country_title_list","selected_country","ico_country_current"]
 
-        function setAttributes(el, atrs) {
-          for (let key in atrs){
-            el.setAttribute(key, atrs[key]);
-          }
+        function swapElements(obj1, obj2) {
+            let obj1_id = obj1.id 
+            let obj2_id = obj2.id 
+            obj1.id = obj2_id
+            obj2.id = obj1_id
+            
+            let parent2 = obj2.parentNode;
+            let next2 = obj2.nextSibling;
+            if (next2 === obj1) {
+                parent2.insertBefore(obj1, obj2);
+            } else {
+                obj1.parentNode.insertBefore(obj2, obj1);
+                if (next2) {
+                    parent2.insertBefore(obj1, next2);
+                } else {
+                    parent2.appendChild(obj1);
+                }
+            }
         }
 
         function requestAjax(data) {
@@ -265,6 +283,7 @@
                     if (mode === "events") {
                         events_btn.innerHTML = 'Simple calendar'
                         add_content_container.innerHTML = response["data"]
+                        element_year.innerHTML = data["year"]
                     }
                 },
                 error: (error) => {
@@ -312,8 +331,8 @@
             let c = e.target.getAttribute('class')
             let i = e.target.getAttribute('id')
             let opened_dropdown_country = false
-            let get_selected_month = document.querySelector('.option-choose-month.is-selected')
-            let get_index_month = months.indexOf(get_selected_month.innerHTML)
+            let get_selected_month = document.querySelector('#month_div_select')
+            let get_index_month = months.indexOf(get_selected_month.value)
             let get_month_count = months_days_count[get_index_month]
             let wtn = 31 - get_month_count
 
@@ -339,25 +358,6 @@
                         removed = true
                     } catch (e) {
                         return
-                    }
-                }
-            }
-
-            function swapElements(obj1, obj2) {
-                let obj1_id = obj1.id 
-                let obj2_id = obj2.id 
-                obj1.id = obj2_id
-                obj2.id = obj1_id
-                let parent2 = obj2.parentNode;
-                let next2 = obj2.nextSibling;
-                if (next2 === obj1) {
-                    parent2.insertBefore(obj1, obj2);
-                } else {
-                    obj1.parentNode.insertBefore(obj2, obj1);
-                    if (next2) {
-                        parent2.insertBefore(obj1, next2);
-                    } else {
-                        parent2.appendChild(obj1);
                     }
                 }
             }
@@ -820,11 +820,10 @@
             if (mode === "numbers") {
                 get_event_list.innerHTML = "";
                 get_event_list.style.display = "none"
-                showCalendar(months.indexOf(document.getElementsByClassName('option-choose-month is-selected')[0].innerHTML), document.getElementsByClassName('option-choose-year is-selected')[0].innerHTML, 'None');
+                showCalendar(months.indexOf(document.getElementById("month_div_select").value),document.getElementById("year_div_select").value, 'None');
             } else if (mode === "events") {
-                let year = document.querySelector('.option-choose-year.is-selected').innerHTML
-                let country_choosed = document.getElementById('dropdown_country_title').innerHTML
-                // let table_event_container = document.getElementById('table_event_container')
+                let year = document.getElementById("year_div_select").value
+                let country_choosed = document.getElementById('dropdown_country_title').className
                 let data = {
                     'year': year,
                     'country': country_choosed,
@@ -843,29 +842,29 @@
         })
 
         for (let m in months) {
-            let create_div_month = document.createElement('div')
+            let create_div_month = document.createElement('option')
             create_div_month.innerHTML = months[m]
             create_div_month.setAttribute('class', 'option-choose-month')
             create_div_month.setAttribute('id', 'selector_' + months[m])
-            month_div.appendChild(create_div_month)
+            month_div_select.appendChild(create_div_month)
         }
 
         for (let d = 1; d < 32; d++) {
             if (String(d).length < 2) {
                 d = "0" + d
             }
-            let create_div_month_days_count = document.createElement('div')
+            let create_div_month_days_count = document.createElement('option')
             create_div_month_days_count.innerHTML = d
             create_div_month_days_count.setAttribute('class', 'option-choose-monthday')
             create_div_month_days_count.setAttribute('id', 'selector_' + d)
-            month_days_div.appendChild(create_div_month_days_count)
+            month_days_div_select.appendChild(create_div_month_days_count)
         }
         for (let yc = 1970; yc <= 2050; yc++) {
-            let create_div_year = document.createElement('div')
+            let create_div_year = document.createElement('option')
             create_div_year.innerHTML = yc
             create_div_year.setAttribute('class', 'option-choose-year')
             create_div_year.setAttribute('id', 'selector_' + yc)
-            year_div.appendChild(create_div_year)
+            year_div_select.appendChild(create_div_year)
         }
 
         let events_btn = document.querySelector('#events_list')
