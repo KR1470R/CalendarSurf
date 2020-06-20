@@ -57,7 +57,7 @@ body::-webkit-scrollbar {
 
 @keyframes preloader-bounce {
 
-    0%,100% {
+    0%, 100% {
         transform: scale(0);
     }
 
@@ -175,12 +175,11 @@ body::-webkit-scrollbar {
     text-decoration: none;
     font-size: 40px;
     font-family: 'Open Sans', sans-serif;
-    padding: 20px;
     width: 127%;
     display: block;
     z-index: 2;
     transition: 0.1s;
-    padding-right: 100px;
+    padding: 20px 100px 20px 20px;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
@@ -194,7 +193,7 @@ body::-webkit-scrollbar {
     background-color: #F5F5F5;
 }
 
-.container_year_day{
+.container_year_day {
     margin-left: 11.7%;
 }
 
@@ -319,11 +318,11 @@ body::-webkit-scrollbar {
 @keyframes calendar_body_swipe_to_right {
     0% {
         margin-top: 10px;
-        margin-left: -200%;        
+        margin-left: -200%;
     }
     100% {
         margin-top: 10px;
-        margin-left: -230px; 
+        margin-left: -230px;
     }
 }
 
@@ -507,10 +506,6 @@ body::-webkit-scrollbar {
 
 .day{
     text-decoration: none;
-/*    
-    display: block;
-    float: left;
-*/
     padding: 145px 100px;
     text-decoration: none;
     font-size:30px;
@@ -582,7 +577,7 @@ a {
     filter: blur(0rem);
     position: absolute;
     overflow: hidden;
-    width:100%;
+    width: 100%;
     height: 100%
     /*pointer-events: all;*/
 }
@@ -641,75 +636,6 @@ a {
     margin-right: 100px;
 }
 
-#opacitylow_bottom {
-    position: absolute;
-    bottom: 4em;
-    height: 110px;
-    width: 100%;
-    text-align: center;
-    top: 50%;
-    left: 50%;
-    pointer-events: none;
-    transform: translate(-50%, 0%);
-    background: -webkit-linear-gradient(
-            rgba(255, 255, 255, 0) 0%,
-            rgba(255, 255, 255, 1) 100%
-    );
-    background-image: -moz-linear-gradient(
-            rgba(255, 255, 255, 0) 0%,
-            rgba(255, 255, 255, 1) 100%
-    );
-    background-image: -o-linear-gradient(
-            rgba(255, 255, 255, 0) 0%,
-            rgba(255, 255, 255, 1) 100%
-    );
-    background-image: linear-gradient(
-            rgba(255, 255, 255, 0) 0%,
-            rgba(255, 255, 255, 1) 100%
-    );
-    background-image: -ms-linear-gradient(
-            rgba(255, 255, 255, 0) 0%,
-            rgba(255, 255, 255, 1) 100%
-    );
-}
-
-#opacitylow_top {
-    position: absolute;
-    bottom: 4em;
-    height: 190px;
-    width: 100%;
-    text-align: center;
-    top: 50%;
-    left: 50%;
-    pointer-events: none;
-    transform: translate(-50%, -100%) rotate(180deg);
-    background: -webkit-linear-gradient(
-            rgba(255, 255, 255, 0) 0%,
-            rgba(255, 255, 255, 1) 100%
-    );
-    background-image: -moz-linear-gradient(
-            rgba(255, 255, 255, 0) 0%,
-            rgba(255, 255, 255, 1) 100%
-    );
-    background-image: -o-linear-gradient(
-            rgba(255, 255, 255, 0) 0%,
-            rgba(255, 255, 255, 1) 100%
-    );
-    background-image: linear-gradient(
-            rgba(255, 255, 255, 0) 0%,
-            rgba(255, 255, 255, 1) 100%
-    );
-    background-image: -ms-linear-gradient(
-            rgba(255, 255, 255, 0) 0%,
-            rgba(255, 255, 255, 1) 100%
-    );
-}
-
-#month_div, #day_div, #year_div {
-    width: 200px;
-    transform: rotate(90deg);
-}
-
 .option-choose-month, .option-choose-monthday, .option-choose-year {
     transform: rotate(-90deg);
     top: 60px;
@@ -719,11 +645,10 @@ a {
     padding-left: 150px;
     padding-top: 50px;
     margin-top: 100px;
-    font-size: 80px;
     font-family: 'Lato', sans-serif;
     display: block;
     overflow-x: hidden;
-    width: 50px;
+    width: 90px;
     height: 200px;
     padding-right: 100px;
     position: relative;
@@ -869,16 +794,32 @@ a {
 }
 
 #get_current_date {
-    background-color: #D5D5D5;
+    background-color: rgb(213, 213, 213);
     width: 100px;
     height: 100px;
     border-radius: 99999px;
-    position: relative;
     display: none;
     flex-direction: column;
     float: right;
+    position: fixed;
     bottom: 3%;
     left: 92%;
+    align-self: flex-end;
+    cursor: pointer;
+    z-index: 10;
+}
+#get_current_date_event{
+    background-color: #D5D5D5;
+    width: 200px;
+    height: 100px;
+    border-radius: 35px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    float: right;
+    position: fixed;
+    bottom: 3%;
+    left: 85%;
     align-self: flex-end;
     cursor: pointer;
     z-index: 10;
@@ -1058,9 +999,9 @@ a {
     z-index: -1;
     margin-left: 3%;
     display: block;
-    text-align:center;
+    text-align: center;
     font-family: 'Lato', sans-serif;
-    font-size:50px;
+    font-size: 50px;
 }
 
 #ico_cal_current_date_btn {
@@ -1075,8 +1016,28 @@ a {
     text-align: center;
     margin-left: -3px;
 }
-#loading{
+
+#loading {
     position: absolute;
     text-align: center;
     width: 100%;
+}
+
+.choose_select_class{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-indent: 1px;
+    text-overflow: '';
+    background-color: white;
+    border:solid 0;
+    font-size: 80px;
+}
+.choose_select_class:focus{
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+    outline: none !important;
+    box-shadow: none !important;
+}
+.choose_select_class::-ms-expand {
+    display: none;
 }
