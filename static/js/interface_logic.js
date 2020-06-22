@@ -216,6 +216,10 @@
 
         let mode = 'numbers'
 
+        let scrollBarPosition = window.pageYOffset | document.body.scrollTop;
+
+        let swipedBool = false;
+
 //         MOBILE CHECK
         function mobileCheck(){
             if (typeof window.orientation !== "undefined"){          
@@ -228,7 +232,7 @@
 //  
 
         if (outMobileCheck === true){                              // true if Mobile       
-            get_background_arrow_buttons.style.display = "none"   // false if NOT Mobile
+            get_background_arrow_buttons.remove()   // false if NOT Mobile
             menu.style.position = "absolute"
         }else{}
 
@@ -572,8 +576,13 @@
 
         let active = false;
         let currentX;
+        let currentY;
         let initialX;
+        let initialY;
         let xOffset = 0;
+        let yOffset = 0;
+        let swipeInitialX = null;
+        let swipeIinitialY = null;
 
         const lel = document.getElementById("left_calendar_body")
         const el = document.getElementById("calendar_body")
@@ -587,10 +596,14 @@
         let getCurrentPosEvents = Math.abs(Number(eventsel.style.marginLeft.replace(/\D/g, '')))
 
         function dragStart(e) {
+            swipeInitialX = e.touches[0].clientX;
+            swipeInitialY = e.touches[0].clientY;
             if (e.type === "touchstart") {
-                initialX = e.touches[0].clientX - xOffset;
+                initialX = e.touches[0].clientX - xOffset
+                initialY = e.touches[0].clientY - yOffset
             } else {
-                initialX = e.clientX - xOffset;
+                initialX = e.clientX - xOffset
+                initialY = e.clientY - yOffset
             }
             let selectedCurrentMonth = months.indexOf(document.getElementById("month_name").innerHTML)
             let selectedCurrentYear = Number(document.getElementById("year").innerHTML)
@@ -601,19 +614,76 @@
             showCalendar(currentMonth, currentYear, "next", "preview", null, false);
         }
 
+        let sideSwipe;
+
         function drag(e) {
             e.preventDefault();
             if (e.type === "touchmove") {
-                currentX = e.touches[0].clientX - initialX;
+                currentX = e.touches[0].clientX - initialX
+                currentY = e.touches[0].clientY - initialY
             } else {
-                currentX = e.clientX - initialX;
+                currentX = e.clientX - initialX
+                currentY = e.clientY - initialY
             }
-            xOffset = currentX;
-            if (mode === "numbers") {
-                setTranslate(currentX, [lel, el, rel]);
+            xOffset = currentX
+            yOffset = currentY
 
-            } else if (mode === "events") {
-                setTranslate(currentX, [eventsel])
+            if (swipeInitialX === null) {
+                return;
+            }
+
+            if (swipeInitialY === null) {
+                return;
+            }
+
+            var swipeCurrentX = e.touches[0].clientX;
+            var swipeCurrentY = e.touches[0].clientY;          
+            var swipeDiffX = swipeInitialX - swipeCurrentX;
+            var swipeDiffY = swipeInitialY - swipeCurrentY; 
+
+            class detectSwipeSide {
+                detectHorisontallySwipe(){
+                    if (Math.abs(swipeDiffX) > Math.abs(swipeDiffY)) {
+                        swipedBool = true
+                        sideSwipe = "horizontally"
+                        // sliding horizontally
+                        if (mode === "numbers") {
+                            setTranslate(currentX, [lel, el, rel]);
+                        } else if (mode === "events") {
+                            setTranslate(currentX, [eventsel])
+                        }
+                    }                  
+                }
+                detectVerticallySwipe(){
+                    if (Math.abs(swipeDiffX) < Math.abs(swipeDiffY)) {
+                        swipedBool = true
+                        sideSwipe = "vertically"
+                        // sliding vertically
+                        eventsel.style.transform = "translateX(0px)"
+                        if (swipeDiffY > 0) {
+                            // swiped down
+                            if ((window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight){
+                                return
+                            }
+                            scrollBarPosition = scrollBarPosition+30
+                            window.scrollTo(0,scrollBarPosition)
+                        } else {
+                            // swiped up
+                            scrollBarPosition = scrollBarPosition-30
+                            window.scrollTo(0,scrollBarPosition)
+                        }                        
+                    }
+                }
+            }
+            let exemDetectSwipeSide = new detectSwipeSide
+            if (swipedBool === false){
+                exemDetectSwipeSide.detectVerticallySwipe();exemDetectSwipeSide.detectHorisontallySwipe();
+            }else{
+                if (sideSwipe === "vertically"){
+                    exemDetectSwipeSide.detectVerticallySwipe()
+                }else if (sideSwipe === "horizontally"){
+                    exemDetectSwipeSide.detectHorisontallySwipe()
+                }
             }
         }
 
@@ -637,41 +707,34 @@
         el.addEventListener("touchstart", dragStart, false)
         el.addEventListener("touchmove", drag, false)
 
-        el.addEventListener("touchend", (e) => {
-            if (el.style.transform === "translateX('0px')") {
-                return
-            } else {
-                if (currentX < -400) {
-                    next(false, currentX)
-                } else if (currentX > 400) {
-                    back(false, currentX)
-                } else if (currentX > -400 || currentX < 400) {
-                    setTranslateBack([lel, el, rel])
+        function touchEndEvent(elements){
+            swipedBool = false
+            if (sideSwipe === "vertically"){}else if (sideSwipe === "horizontally"){
+                if (el.style.transform === "translateX('0px')") {
+                    return
+                } else {
+                    if (currentX < -400) {
+                        next(false, currentX)
+                    } else if (currentX > 400) {
+                        back(false, currentX)
+                    } else if (currentX > -400 || currentX < 400) {
+                        setTranslateBack(elements)
+                    } 
+                    xOffset = 0
+                    currentX = 0  
                 }
             }
-            xOffset = 0
-            currentX = 0
+        }
+
+        el.addEventListener("touchend", (e) => {
+            touchEndEvent([lel, el, rel])
         }, false)
 
         eventsel.addEventListener("touchstart", dragStart, false)
         eventsel.addEventListener("touchmove", drag, false)
-
+        
         eventsel.addEventListener("touchend", (e) => {
-            if (eventsel.style.transform === "translateX('0px')") {
-                return
-            } else {
-                if (currentX < -400) {
-                    next(false, currentX);
-                    setTranslateBack([eventsel])
-                } else if (currentX > 400) {
-                    back(false, currentX);
-                    setTranslateBack([eventsel])
-                } else if (currentX > -400 || currentX < 400) {
-                    setTranslateBack([eventsel])
-                }
-            }
-            xOffset = 0
-            currentX = 0
+            touchEndEvent([eventsel])
         }, false)
 
         function back(clickedOnButton, xPos) {
@@ -776,10 +839,8 @@
             get_div_bg.style.display = 'block'
             get_background.style.cssText = 'display:block;animation:0.1s linear blur_background;';
             setTimeout(() => get_background.style.cssText = 'filter:blur(1rem);', 100)
-
             get_background_arrow_buttons.style.cssText = 'animation:0.1s linear blur_background;';
-            setTimeout(() => get_background_arrow_buttons.style.cssText = 'filter:blur(1rem);', 100)
-
+            setTimeout(() => get_background_arrow_buttons.style.cssText = 'filter:blur(1rem);', 100) 
             get_event_list.style.cssText = 'margin-left:3%;display:block;animation:0.1s linear blur_background;';
             setTimeout(() => get_event_list.style.cssText = 'margin-left:3%;display:block;filter:blur(1rem);', 100)
 
@@ -882,7 +943,6 @@
                 mode = "events"
                 calendar.preloader.show();
                 get_container_center.style.cssText = 'margin-left:-200%;margin-top: 180px;position:absolute;display:none;'
-                events_container.style.cssText = "margin-left:50px;display:block;"
                 let year = document.getElementById('year').innerHTML
                 let country_choosed = document.getElementById('dropdown_country_title').className
                 let data = {

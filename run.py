@@ -52,6 +52,12 @@ def send_data_by_country():
         response_content = soup.find("table")
         response_content.find("thead")["id"] = "event_thead"
         response_content.find("tbody")["id"] = "event_tbody"
+        get_td = response_content.findAll("td")
+        for i in get_td:
+            i["id"] = "event_td"
+        get_th = response_content.findAll("th")
+        for j in get_th:
+            j["id"] = "event_th"
         if len(response_content.find("tbody").text) <= 1:
             response_content = "Data not found. 404"
         return jsonify({

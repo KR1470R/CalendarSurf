@@ -1,8 +1,7 @@
 body, html {
     width: 100%;
     background-color: white;
-    overflow: -moz-scrollbars-none;
-    -ms-overflow-style: none;
+    overflow-x: hidden;
 }
 
 body::-webkit-scrollbar {
@@ -578,8 +577,8 @@ a {
     position: absolute;
     overflow: hidden;
     width: 100%;
-    height: 100%
-    /*pointer-events: all;*/
+    min-height: 100%;
+    height: auto;
 }
 
 @keyframes blur_background {
@@ -612,7 +611,7 @@ a {
     background-color: white;
     min-width: 50%;
     width: auto;
-    height: 60%;
+    height: auto;
     display: none;
     position: fixed;
     text-align: center;
@@ -658,6 +657,7 @@ a {
 #buttons_comfirm_div {
     display: flex;
     flex-direction: row;
+    transform: translateY(-100px);
 }
 
 #left_buttons_div {
@@ -854,7 +854,6 @@ a {
 }
 
 #events_container {
-    position: absolute;
     display: none;
     width: 94%;
     min-height: 70%;
@@ -921,7 +920,7 @@ a {
 }
 
 #dropdown_list_ul {
-    margin-left: -40px;
+    padding-left: 0;
 }
 
 #dropdown_country_title {
@@ -1040,4 +1039,8 @@ a {
 }
 .choose_select_class::-ms-expand {
     display: none;
+}
+
+#event_th,#event_td{
+    border-bottom: 1px solid #ddd;
 }
