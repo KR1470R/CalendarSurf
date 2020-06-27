@@ -42,6 +42,7 @@
 	}
 	#nav_menu{
 		transform: translate(200px, -27px);	
+		width: 47%;
 	}
 	.nav_menu_li{
 		font-size: 25px;
@@ -54,14 +55,14 @@
 	}
 	#cancel,#ok{
 		font-size:40px;
-		padding:0 0 0 0; 
+		padding:0 0 0 0;
 	}
 	#get_current_date{
 		left:75%;
 	}
-	/*#get_current_date_event{
-		left:;
-	}*/
+	#get_current_date_event{
+		left:54%;
+	}
 	.column{
 		padding-left: 0px;
 		margin-left: 34px;
@@ -78,6 +79,10 @@
 		font-size: 23px;
 	}
 
+	#git_div{
+		transform: translate(5%, -50%);
+	}
+
 	#dropdown_country_title,#dropdown_country_title_list{
 		display: none;
 	}
@@ -88,7 +93,7 @@
 	}
 
 	#events_container{
-		margin-left: 8px;
+		margin-left: 1%;
 	}
 
 	#table_event_container {
@@ -105,11 +110,11 @@
 
 @media all and (max-width:412px){
 	.table_calendar{
-		transform: translate(70px,-220px);
+		transform: translate(70px,-230px);
 	}
 
 	#nav{
-		transform: translateX(-15px);
+		transform: translateX(-10px);
 	}
 
 	#month_name{
@@ -126,49 +131,112 @@
 	}
 
 	.day{
-		padding:145px 4.5px;
+		padding:145px 8.5px;
 		font-size:20px;
 	}
 
 	.date-picker{
 		padding:18px;
-		padding-left: 5px;
+		padding-left: 0;
 		font-size: 20px;
 		transform: translate(7px,-153px);
 	}
 
 	.selected{
-    padding: 10px 10px 10px 10px;
+		padding: 10px 10px 10px 10px;
     margin: -10px -10px -10px -10px;
-	}	
+	}
 	#nav_menu{
-		transform: translate(120px, -27px);	
+		transform: translate(125px, -27px);	
+		width: 54%;
 	}
 	.nav_menu_li{
 		font-size: 25px;
+	}
+	#go-to-div{
+		width: 90%;
+	}
+	#buttons_div{
+		transform: translate(1%,100%);
+	}
+	#cancel,#ok{
+		font-size:30px;
+		padding:0 0 0 0;
+	}
+	#get_current_date{
+		left:70%;
+	}
+	#get_current_date_event{
+		left:47%;
+	}
+	.column{
+		padding-left: 0px;
+		margin-left: 20px;
+	}
+	.choose_select_class{
+		font-size: 40px;
+	}
+
+	#about{
+		width: 89%;
+		height: auto;
+	}
+	#about_ul{
+		margin: 0 0 0 18%;
+	}
+	#title_li,#git_li{
+		font-size: 23px;
+	}
+
+	#git_div{
+		transform: translate(5%, -50%);
+	}
+
+	#dropdown_country_title,#dropdown_country_title_list{
+		display: none;
+	}
+	#dropdown_country{
+		width:85px;
+		padding:0 5px;
+		transform: translate(-67px, -4px);
+	}
+
+	#events_container{
+		margin-left: 1%;
+	}
+
+	#table_event_container {
+    margin-top: -75px;
+	}
+	[scope="col"] {
+    font-size: 25px;
+	}
+	#event_tbody{
+		margin-left: 100px;
+		font-size: 15px;
 	}
 }
 
 @media all and (max-width:361px){
 	.table_calendar{
-		transform: translate(70px,-220px);
+		transform: translate(70px,-230px);
 	}
 
 	#nav{
-		transform: translateX(-15px);
+		transform: translateX(-10px);
 	}
 
 	#month_name{
-		transform: translate(-20px,-12px);
+		transform: translate(-35px,-12px);
 	}
 	#month_day{
-		transform: translate(-45px,-12px);
+		transform: translate(-55px,-12px);
 	}
 	.nav_li{
 		font-size: 40px;
 	}
 	.container_year_day{
-		transform: translate(28px,-40px);
+		transform: translate(15px,-40px);
 	}
 
 	.day{
@@ -178,60 +246,210 @@
 
 	.date-picker{
 		padding:18px;
-		padding-left: 1px;
+		padding-left: 0px;
 		font-size: 20px;
-		transform: translate(7px,-153px);
+		transform: translate(8px,-153px);
 	}
 
 	.selected{
-    padding: 10px 10px 10px 10px;
+		padding: 10px 10px 10px 10px;
     margin: -10px -10px -10px -10px;
-	}	
+	}
 	#nav_menu{
-		transform: translate(70px, -27px);	
+		transform: translate(100px, -27px);	
+		width: 54%;
 	}
 	.nav_menu_li{
-		font-size: 25px;
+		font-size: 20px;
+	}
+	#go-to-div{
+		width: 90%;
+	}
+	#buttons_div{
+		transform: translate(1%,100%);
+	}
+	#cancel,#ok{
+		font-size:30px;
+		padding:0 0 0 0;
+	}
+	#get_current_date{
+		left:70%;
+	}
+	#get_current_date_event{
+		left:40%;
+	}
+	.column{
+		padding-left: 0px;
+		margin-left: 9px;
+	}
+	.choose_select_class{
+		font-size: 40px;
+	}
+
+	#about{
+		width: 89%;
+		height: auto;
+	}
+	#about_ul{
+		margin: 0 0 0 14%;
+	}
+	#abour_li{
+		padding: 14px 10px;
+	}
+	#title_li,#git_li{
+		font-size: 23px;
+	}
+
+	#git_div{
+		transform: translate(5%, -50%);
+	}
+
+	#dropdown_country_title,#dropdown_country_title_list{
+		display: none;
+	}
+	#dropdown_country{
+		width:85px;
+		padding:0 5px;
+		transform: translate(-71px, -4px);
+	}
+
+	#events_container{
+		margin-left: 1%;
+	}
+
+	#table_event_container {
+    margin-top: -75px;
+	}
+	[scope="col"] {
+    font-size: 25px;
+	}
+	#event_tbody{
+		margin-left: 100px;
+		font-size: 15px;
 	}
 }
 
 @media all and (max-width:325px){
 	.table_calendar{
-		transform: translate(70px,-220px);
+		transform: translate(68px,-230px);
 	}
 
 	#nav{
-		transform: translateX(-15px);
+		transform: translateX(-10px);
 	}
 
 	#month_name{
-		transform: translate(-20px,-12px);
+		transform: translate(-35px,-12px);
 	}
 	#month_day{
-		transform: translate(-45px,-12px);
+		transform: translate(-55px,-12px);
 	}
 	.nav_li{
-		font-size: 40px;
+		font-size: 35px;
+	}
+	.nav_li_y,.nav_li_d{
+		font-size: 25px;
+	}
+	.nav_li_d{
+		margin-left: -150px;
 	}
 	.container_year_day{
-		transform: translate(28px,-40px);
+		transform: translate(27px,-40px);
 	}
 
 	.day{
-		padding:145px 0px;
-		font-size:20px;
+		padding:145px 4.5px;
+		font-size:18px;
 	}
 
 	.date-picker{
-		padding:17px;
+		padding:18px;
 		padding-left: 0px;
 		font-size: 20px;
-		transform: translate(3px,-153px);
+		transform: translate(8px,-153px);
 	}
 
 	.selected{
-    padding: 10px 10px 10px 10px;
-    margin: -10px -10px -10px -10px;
+		padding: 5px 5px 5px 5px;
+		margin: -5px -5px -5px -5px;
+	}
+	#nav_menu{
+		transform: translate(100px, -27px);	
+		width: 54%;
+	}
+	.nav_menu_li{
+		font-size: 20px;
+	}
+	#go-to-div{
+		width: 90%;
+	}
+	#buttons_div{
+		transform: translate(8.5%,100%);
+	}
+	#cancel,#ok{
+		font-size:30px;
+		padding:0 0 0 0;
+	}
+	#ok{
+		transform: translateX(-50px);
+	}
+	#get_current_date{
+		left:64%;
+	}
+	#get_current_date_event{
+		left:34%;
+	}
+	.column{
+		padding-left: 0px;
+		margin-left: -10px;
+	}
+	#choose_date{
+		transform: translateX(20px);
+	}
+	.choose_select_class{
+		font-size: 40px;
+	}
+
+	#about{
+		width: 89%;
+		height: auto;
+	}
+	#about_ul{
+		margin: 0 0 0 10%;
+	}
+	#abour_li{
+		padding: 14px 10px;
+	}
+	#title_li,#git_li{
+		font-size: 23px;
+	}
+
+	#git_div{
+		transform: translate(5%, -50%);
+	}
+
+	#dropdown_country_title,#dropdown_country_title_list{
+		display: none;
+	}
+	#dropdown_country{
+		width:85px;
+		padding:0 5px;
+		transform: translate(-71px, -4px);
+	}
+
+	#events_container{
+		margin-left: 1%;
+	}
+
+	#table_event_container {
+    margin-top: -75px;
+	}
+	[scope="col"] {
+    font-size: 25px;
+	}
+	#event_tbody{
+		margin-left: 100px;
+		font-size: 15px;
 	}
 }
 

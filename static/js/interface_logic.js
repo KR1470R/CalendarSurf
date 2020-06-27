@@ -272,6 +272,7 @@
         }
 
         function requestAjax(data) {
+            window.scrollTo(0,0)
             $.ajax({
                 type: "POST",
                 url: '/countries/',
@@ -305,7 +306,6 @@
                     ico_cal_current_date_btn.width = "75";
                     ico_cal_current_date_btn.height = "75"
                     ico_cal_current_date_btn.style.marginTop = "-40px"
-
                 }
             } else if (mode === "events") {
                 if (element_year.innerHTML == now.getFullYear()) {
@@ -617,7 +617,9 @@
         let sideSwipe;
 
         function drag(e) {
-            e.preventDefault();
+            if (e.cancelable){
+                e.preventDefault();
+            }
             if (e.type === "touchmove") {
                 currentX = e.touches[0].clientX - initialX
                 currentY = e.touches[0].clientY - initialY
@@ -677,7 +679,8 @@
             }
             let exemDetectSwipeSide = new detectSwipeSide
             if (swipedBool === false){
-                exemDetectSwipeSide.detectVerticallySwipe();exemDetectSwipeSide.detectHorisontallySwipe();
+                exemDetectSwipeSide.detectVerticallySwipe();
+                exemDetectSwipeSide.detectHorisontallySwipe();
             }else{
                 if (sideSwipe === "vertically"){
                     exemDetectSwipeSide.detectVerticallySwipe()
@@ -709,15 +712,26 @@
 
         function touchEndEvent(elements){
             swipedBool = false
+            eventsel.style.pointerEvents = ""
             if (sideSwipe === "vertically"){}else if (sideSwipe === "horizontally"){
                 if (el.style.transform === "translateX('0px')") {
                     return
                 } else {
-                    if (currentX < -400) {
+                    function checkModeForSetTranslateBack(){
+                        if (mode === "events"){
+                            console.log(mode)
+                            setTranslateBack(elements)
+                            eventsel.style.pointerEvents = "all"
+                        }else{}
+                    }
+                    let n = 400
+                    if (currentX < -Math.abs(window.innerWidth-n)) {
                         next(false, currentX)
-                    } else if (currentX > 400) {
+                        checkModeForSetTranslateBack()
+                    } else if (currentX > window.innerWidth-n) {
                         back(false, currentX)
-                    } else if (currentX > -400 || currentX < 400) {
+                        checkModeForSetTranslateBack()
+                    } else if (currentX > -Math.abs(window.innerWidth-n) || currentX < window.innerWidth-n) {
                         setTranslateBack(elements)
                     } 
                     xOffset = 0
@@ -822,8 +836,8 @@
             get_background_arrow_buttons.style.cssText = 'animation:0.1s linear blur_background;';
             setTimeout(() => get_background_arrow_buttons.style.cssText = 'filter:blur(1rem);', 100)
 
-            get_event_list.style.cssText = 'margin-left:3%;display:block;animation:0.1s linear blur_background;';
-            setTimeout(() => get_event_list.style.cssText = 'margin-left:3%;display:block;filter:blur(1rem);', 100)
+            get_event_list.style.cssText = 'display:block;animation:0.1s linear blur_background;';
+            setTimeout(() => get_event_list.style.cssText = 'display:block;filter:blur(1rem);', 100)
 
             get_button_for_switch_to_current_date.style.cssText = 'animation:0.1s linear blur_background;';
             setTimeout(() => get_button_for_switch_to_current_date.style.filter = 'blur(1rem)', 100)
@@ -841,8 +855,8 @@
             setTimeout(() => get_background.style.cssText = 'filter:blur(1rem);', 100)
             get_background_arrow_buttons.style.cssText = 'animation:0.1s linear blur_background;';
             setTimeout(() => get_background_arrow_buttons.style.cssText = 'filter:blur(1rem);', 100) 
-            get_event_list.style.cssText = 'margin-left:3%;display:block;animation:0.1s linear blur_background;';
-            setTimeout(() => get_event_list.style.cssText = 'margin-left:3%;display:block;filter:blur(1rem);', 100)
+            get_event_list.style.cssText = 'display:block;animation:0.1s linear blur_background;';
+            setTimeout(() => get_event_list.style.cssText = 'display:block;filter:blur(1rem);', 100)
 
             get_button_for_switch_to_current_date.style.cssText = 'animation:0.1s linear blur_background;';
             setTimeout(() => get_button_for_switch_to_current_date.style.filter = 'blur(1rem)', 100)
@@ -943,6 +957,7 @@
                 mode = "events"
                 calendar.preloader.show();
                 get_container_center.style.cssText = 'margin-left:-200%;margin-top: 180px;position:absolute;display:none;'
+                 events_container.style.cssText = "display:block;"
                 let year = document.getElementById('year').innerHTML
                 let country_choosed = document.getElementById('dropdown_country_title').className
                 let data = {
@@ -956,7 +971,7 @@
                 })
                 requestAjax(data)
             }
-
+            visibleCurrentDateBtn()
         })
     })
 })();   
