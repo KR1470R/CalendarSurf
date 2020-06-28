@@ -43,6 +43,7 @@
 	#nav_menu{
 		transform: translate(200px, -27px);	
 		width: 47%;
+		right: 68%;
 	}
 	.nav_menu_li{
 		font-size: 25px;
@@ -149,6 +150,7 @@
 	#nav_menu{
 		transform: translate(125px, -27px);	
 		width: 54%;
+		right:64%;
 	}
 	.nav_menu_li{
 		font-size: 25px;
@@ -258,6 +260,7 @@
 	#nav_menu{
 		transform: translate(100px, -27px);	
 		width: 54%;
+		right: 62%;
 	}
 	.nav_menu_li{
 		font-size: 20px;
@@ -376,6 +379,7 @@
 	#nav_menu{
 		transform: translate(100px, -27px);	
 		width: 54%;
+		right: 67%;
 	}
 	.nav_menu_li{
 		font-size: 20px;

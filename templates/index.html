@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <title>Calendar</title>
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/style.css') }}">
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/media.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style_min.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/media_min.css') }}">  
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto:wght@500&display=swap"
         rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
@@ -125,7 +125,6 @@
   </div>
   
 </body>
-<script type="text/javascript" src='{{ url_for("static", filename="js/interface_logic.js") }}'></script>
-<script type="text/javascript" src='https://unpkg.com/flickity@2.0.11/dist/flickity.pkgd.js'></script>
+<script type="text/javascript" src='{{ url_for("static", filename="js/all.js") }}'></script>
 <script type="text/javascript" src='https://code.jquery.com/jquery-3.5.0.min.js'></script>
 </html>

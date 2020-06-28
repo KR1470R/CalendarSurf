@@ -156,7 +156,9 @@ body::-webkit-scrollbar {
 #nav_menu {
     display: none;
     opacity: 0;
-    position: relative;
+    position: absolute;
+    top:0;
+    right: 9%;
     float: right;
     -webkit-box-shadow: 0 0 23px -5px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: 0 0 23px -5px rgba(0, 0, 0, 0.75);
