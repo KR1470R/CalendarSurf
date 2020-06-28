@@ -220,6 +220,8 @@
 
         let swipedBool = false;
 
+        let windowWidth = window.innerWidth
+
 //         MOBILE CHECK
         function mobileCheck(){
             if (typeof window.orientation !== "undefined"){          
@@ -713,18 +715,26 @@
         function touchEndEvent(elements){
             swipedBool = false
             eventsel.style.pointerEvents = ""
+            function getSizeWindowForAdaptiveSlide() {
+                let sizes = [480,414,412,375,361,325,320]
+                for (sheep of sizes){
+                    if (windowWidth == sheep) {
+                        return windowWidth-130
+                    }
+                    if (sheep === sizes[sizes.length-1]) return 400
+                }
+            }
             if (sideSwipe === "vertically"){}else if (sideSwipe === "horizontally"){
                 if (el.style.transform === "translateX('0px')") {
                     return
                 } else {
                     function checkModeForSetTranslateBack(){
                         if (mode === "events"){
-                            console.log(mode)
                             setTranslateBack(elements)
                             eventsel.style.pointerEvents = "all"
                         }else{}
                     }
-                    let n = 400
+                    let n = getSizeWindowForAdaptiveSlide()
                     if (currentX < -Math.abs(window.innerWidth-n)) {
                         next(false, currentX)
                         checkModeForSetTranslateBack()
