@@ -1,10 +1,13 @@
 # Calendar Surf SPA
-## Description & Preview
+
+## Preview
 Simple & Beautifully in interface, advanced inside.
 |<img src="/screenshots/1.png" width=250> | <img src="/screenshots/2.png" width=250> |
 |-----------------------------------------|------------------------------------------|
-|                                         |                                          |
+
+## Description
 **Faster** and **flat** calendar can show you week days and will not let you forget what date is today, you can discover holidays of countries: **Ukraine**, **Russia**, **Belarus**, **Uzbekistan**, **USA** (just try Event list).
+
 ## Run application
 
  1. Clone Calendar Surf:
