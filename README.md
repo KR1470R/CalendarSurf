@@ -6,7 +6,7 @@ Simple & Beautifully in interface, advanced inside.
 |-----------------------------------------|------------------------------------------|
 
 ## Description
-**Faster** and **flat** calendar can show you week days and will not let you forget what date is today, you can discover holidays of countries: **Ukraine**, **Russia**, **Belarus**, **Uzbekistan**, **USA** (just try Event list).
+**Faster** and **flat** calendar can show you week days and will not let you forget what date is today, you can discover holidays of countries: **Ukraine**, **Russia**, **Belarus**, **Uzbekistan**, **USA**, just try **Events list**.
 
 ## Run application
 
