@@ -1,6 +1,6 @@
-# Calendar Surf
+# Calendar Surf SPA
 ## Description & Preview
-Simple & Beautifully in interface, fancy inside.
+Simple & Beautifully in interface, advanced inside.
 |<img src="/screenshots/1.png" width=250> | <img src="/screenshots/2.png" width=250> |
 |-----------------------------------------|------------------------------------------|
 |                                         |                                          |
