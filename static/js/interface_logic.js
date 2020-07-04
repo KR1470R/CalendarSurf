@@ -275,27 +275,27 @@
 
         function requestAjax(data) {
             window.scrollTo(0,0)
-            $.ajax({
-                type: "POST",
-                url: '/countries/',
-                data: JSON.stringify(data, null, '\t'),
-                contentType: 'application/json;charset=UTF-8',
-                success: function (response) {
-                    get_event_list.innerHTML = ''
-                    let add_content_container = document.createElement("div")
-                    add_content_container.setAttribute("id", "table_event_container")
-                    add_content_container.innerHTML = response["data"]
-                    get_event_list.appendChild(add_content_container)
-                    calendar.preloader.hide();
-                    events_btn.innerHTML = 'Simple calendar'
-                    add_content_container.innerHTML = response["data"]
-                    element_year.innerHTML = data["year"]
-                    visibleCurrentDateBtn()
-                },
-                error: (error) => {
-                    throw error
-                }
-            })
+            let xhr = new XMLHttpRequest()
+            xhr.open("POST","/countries/")
+            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            xhr.send(JSON.stringify(data, null, '\t'))
+            xhr.onload = ()=>{
+                let response = JSON.parse(xhr.response)
+                get_event_list.innerHTML = ''
+                let add_content_container = document.createElement("div")
+                add_content_container.setAttribute("id", "table_event_container")
+                add_content_container.innerHTML = response["data"]
+                get_event_list.appendChild(add_content_container)
+                calendar.preloader.hide();
+                events_btn.innerHTML = 'Simple calendar'
+                add_content_container.innerHTML = response["data"]
+                element_year.innerHTML = data["year"]
+                visibleCurrentDateBtn()
+            }
+            xhr.onerror = ()=>{
+                add_content_container.innerHTML = xhr.response
+                throw xhr.response
+            }
         }
 
         function visibleCurrentDateBtn() {
