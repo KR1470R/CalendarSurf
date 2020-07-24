@@ -29,7 +29,7 @@ Simple & Beautifully in interface, advanced inside.
 ## Supports Systems
 
  - ~~Windows~~
- - Unix-like systems(Linux, OSX, BSD, etc).
+ - Unix and Unix-like systems(Linux, OSX, BSD, etc).
 ## Contributors
 [KR1470R][1], [SYSTEM404][2], [Shuttered Ruby][3]
 
