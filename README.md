@@ -31,7 +31,7 @@ Simple & Beautifully in interface, advanced inside.
  - ~~Windows~~
  - Unix and Unix-like systems(Linux, OSX, BSD, etc).
 ## Contributors
-[KR1470R][1], [SYSTEM404][2], [Shuttered Ruby][3]
+[KR1470R][1], [SYSTEM404][2], [Shattered Ruby][3]
 
 [1]:https://github.com/KR1470R
 [2]:https://github.com/404system404
