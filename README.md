@@ -11,15 +11,15 @@ Simple & Beautifully in interface, advanced inside.
 ## Run application
 
  1. Clone Calendar Surf:
-	   ```bash
+	 ```sh
 	 git clone https://github.com/KR1470R/CalendarSurf.git && cd CalendarSurf/
-    ```
+    	 ```
  2. Install requiments:
-	 ```bash
-	pip3 install -r requiments.txt
+	 ```sh
+	pip3 install -r requirements.txt
 	```
  3. Run server:
-	```bash
+	```sh
 	FLASK_APP=run.py flask run
 	```
  4. Open in your browser this link:
