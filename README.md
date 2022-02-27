@@ -1,12 +1,12 @@
 # Calendar Surf SPA
 
 ## Preview
-Simple & Beautifully in interface, advanced inside.
+Simple & Beautiful in interface, advanced inside.
 |<img src="/screenshots/1.png" width=250> | <img src="/screenshots/2.png" width=250> |
 |-----------------------------------------|------------------------------------------|
 
 ## Description
-**Faster** and **flat** calendar can show you week days and will not let you forget what date is today, you can discover holidays of countries: **Ukraine**, **Russia**, **Belarus**, **Uzbekistan**, **USA**, just try **Events list**.
+**Fast** and **slim** calendar can show you week days and will not let you forget what date is today, you can discover holidays of countries: **Ukraine**, **Russia**, **Belarus**, **Uzbekistan**, **USA**, just try **Events list**.
 
 ## Run application
 
@@ -29,7 +29,7 @@ Simple & Beautifully in interface, advanced inside.
 ## Supports Systems
 
  - ~~Windows~~
- - Unix and Unix-like systems(Linux, OSX, BSD, etc).
+ - Unix and Unix-like systems (Linux, OS X, BSD, etc).
 ## Contributors
 [KR1470R][1], [SYSTEM404][2], [Shattered Ruby][3]
 
