@@ -223,42 +223,44 @@
         let windowWidth = window.innerWidth
 
 //         MOBILE CHECK
-        function mobileCheck(){
-            if (typeof window.orientation !== "undefined"){          
-                return true                                                                     
-            }else{
+        function mobileCheck() {
+            if (typeof window.orientation !== "undefined") {
+                return true
+            } else {
                 return false
             }
         }
+
         let outMobileCheck = mobileCheck()
 //  
 
-        if (outMobileCheck === true){                              // true if Mobile       
+        if (outMobileCheck === true) {                              // true if Mobile
             get_background_arrow_buttons.remove()   // false if NOT Mobile
             menu.style.position = "absolute"
-        }else{}
+        } else {
+        }
 
         function setAttributes(el, atrs) {
-          for (let key in atrs){
-            el.setAttribute(key, atrs[key]);
-          }
+            for (let key in atrs) {
+                el.setAttribute(key, atrs[key]);
+            }
         }
 
         dict_dropdown_list_countries = {
-            "Russia":["/static/img/IcoCountryes/ru.png","ru"],
-            "Belarus":["/static/img/IcoCountryes/by.svg","by"],
-            "USA":["/static/img/IcoCountryes/usa.png","us"],
-            "Uzbekistan":["/static/img/IcoCountryes/uz.png","uz"],
+            "Russia": ["/static/img/IcoCountryes/ru.png", "ru"],
+            "Belarus": ["/static/img/IcoCountryes/by.svg", "by"],
+            "USA": ["/static/img/IcoCountryes/usa.png", "us"],
+            "Uzbekistan": ["/static/img/IcoCountryes/uz.png", "uz"],
         }
 
-        let dropdown_list_elms = ["dropdown_country","dropdown_list_ul","country_dropdown_list","dropdown_country_title_list","selected_country","ico_country_current"]
+        let dropdown_list_elms = ["dropdown_country", "dropdown_list_ul", "country_dropdown_list", "dropdown_country_title_list", "selected_country", "ico_country_current"]
 
         function swapElements(obj1, obj2) {
-            let obj1_id = obj1.id 
-            let obj2_id = obj2.id 
+            let obj1_id = obj1.id
+            let obj2_id = obj2.id
             obj1.id = obj2_id
             obj2.id = obj1_id
-            
+
             let parent2 = obj2.parentNode;
             let next2 = obj2.nextSibling;
             if (next2 === obj1) {
@@ -274,12 +276,12 @@
         }
 
         function requestAjax(data) {
-            window.scrollTo(0,0)
+            window.scrollTo(0, 0)
             let xhr = new XMLHttpRequest()
-            xhr.open("POST","/countries/")
+            xhr.open("POST", "/countries/")
             xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
             xhr.send(JSON.stringify(data, null, '\t'))
-            xhr.onload = ()=>{
+            xhr.onload = () => {
                 let response = JSON.parse(xhr.response)
                 get_event_list.innerHTML = ''
                 let add_content_container = document.createElement("div")
@@ -292,7 +294,7 @@
                 element_year.innerHTML = data["year"]
                 visibleCurrentDateBtn()
             }
-            xhr.onerror = ()=>{
+            xhr.onerror = () => {
                 add_content_container.innerHTML = xhr.response
                 throw xhr.response
             }
@@ -326,7 +328,8 @@
                 get_button_for_switch_to_current_date.style.filter = 'blur(1rem)'
             }
 
-        }  
+        }
+
         document.addEventListener("click", function (e) {
             let c = e.target.getAttribute('class')
             let i = e.target.getAttribute('id')
@@ -362,84 +365,114 @@
 
             if (c === 'nav_menu_li') {
                 return;
-            }else if(!dropdown_list_elms.includes(i)){
-                try{
+            } else if (!dropdown_list_elms.includes(i)) {
+                try {
                     let get_dropdown_list = document.getElementById('dropdown_list_countries')
                     let get_dropdown_list_ul = document.getElementById('dropdown_list_ul')
-                    get_dropdown_list.animate([{opacity:1},{opacity:0}],{duration:100,fill:'both'});setTimeout(()=>get_dropdown_list.style.cssText='opacity:0;display:none;',100)
-                    get_dropdown_list_ul.animate([{opacity:1},{opacity:0}],{duration:100,fill:'both'});setTimeout(()=>get_dropdown_list_ul.style.cssText='opacity:0;display:none;',100)
-                    opened_dropdown_country = true  
+                    get_dropdown_list.animate([{opacity: 1}, {opacity: 0}], {duration: 100, fill: 'both'});
+                    setTimeout(() => get_dropdown_list.style.cssText = 'opacity:0;display:none;', 100)
+                    get_dropdown_list_ul.animate([{opacity: 1}, {opacity: 0}], {duration: 100, fill: 'both'});
+                    setTimeout(() => get_dropdown_list_ul.style.cssText = 'opacity:0;display:none;', 100)
+                    opened_dropdown_country = true
                     document.getElementById('dropdown_country').style.cssText = 'display:block;opacity:1;background-color:transparent;'
-                }catch(e){return}
-            }else if (dropdown_list_elms.includes(i)){
-                if (opened_dropdown_country === false){
-                    if (document.getElementById("dropdown_list_countries") != null === true){
-                        if (opened_dropdown_country === false && i != 'selected_country' == true){
+                } catch (e) {
+                    return
+                }
+            } else if (dropdown_list_elms.includes(i)) {
+                if (opened_dropdown_country === false) {
+                    if (document.getElementById("dropdown_list_countries") != null === true) {
+                        if (opened_dropdown_country === false && i != 'selected_country' == true) {
                             let get_value_clicked_item = e.target
-                            if (get_value_clicked_item.getAttribute('id') === 'dropdown_list_ul' || get_value_clicked_item.getAttribute('id') === 'dropdown_country'){return}else{
+                            if (get_value_clicked_item.getAttribute('id') === 'dropdown_list_ul' || get_value_clicked_item.getAttribute('id') === 'dropdown_country') {
+                                return
+                            } else {
                                 let get_content_from_title = get_value_clicked_item.querySelector('#dropdown_country_title_list')
                                 let get_ico_from_item = get_value_clicked_item.querySelector('#ico_country')
                                 let get_current_item_ico = document.getElementById('ico_country_current')
                                 let get_current_item_title = document.getElementById('dropdown_country_title')
                                 let previous_current_title_country = get_current_item_title.innerHTML
                                 let previus_current_ico_country = get_current_item_ico.getAttribute("src")
-                                swapElements(get_content_from_title,get_current_item_title)
-                                get_current_item_ico.setAttribute("src",String(get_ico_from_item.getAttribute("src")));get_ico_from_item.setAttribute("src",String(previus_current_ico_country))
+                                swapElements(get_content_from_title, get_current_item_title)
+                                get_current_item_ico.setAttribute("src", String(get_ico_from_item.getAttribute("src")));
+                                get_ico_from_item.setAttribute("src", String(previus_current_ico_country))
                                 let get_dropdown_list = document.getElementById('dropdown_list_countries')
                                 let get_dropdown_list_ul = document.getElementById('dropdown_list_ul')
-                                get_dropdown_list.animate([{opacity:1},{opacity:0}],{duration:100,fill:'both'});setTimeout(()=>get_dropdown_list.style.cssText='opacity:0;display:none;',100)
-                                get_dropdown_list_ul.animate([{opacity:1},{opacity:0}],{duration:100,fill:'both'});setTimeout(()=>get_dropdown_list_ul.style.cssText='opacity:0;display:none;',100)
-                                opened_dropdown_country = true  
+                                get_dropdown_list.animate([{opacity: 1}, {opacity: 0}], {duration: 100, fill: 'both'});
+                                setTimeout(() => get_dropdown_list.style.cssText = 'opacity:0;display:none;', 100)
+                                get_dropdown_list_ul.animate([{opacity: 1}, {opacity: 0}], {
+                                    duration: 100,
+                                    fill: 'both'
+                                });
+                                setTimeout(() => get_dropdown_list_ul.style.cssText = 'opacity:0;display:none;', 100)
+                                opened_dropdown_country = true
                                 document.getElementById('dropdown_country').style.cssText = 'display:block;opacity:1;background-color:transparent;'
                                 let year = document.getElementById('year').innerHTML
                                 let country_choosed = document.getElementById('dropdown_country_title').className
-                                let data = {    
+                                let data = {
                                     'year': year,
                                     'country': country_choosed,
                                 }
                                 calendar.preloader.show();
                                 requestAjax(data)
                             }
-                        }else{
+                        } else {
                             let create_dropdown_list_ul = document.getElementById('dropdown_list_countries')
                             let get_dropdown_list_ul = document.getElementById('dropdown_list_ul')
                             get_dropdown_list_ul.style.cssText = 'display:block;opacity:0;'
                             create_dropdown_list_ul.style.cssText = 'display:block;opacity:0;'
-                            create_dropdown_list_ul.animate([{opacity:0},{opacity:1}],{duration:100,fill:"both"});setTimeout(()=>create_dropdown_list_ul.cssText="opacity:1;")
-                            get_dropdown_list_ul.animate([{opacity:0},{opacity:1}],{duration:100,fill:"both"});setTimeout(()=>get_dropdown_list_ul.cssText="opacity:1;")
-                            document.getElementById('dropdown_country').style.cssText = "background-color:white;min-height:50px;height:auto;-webkit-box-shadow: 0px 0px 23px -5px rgba(0,0,0,0.75);-moz-box-shadow: 0px 0px 23px -5px rgba(0,0,0,0.75);box-shadow: 0px 0px 23px -5px rgba(0,0,0,0.75);" 
+                            create_dropdown_list_ul.animate([{opacity: 0}, {opacity: 1}], {
+                                duration: 100,
+                                fill: "both"
+                            });
+                            setTimeout(() => create_dropdown_list_ul.cssText = "opacity:1;")
+                            get_dropdown_list_ul.animate([{opacity: 0}, {opacity: 1}], {duration: 100, fill: "both"});
+                            setTimeout(() => get_dropdown_list_ul.cssText = "opacity:1;")
+                            document.getElementById('dropdown_country').style.cssText = "background-color:white;min-height:50px;height:auto;-webkit-box-shadow: 0px 0px 23px -5px rgba(0,0,0,0.75);-moz-box-shadow: 0px 0px 23px -5px rgba(0,0,0,0.75);box-shadow: 0px 0px 23px -5px rgba(0,0,0,0.75);"
                         }
 
-                    }else if (document.getElementById("dropdown_list_countries") === null){
+                    } else if (document.getElementById("dropdown_list_countries") === null) {
                         let create_dropdown_list_ul = document.createElement('div')
                         create_dropdown_list_ul.setAttribute('id', "dropdown_list_countries")
                         let create_dropdown_list_ul_el = document.createElement("ul")
-                        create_dropdown_list_ul_el.setAttribute("id","dropdown_list_ul")
+                        create_dropdown_list_ul_el.setAttribute("id", "dropdown_list_ul")
                         create_dropdown_list_ul.appendChild(create_dropdown_list_ul_el)
-                        for (let [name,value] of Object.entries(dict_dropdown_list_countries)){
+                        for (let [name, value] of Object.entries(dict_dropdown_list_countries)) {
                             let dropdown_list_ul_li = document.createElement("li")
-                            dropdown_list_ul_li.setAttribute("class","nav_ul")
+                            dropdown_list_ul_li.setAttribute("class", "nav_ul")
                             create_dropdown_list_ul_el.appendChild(dropdown_list_ul_li)
                             let dropdown_list_ul_li_div = document.createElement("div")
-                            dropdown_list_ul_li_div.setAttribute("id","country_dropdown_list")
+                            dropdown_list_ul_li_div.setAttribute("id", "country_dropdown_list")
                             dropdown_list_ul_li.appendChild(dropdown_list_ul_li_div)
                             let dropdown_list_ul_li_div_img = document.createElement("img")
-                            setAttributes(dropdown_list_ul_li_div_img,{"id":"ico_country","src":value[0],"width":"80","height":"80"})
+                            setAttributes(dropdown_list_ul_li_div_img, {
+                                "id": "ico_country",
+                                "src": value[0],
+                                "width": "80",
+                                "height": "80"
+                            })
                             let dropdown_list_ul_li_div_p = document.createElement("p")
-                            setAttributes(dropdown_list_ul_li_div_p,{"id":"dropdown_country_title_list","class":value[1]})
-                            dropdown_list_ul_li_div_p.innerHTML = name 
-                            dropdown_list_ul_li_div.appendChild(dropdown_list_ul_li_div_img);dropdown_list_ul_li_div.appendChild(dropdown_list_ul_li_div_p)
+                            setAttributes(dropdown_list_ul_li_div_p, {
+                                "id": "dropdown_country_title_list",
+                                "class": value[1]
+                            })
+                            dropdown_list_ul_li_div_p.innerHTML = name
+                            dropdown_list_ul_li_div.appendChild(dropdown_list_ul_li_div_img);
+                            dropdown_list_ul_li_div.appendChild(dropdown_list_ul_li_div_p)
                         }
                         document.getElementById('dropdown_country').appendChild(create_dropdown_list_ul)
                         create_dropdown_list_ul.style.cssText = 'display:block;opacity:0;'
-                        create_dropdown_list_ul.animate([{opacity:0},{opacity:1}],{duration:100,fill:"both"});setTimeout(()=>{create_dropdown_list_ul.cssText="opacity:1;"},100)
+                        create_dropdown_list_ul.animate([{opacity: 0}, {opacity: 1}], {duration: 100, fill: "both"});
+                        setTimeout(() => {
+                            create_dropdown_list_ul.cssText = "opacity:1;"
+                        }, 100)
                         document.getElementById('dropdown_country').style.cssText = "background-color:white;min-height:50px;height:auto;z-index:10;-webkit-box-shadow: 0px 0px 23px -5px rgba(0,0,0,0.75);-moz-box-shadow: 0px 0px 23px -5px rgba(0,0,0,0.75);box-shadow: 0px 0px 23px -5px rgba(0,0,0,0.75);"
                         document.getElementById('ico_country').setAttribute('draggable', false);
                     }
                     opened_dropdown_country = true
                     return
+                }
             }
-        }});
+        });
 
         //PART LOGIC OF CALENDAR
 
@@ -462,7 +495,7 @@
                 element_year.innerHTML = year
             }
 
-            if(clickedOnButton){
+            if (clickedOnButton) {
                 if (swiped === "next") {
                     render_cal('right_calendar_body')
                     let get_container_right = document.getElementById('right_calendar_body')
@@ -471,7 +504,7 @@
                     get_container_center.style.cssText = '-webkit-animation: animation_next 1000ms linear both;animation: animation_next 1000ms linear both;';
                     setTimeout(() => get_container_center.style.cssText = 'margin-left:-280px;margin-top: 180px;position: absolute;', 100)
                     get_container_center.innerHTML = get_container_right.innerHTML
-                }else if(swiped === "back"){
+                } else if (swiped === "back") {
                     render_cal('left_calendar_body')
                     let get_container_right = document.getElementById('right_calendar_body')
                     let get_container_left = document.getElementById('left_calendar_body')
@@ -619,7 +652,7 @@
         let sideSwipe;
 
         function drag(e) {
-            if (e.cancelable){
+            if (e.cancelable) {
                 e.preventDefault();
             }
             if (e.type === "touchmove") {
@@ -641,12 +674,12 @@
             }
 
             var swipeCurrentX = e.touches[0].clientX;
-            var swipeCurrentY = e.touches[0].clientY;          
+            var swipeCurrentY = e.touches[0].clientY;
             var swipeDiffX = swipeInitialX - swipeCurrentX;
-            var swipeDiffY = swipeInitialY - swipeCurrentY; 
+            var swipeDiffY = swipeInitialY - swipeCurrentY;
 
             class detectSwipeSide {
-                detectHorisontallySwipe(){
+                detectHorisontallySwipe() {
                     if (Math.abs(swipeDiffX) > Math.abs(swipeDiffY)) {
                         swipedBool = true
                         sideSwipe = "horizontally"
@@ -656,9 +689,10 @@
                         } else if (mode === "events") {
                             setTranslate(currentX, [eventsel])
                         }
-                    }                  
+                    }
                 }
-                detectVerticallySwipe(){
+
+                detectVerticallySwipe() {
                     if (Math.abs(swipeDiffX) < Math.abs(swipeDiffY)) {
                         swipedBool = true
                         sideSwipe = "vertically"
@@ -666,27 +700,28 @@
                         eventsel.style.transform = "translateX(0px)"
                         if (swipeDiffY > 0) {
                             // swiped down
-                            if ((window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight){
+                            if ((window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight) {
                                 return
                             }
-                            scrollBarPosition = scrollBarPosition+30
-                            window.scrollTo(0,scrollBarPosition)
+                            scrollBarPosition = scrollBarPosition + 30
+                            window.scrollTo(0, scrollBarPosition)
                         } else {
                             // swiped up
-                            scrollBarPosition = scrollBarPosition-30
-                            window.scrollTo(0,scrollBarPosition)
-                        }                        
+                            scrollBarPosition = scrollBarPosition - 30
+                            window.scrollTo(0, scrollBarPosition)
+                        }
                     }
                 }
             }
+
             let exemDetectSwipeSide = new detectSwipeSide
-            if (swipedBool === false){
+            if (swipedBool === false) {
                 exemDetectSwipeSide.detectVerticallySwipe();
                 exemDetectSwipeSide.detectHorisontallySwipe();
-            }else{
-                if (sideSwipe === "vertically"){
+            } else {
+                if (sideSwipe === "vertically") {
                     exemDetectSwipeSide.detectVerticallySwipe()
-                }else if (sideSwipe === "horizontally"){
+                } else if (sideSwipe === "horizontally") {
                     exemDetectSwipeSide.detectHorisontallySwipe()
                 }
             }
@@ -712,40 +747,45 @@
         el.addEventListener("touchstart", dragStart, false)
         el.addEventListener("touchmove", drag, false)
 
-        function touchEndEvent(elements){
+        function touchEndEvent(elements) {
             swipedBool = false
             eventsel.style.pointerEvents = ""
+
             function getSizeWindowForAdaptiveSlide() {
-                let sizes = [480,414,412,375,361,325,320]
-                for (sheep of sizes){
+                let sizes = [480, 414, 412, 375, 361, 325, 320]
+                for (sheep of sizes) {
                     if (windowWidth == sheep) {
-                        return windowWidth-130
+                        return windowWidth - 130
                     }
-                    if (sheep === sizes[sizes.length-1]) return 400
+                    if (sheep === sizes[sizes.length - 1]) return 400
                 }
             }
-            if (sideSwipe === "vertically"){}else if (sideSwipe === "horizontally"){
+
+            if (sideSwipe === "vertically") {
+            } else if (sideSwipe === "horizontally") {
                 if (el.style.transform === "translateX('0px')") {
                     return
                 } else {
-                    function checkModeForSetTranslateBack(){
-                        if (mode === "events"){
+                    function checkModeForSetTranslateBack() {
+                        if (mode === "events") {
                             setTranslateBack(elements)
                             eventsel.style.pointerEvents = "all"
-                        }else{}
+                        } else {
+                        }
                     }
+
                     let n = getSizeWindowForAdaptiveSlide()
-                    if (currentX < -Math.abs(window.innerWidth-n)) {
+                    if (currentX < -Math.abs(window.innerWidth - n)) {
                         next(false, currentX)
                         checkModeForSetTranslateBack()
-                    } else if (currentX > window.innerWidth-n) {
+                    } else if (currentX > window.innerWidth - n) {
                         back(false, currentX)
                         checkModeForSetTranslateBack()
-                    } else if (currentX > -Math.abs(window.innerWidth-n) || currentX < window.innerWidth-n) {
+                    } else if (currentX > -Math.abs(window.innerWidth - n) || currentX < window.innerWidth - n) {
                         setTranslateBack(elements)
-                    } 
+                    }
                     xOffset = 0
-                    currentX = 0  
+                    currentX = 0
                 }
             }
         }
@@ -756,7 +796,7 @@
 
         eventsel.addEventListener("touchstart", dragStart, false)
         eventsel.addEventListener("touchmove", drag, false)
-        
+
         eventsel.addEventListener("touchend", (e) => {
             touchEndEvent([eventsel])
         }, false)
@@ -800,7 +840,7 @@
                     calendar.preloader.show();
                     requestAjax(data)
                 }
-                
+
             } else if (mode === "numbers") {
                 let selectedCurrentMonth = months.indexOf(document.getElementById("month_name").innerHTML)
                 let selectedCurrentYear = Number(document.getElementById("year").innerHTML)
@@ -811,7 +851,7 @@
             } else {
                 throw "Can't get mode."
             }
-            
+
         }
 
         function daysInMonth(iMonth, iYear) {
@@ -864,7 +904,7 @@
             get_background.style.cssText = 'display:block;animation:0.1s linear blur_background;';
             setTimeout(() => get_background.style.cssText = 'filter:blur(1rem);', 100)
             get_background_arrow_buttons.style.cssText = 'animation:0.1s linear blur_background;';
-            setTimeout(() => get_background_arrow_buttons.style.cssText = 'filter:blur(1rem);', 100) 
+            setTimeout(() => get_background_arrow_buttons.style.cssText = 'filter:blur(1rem);', 100)
             get_event_list.style.cssText = 'display:block;animation:0.1s linear blur_background;';
             setTimeout(() => get_event_list.style.cssText = 'display:block;filter:blur(1rem);', 100)
 
@@ -900,7 +940,7 @@
             if (mode === "numbers") {
                 get_event_list.innerHTML = "";
                 get_event_list.style.display = "none"
-                showCalendar(months.indexOf(document.getElementById("month_div_select").value),document.getElementById("year_div_select").value, 'None');
+                showCalendar(months.indexOf(document.getElementById("month_div_select").value), document.getElementById("year_div_select").value, 'None');
             } else if (mode === "events") {
                 let year = document.getElementById("year_div_select").value
                 let country_choosed = document.getElementById('dropdown_country_title').className
@@ -953,21 +993,23 @@
         let get_container_center = document.getElementById('calendar_body')
         let get_calendar_head = document.getElementById('nav_days_ul')
         events_btn.addEventListener("click", () => {
-            if (mode === 'events'){
+            if (mode === 'events') {
                 mode = "numbers"
                 get_container_center.style.cssText = 'margin-left:-280px;margin-top: 180px;position:absolute;display:block;'
-                events_container.style.cssText = "margin-left:200%;display:none;";event_container.innerHTML
-                    dropdown_list_country.style.cssText = 'display:block;'
+                events_container.style.cssText = "margin-left:200%;display:none;";
+                event_container.innerHTML
+                dropdown_list_country.style.cssText = 'display:block;'
                 dropdown_list_country.animate([{opacity: 1}, {opacity: 0}], {duration: 100, fill: 'both'});
                 setTimeout(() => {
-                    dropdown_list_country.style.cssText = 'display:none;opacity:0;';events_btn.innerHTML = 'Event list'
-                },1000)
+                    dropdown_list_country.style.cssText = 'display:none;opacity:0;';
+                    events_btn.innerHTML = 'Event list'
+                }, 1000)
                 get_current_date_btn.id = "get_current_date"
-            }else{
+            } else {
                 mode = "events"
                 calendar.preloader.show();
                 get_container_center.style.cssText = 'margin-left:-200%;margin-top: 180px;position:absolute;display:none;'
-                 events_container.style.cssText = "display:block;"
+                events_container.style.cssText = "display:block;"
                 let year = document.getElementById('year').innerHTML
                 let country_choosed = document.getElementById('dropdown_country_title').className
                 let data = {
@@ -984,4 +1026,4 @@
             visibleCurrentDateBtn()
         })
     })
-})();   
+})();
