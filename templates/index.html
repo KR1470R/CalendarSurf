@@ -1,129 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Calendar</title>
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style_min.css') }}">
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/media_min.css') }}">  
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto:wght@500&display=swap"
-        rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
-  <link id="link-icon" rel="icon" href="" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Calendar</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style_min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/media_min.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto:wght@500&display=swap"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+    <link id="link-icon" rel="icon" href=""/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 </head>
 <noscript><p>JS support not enabled!</p></noscript>
 <body id='body'>
-  <div class="preloader" id='preloader-div'>
-      <div class="preloader__row">
-          <div class="preloader__item"></div>
-          <div class="preloader__item"></div>
-      </div>
-  </div>
-  <div id='canvas_cal'>
-      <div id='nav'>
-          <ul id='nav_ul'>
-              <li id='month_name' class='nav_li'></li>
-              <li id='month_day' class='nav_li'></li>
-              <li id='menu' class='nav_li'>...</li>
-              <li id='additionally' class='nav_li'>+</li>
-              <li style='z-index: 10;text-decoration: none;display:block;'>
-                  <div id='nav_menu'>
-                      <ul class='nav_ul' id='elem_menu'>
-                          <li class="nav_menu_li" id='events_list'>Events list</li>
-                          <li class="nav_menu_li" id='go_to'>Go to</li>
-                          <li class="nav_menu_li" id='settings'>About</li>
-                      </ul>
-                  </div>
-              </li>
-              <li id='dropdown_country' class="nav_li">
-                  <div id='selected_country'>
-                      <img id='ico_country_current' src='{{ url_for("static", filename="img/IcoCountryes/ua.png") }}'
-                           width="80" height='80' alt="no">
-                      <p id='dropdown_country_title' class='ua'>Ukraine</p>
-                  </div>
-              </li>
-          </ul>
-          <ul class='container_year_day'>
-              <li id='year' class='nav_li_y'></li>
-              <li id='day_identificator' class='nav_li_d'>Today</li>
-          </ul>
-      </div>
-      <table id='calendar' class='table_calendar'>
-          <tbody id='left_calendar_body'></tbody>
-          <tbody id='calendar_body' style='position:absolute;margin-top:180px;margin-left:-280px;'></tbody>
-          <tbody id='right_calendar_body'></tbody>            
-      </table>
-      <div id='events_container'></div>
-  </div>
-  <div id='div_back_next'>
-      <div id='back'>
-          <div id='back_first'></div>
-          <div id='back_center'><</div>
-          <div id='back_second'></div>
-      </div>
-      <div id='center'></div>
-      <div id='next'>
-          <div id='next_first'></div>
-          <div id='next_center'>></div>
-          <div id='next_second'></div>
-      </div>
-  </div>
+<div class="preloader" id='preloader-div'>
+    <div class="preloader__row">
+        <div class="preloader__item"></div>
+        <div class="preloader__item"></div>
+    </div>
+</div>
+<div id='canvas_cal'>
+    <div id='nav'>
+        <ul id='nav_ul'>
+            <li id='month_name' class='nav_li'></li>
+            <li id='month_day' class='nav_li'></li>
+            <li id='menu' class='nav_li'>...</li>
+            <li id='additionally' class='nav_li'>+</li>
+            <li style='z-index: 10;text-decoration: none;display:block;'>
+                <div id='nav_menu'>
+                    <ul class='nav_ul' id='elem_menu'>
+                        <li class="nav_menu_li" id='events_list'>Events list</li>
+                        <li class="nav_menu_li" id='go_to'>Go to</li>
+                        <li class="nav_menu_li" id='settings'>About</li>
+                    </ul>
+                </div>
+            </li>
+            <li id='dropdown_country' class="nav_li">
+                <div id='selected_country'>
+                    <img id='ico_country_current' src='{{ url_for("static", filename="img/IcoCountryes/ua.png") }}'
+                         width="80" height='80' alt="no">
+                    <p id='dropdown_country_title' class='ua'>Ukraine</p>
+                </div>
+            </li>
+        </ul>
+        <ul class='container_year_day'>
+            <li id='year' class='nav_li_y'></li>
+            <li id='day_identificator' class='nav_li_d'>Today</li>
+        </ul>
+    </div>
+    <table id='calendar' class='table_calendar'>
+        <tbody id='left_calendar_body'></tbody>
+        <tbody id='calendar_body' style='position:absolute;margin-top:180px;margin-left:-280px;'></tbody>
+        <tbody id='right_calendar_body'></tbody>
+    </table>
+    <div id='events_container'></div>
+</div>
+<div id='div_back_next'>
+    <div id='back'>
+        <div id='back_first'></div>
+        <div id='back_center'><</div>
+        <div id='back_second'></div>
+    </div>
+    <div id='center'></div>
+    <div id='next'>
+        <div id='next_first'></div>
+        <div id='next_center'>></div>
+        <div id='next_second'></div>
+    </div>
+</div>
 
-  <div id='background'></div>
-  <div id='about'>
-      <ul id='about_ul'>
-          <li class='about_li'>
-              <div id='title_div'>
-                  <ul id='title_ul'>
-                      <li id='title_li'><p>Calendar Surf <b>v1.0</b></p></li>
-                  </ul>
-              </div>
-          </li>
-          <li id='about_li'>
-              <div id='git_div'>
-                  <ul id='git_ul'>
-                      <li id='git_li'><a href="https://github.com/KR1470R/CalendarSurf">Git Repository</a></li>
-                  </ul>
-              </div>
-          </li>
-      </ul>
-  </div>
-  <div id='go-to-div'>
-      <div id='choose_date'>
-          <div id='month_div' class='column'>
+<div id='background'></div>
+<div id='about'>
+    <ul id='about_ul'>
+        <li class='about_li'>
+            <div id='title_div'>
+                <ul id='title_ul'>
+                    <li id='title_li'><p>Calendar Surf <b>v1.0</b></p></li>
+                </ul>
+            </div>
+        </li>
+        <li id='about_li'>
+            <div id='git_div'>
+                <ul id='git_ul'>
+                    <li id='git_li'><a href="https://github.com/KR1470R/CalendarSurf">Git Repository</a></li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+</div>
+<div id='go-to-div'>
+    <div id='choose_date'>
+        <div id='month_div' class='column'>
             <select id='month_div_select' class="choose_select_class">
-              
-            </select>
-          </div>
-          <div id='day_div' class='column'>
-            <select id='day_div_select' class="choose_select_class">
-              
-            </select>
-          </div>
-          <div id='year_div' class='column'>
-            <select id='year_div_select' class="choose_select_class">
-              
-            </select>
-          </div>
-      </div>
-      <div id='buttons_comfirm_div'>
-          <div id='left_buttons_div'></div>
-          <div id='buttons_div'>
-              <div id='cancel'>Cancel</div>
-              <div id='ok'>OK</div>
-          </div>
-          <div id='right_buttons_div'></div>
-      </div>
-  </div>
-  <div id='get_current_date'>
-      <div id='get_current_date_first'></div>
-      <div id='text_current_date_center'>
-          <img id='ico_cal_current_date_btn' src='{{ url_for("static", filename="img/calendar.png") }}' width="75" height="75" alt="calendar">
-          <p id='text_current_date_content'></p>
-      </div>
 
-      <div id='get_current_date_second'></div>
-  </div>
-  
+            </select>
+        </div>
+        <div id='day_div' class='column'>
+            <select id='day_div_select' class="choose_select_class">
+
+            </select>
+        </div>
+        <div id='year_div' class='column'>
+            <select id='year_div_select' class="choose_select_class">
+
+            </select>
+        </div>
+    </div>
+    <div id='buttons_comfirm_div'>
+        <div id='left_buttons_div'></div>
+        <div id='buttons_div'>
+            <div id='cancel'>Cancel</div>
+            <div id='ok'>OK</div>
+        </div>
+        <div id='right_buttons_div'></div>
+    </div>
+</div>
+<div id='get_current_date'>
+    <div id='get_current_date_first'></div>
+    <div id='text_current_date_center'>
+        <img id='ico_cal_current_date_btn' src='{{ url_for("static", filename="img/calendar.png") }}' width="75"
+             height="75" alt="calendar">
+        <p id='text_current_date_content'></p>
+    </div>
+
+    <div id='get_current_date_second'></div>
+</div>
+
 </body>
 <script type="text/javascript" src='{{ url_for("static", filename="js/all.js") }}'></script>
 </html>
