@@ -58,6 +58,6 @@ holidays of countries: **Ukraine**, **Russia**, **Belarus**, **Uzbekistan**, **U
 
 [5]:https://github.com/KR1470R
 
-[6]:https://github.com/404system404
+[6]:https://github.com/SY573M404
 
 [7]:https://github.com/unurgunite
